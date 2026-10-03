@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -1260,7 +1261,7 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 .gift-micro-list{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:6px}
 .gift-micro-list span{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.8);border:1px solid rgba(194,164,101,.28);font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#5f625d}
 @keyframes giftFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes giftLidBob{0%,100%{transform:translateX(-50%) rotateX(0deg) translateY(0)}35%{transform:translateX(-50%) rotateX(-7deg) translateY(-2px)}65%{transform:translateX(-50%) rotateX(6deg) translateY(-1px)}}35%{transform:translateX(-50%) rotate(-4deg)}65%{transform:translateX(-50%) rotate(4deg)}}
+@keyframes giftLidBob{0%,100%{transform:translateX(-50%) rotateX(0deg) translateY(0)}35%{transform:translateX(-50%) rotateX(-7deg) translateY(-2px)}65%{transform:translateX(-50%) rotateX(6deg) translateY(-1px)}}
 
 .bonus-modal[hidden]{display:none}
 .bonus-modal{
@@ -1570,6 +1571,22 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
   font-size:9px;
   letter-spacing:.12em;
   font-weight:800;
+}
+
+
+/* FINAL FIX: bonus popup must stay invisible until the gift is clicked */
+#bonusGiftModal[hidden],
+.bonus-modal[hidden]{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+#bonusGiftModal:not([hidden]){
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
 }
 
 </style>
@@ -2236,10 +2253,16 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
   const openBtn = document.getElementById('openBonusGifts');
   const modal = document.getElementById('bonusGiftModal');
   if(!openBtn || !modal) return;
+
+  // Force a clean closed state on load.
+  modal.classList.remove('is-open');
+  modal.setAttribute('hidden', '');
+  document.body.classList.remove('body-lock');
+  openBtn.setAttribute('aria-expanded','false');
   const closeNodes = modal.querySelectorAll('[data-bonus-close]');
   const firstFocusable = modal.querySelector('.bonus-modal-close');
   function openModal(){
-    modal.hidden = false;
+    modal.removeAttribute('hidden');
     document.body.classList.add('body-lock');
     requestAnimationFrame(() => modal.classList.add('is-open'));
     openBtn.setAttribute('aria-expanded','true');
@@ -2249,7 +2272,7 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
     modal.classList.remove('is-open');
     document.body.classList.remove('body-lock');
     openBtn.setAttribute('aria-expanded','false');
-    setTimeout(() => { modal.hidden = true; }, 280);
+    setTimeout(() => { modal.setAttribute('hidden', ''); }, 340);
     openBtn.focus();
   }
   openBtn.addEventListener('click', openModal);
