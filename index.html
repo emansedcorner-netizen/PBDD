@@ -1669,44 +1669,134 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 /* Peek inside: phone mockup with toggles */
 .peek{margin:72px auto 0;max-width:760px;text-align:center}
 .peek-head h3{font-size:clamp(30px,4vw,44px);margin:0 0 10px}
-.peek-head p{margin:0 auto 34px;color:#5f625d;max-width:520px}
+.peek-head p{margin:0 auto 24px;color:#5f625d;max-width:520px}
+.peek-toggle{position:relative;display:inline-grid;grid-template-columns:repeat(4,auto);gap:4px;margin:0 auto;padding:6px;background:#fff;border:1px solid rgba(194,164,101,.35);border-radius:999px;box-shadow:0 10px 26px rgba(36,48,41,.08)}
+.peek-pill{position:absolute;top:0;left:0;border-radius:999px;background:var(--evergreen);box-shadow:0 6px 16px rgba(36,48,41,.25);transition:transform .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),height .45s;z-index:0}
+.peek-toggle button{position:relative;z-index:1;border:0;background:none;padding:12px 18px;border-radius:999px;font:700 12px/1 'Manrope',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#4a4d47;cursor:pointer;transition:color .3s;white-space:nowrap}
+.peek-toggle button[aria-selected="true"]{color:#f7f3ec}
+.peek-toggle button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.peek-caption{min-height:3em;margin:16px auto 6px;max-width:470px;color:#5f625d;font-size:17px}
 .peek-stage{position:relative;display:flex;justify-content:center;padding:10px 0 6px}
 .peek-stage:before{content:"";position:absolute;inset:6% 12% 0;border-radius:50%;background:radial-gradient(closest-side,rgba(181,150,98,.22),rgba(181,150,98,0));filter:blur(8px)}
-.peek-phone{position:relative;width:min(300px,78vw);aspect-ratio:9/19.5;border-radius:46px;padding:11px;background:#141815;box-shadow:0 0 0 2px #2d332e inset,0 30px 70px rgba(36,48,41,.28),0 8px 20px rgba(36,48,41,.14);opacity:0;transform:translateY(34px) scale(.97);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
-.peek.is-visible .peek-phone{opacity:1;transform:none;animation:peekFloat 6s ease-in-out 1s infinite}
-@keyframes peekFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.peek-phone:after{content:"";position:absolute;top:19px;left:50%;width:84px;height:24px;margin-left:-42px;border-radius:20px;background:#141815;z-index:5}
-.peek-screen{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#fff;isolation:isolate}
-.peek-panel{position:absolute;inset:0;opacity:0;transform:translateX(14%) scale(.98);transition:opacity .55s ease,transform .65s cubic-bezier(.2,.8,.2,1);pointer-events:none;display:flex;flex-direction:column}
+.peek-phone{position:relative;width:min(310px,80vw);aspect-ratio:9/19.5;border-radius:46px;padding:11px;background:#141815;box-shadow:0 0 0 2px #2d332e inset,0 30px 70px rgba(36,48,41,.28),0 8px 20px rgba(36,48,41,.14);opacity:0;transform:translateY(34px) scale(.97);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.peek.is-visible .peek-phone{opacity:1;transform:none}
+.peek-phone:after{content:"";position:absolute;top:19px;left:50%;width:84px;height:24px;margin-left:-42px;border-radius:20px;background:#141815;z-index:5;pointer-events:none}
+.peek-screen{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#fff;isolation:isolate;text-align:left}
+.peek-panel{position:absolute;inset:0;opacity:0;transform:translateX(14%) scale(.98);transition:opacity .55s ease,transform .65s cubic-bezier(.2,.8,.2,1);pointer-events:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.peek-panel::-webkit-scrollbar{display:none}
 .peek-panel.is-before{transform:translateX(-14%) scale(.98)}
 .peek-panel.is-active{opacity:1;transform:none;pointer-events:auto}
-.peek-panel video{display:block;width:100%;background:#f2f2f2}
-.peek-fill video{height:100%;object-fit:cover;object-position:top}
-.peek-statusbar{height:40px;flex:0 0 40px}
+.peek-hint{position:absolute;left:50%;bottom:78px;z-index:6;transform:translateX(-50%);padding:7px 12px;border-radius:999px;background:rgba(20,24,21,.82);color:#f7f3ec;font:700 10px/1 'Manrope',sans-serif;letter-spacing:.1em;text-transform:uppercase;pointer-events:none;transition:opacity .4s;animation:peekNudge 1.8s ease-in-out infinite}
+.peek-hint.is-hidden{opacity:0}
+@keyframes peekNudge{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-5px)}}
+.peek-ui{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Manrope',sans-serif;color:#1d1d1f}
+.peek-top{position:sticky;top:0;z-index:4;height:44px;display:flex;align-items:center;justify-content:flex-end;padding:0 14px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.pp .peek-top{background:rgba(218,220,219,.92)}
+.ff .peek-top{background:rgba(233,243,239,.92)}
 /* podcast */
-.peek-podcast{background:#fff}
-.peek-podcast:before{content:"";flex:0 0 34px;background:var(--peek-pod-top,#dedede)}
-.peek-podcast video{flex:0 0 auto;height:auto}
-.peek-podcast .peek-np{margin-top:auto}
-.peek-np{flex:0 0 auto;margin:0 10px 12px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.96);box-shadow:0 6px 18px rgba(0,0,0,.12);display:flex;gap:10px;align-items:center;text-align:left}
-.peek-np-art{width:38px;height:38px;border-radius:8px;flex:0 0 38px;background:linear-gradient(135deg,#ece8e1,#c9c2b6);display:grid;place-items:center;font:700 8px/1.1 'Manrope',sans-serif;color:#3a3a32;letter-spacing:.04em}
-.peek-np-meta{flex:1;min-width:0}
-.peek-np-meta b{display:block;font:700 11px/1.3 'Manrope',sans-serif;color:#1d1d1f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.peek-np-meta span{display:block;font:500 10px/1.3 'Manrope',sans-serif;color:#8a8a8e}
-.peek-np-bar{height:3px;border-radius:3px;background:#e2e2e5;margin-top:6px;overflow:hidden}
-.peek-np-bar i{display:block;height:100%;width:30%;background:#7b4fd6;border-radius:3px}
-.peek-panel.is-active .peek-np-bar i{animation:peekProgress 14s linear infinite}
-@keyframes peekProgress{from{width:18%}to{width:92%}}
-.peek-np-play{width:26px;height:26px;border-radius:50%;background:#1d1d1f;flex:0 0 26px;position:relative}
-.peek-np-play:before,.peek-np-play:after{content:"";position:absolute;top:8px;width:3px;height:10px;background:#fff;border-radius:1px}
-.peek-np-play:before{left:9px}.peek-np-play:after{right:9px}
+.pp{background:#fff}
+.pp-hero{background:linear-gradient(#dcdedd,#d6d8d7);padding:8px 16px 16px;text-align:center}
+.pp-hero img{width:150px;height:150px;border-radius:8px;box-shadow:0 10px 24px rgba(0,0,0,.18);display:block;margin:0 auto 12px}
+.pp-hero b{display:block;font-size:15px;line-height:1.25}
+.pp-hero span{display:block;font-size:12px;color:#6e6e73;margin:3px 0 12px}
+.pp-latest{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:#1d1d1f;color:#fff;font:600 13px/1 inherit;padding:10px 18px;cursor:pointer}
+.pp-desc{margin:12px 0 0;text-align:left;font-size:11.5px;line-height:1.45;color:#3a3a3c}
+.pp-desc b{display:inline;font-size:11.5px}
+.pp-list{padding:6px 16px 90px}
+.pp-list h4{font:700 18px/1.2 inherit;margin:8px 0 4px;display:flex;justify-content:space-between;align-items:center}
+.pp-list h4 small{font-size:12px;font-weight:500;color:#7b4fd6}
+.pp-ep{padding:12px 0;border-bottom:1px solid #e5e5ea}
+.pp-ep time{display:block;font-size:10px;font-weight:600;color:#8a8a8e;letter-spacing:.02em}
+.pp-ep b{display:block;font-size:13px;line-height:1.3;margin:2px 0 3px}
+.pp-ep p{margin:0 0 8px;font-size:11px;line-height:1.4;color:#6e6e73;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pp-play{border:0;border-radius:999px;background:#f0ecfb;color:#6b3fd4;font:600 11px/1 inherit;padding:6px 11px;cursor:pointer}
+.pp-play.is-on{background:#6b3fd4;color:#fff}
+.pp-hero .pp-latest{background:#1d1d1f;color:#fff;font-size:13px;padding:10px 18px}
+.pp-more{display:flex;justify-content:space-between;padding:14px 0;color:#7b4fd6;font-size:13px;font-weight:500;border-bottom:1px solid #e5e5ea}
+.pp-info{padding-top:14px}
+.pp-info h5{font:700 16px/1 inherit;margin:0 0 10px}
+.pp-info div{display:flex;justify-content:space-between;font-size:12px;padding:8px 0;border-bottom:1px solid #e5e5ea;color:#6e6e73}
+.pp-info div span:last-child{color:#1d1d1f}
+.pp-np{position:sticky;bottom:10px;z-index:3;margin:-80px 10px 0;padding:9px 11px;border-radius:16px;background:rgba(250,250,250,.94);backdrop-filter:blur(10px);box-shadow:0 6px 18px rgba(0,0,0,.14);display:flex;gap:9px;align-items:center}
+.pp-np img{width:34px;height:34px;border-radius:6px}
+.pp-np div{flex:1;min-width:0}
+.pp-np b{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-np i{display:block;height:3px;border-radius:3px;background:#e2e2e5;margin-top:5px;overflow:hidden;font-style:normal}
+.pp-np i:after{content:"";display:block;height:100%;width:24%;background:#7b4fd6}
+.peek-panel.is-active .pp-np.is-playing i:after{animation:peekProgress 30s linear infinite}
+@keyframes peekProgress{from{width:12%}to{width:96%}}
+.pp-np button{width:28px;height:28px;border-radius:50%;border:0;background:#1d1d1f;color:#fff;font-size:10px;cursor:pointer;flex:0 0 28px}
+/* course portal */
+.cp{background:#fff;color:#2b2f36}
+.cp-sec{padding:16px 16px 18px;text-align:center}
+.cp h4{font:400 26px/1.15 'Playfair Display','Bodoni Moda',Georgia,serif;margin:44px 0 10px;color:#111}
+.cp h5{font:400 21px/1.15 'Playfair Display','Bodoni Moda',Georgia,serif;margin:0 0 8px;color:#111;text-transform:uppercase;letter-spacing:.02em}
+.cp p{font-size:12px;line-height:1.5;margin:0 0 12px;color:#444}
+.cp-thumb{position:relative;display:block;width:100%;border-radius:10px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.cp-thumb img{display:block;width:100%}
+.cp-dark{background:#3f4744;padding:16px 12px}
+.cp-card{background:#fff;border-radius:12px;padding:14px;text-align:left;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:12px}
+.cp-card small{display:block;color:#2f8f7d;font-size:10px;font-weight:700;margin-bottom:4px}
+.cp-card b{display:block;font-size:14px;color:#111;margin-bottom:6px}
+.cp-card p{text-align:left;font-size:11px;margin-bottom:10px}
+.cp-check{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cp-check button{display:flex;align-items:center;gap:7px;border:0;background:none;padding:0;font:600 11px/1.2 inherit;color:#2b2f36;cursor:pointer;text-align:left}
+.cp-check button:before{content:"";width:16px;height:16px;border-radius:50%;border:1.5px solid #9aa0a6;flex:0 0 16px;transition:all .25s}
+.cp-check button.is-done{color:#2f8f7d}
+.cp-check button.is-done:before{background:#2f8f7d url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E") center/12px no-repeat;border-color:#2f8f7d}
+.cp-xp{border:1px solid #d6dbe0;border-radius:999px;padding:3px 8px;font-size:10px;font-weight:700;color:#444;white-space:nowrap}
+.cp-xp.is-earned{background:#2f8f7d;border-color:#2f8f7d;color:#fff}
+.cp-score{padding:5px 9px;border-radius:999px;background:rgba(17,17,17,.82);color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em}
+.cp-board{background:#f6f7f9;border-radius:12px;padding:10px;text-align:left}
+.cp-board div{display:flex;align-items:center;gap:8px;font-size:11px;padding:6px 4px}
+.cp-board em{font-style:normal;width:14px;color:#888}
+.cp-board i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-style:normal;color:#fff;font-size:10px;font-weight:700}
+.cp-board span{flex:1}
+.cp-board strong{font-size:11px}
+.cp-end{background:#e9edf3;padding:30px 16px 90px}
+.cp-end h4{margin:0}
+.cp-bar{position:sticky;bottom:0;z-index:3;margin-top:-62px;padding:10px 12px 14px;background:linear-gradient(rgba(255,255,255,0),#fff 35%)}
+.cp-bar div{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 auto;width:78%;padding:9px 12px;border-radius:999px;background:#f2f2f4;box-shadow:0 2px 10px rgba(0,0,0,.08);font-size:11px;color:#333}
+/* fitrah filter */
+.ff{background:linear-gradient(180deg,#e9f3ef 0%,#9fd0c4 55%,#5e9f97 100%);min-height:100%}
+.ff-head{padding:4px 14px 8px;text-align:center;position:relative}
+.ff-head img.logo{width:62px;height:62px;border-radius:50%;display:block;margin:0 auto 4px}
+.ff-head img.me{position:absolute;right:14px;top:4px;width:30px;height:30px;border-radius:50%;border:2px solid #fff}
+.ff-head b{display:block;font:700 17px/1.1 inherit;color:#1f6b63}
+.ff-head b span{color:#c9a447}
+.ff-head small{display:block;font-size:10px;color:#3d6e66;margin-top:4px}
+.ff-hi{font:500 17px/1.2 'Bodoni Moda',Georgia,serif;color:#fff;text-align:center;margin:12px 16px 4px;text-shadow:0 1px 6px rgba(0,0,0,.18)}
+.ff-search{display:flex;align-items:center;gap:8px;margin:8px 12px 12px;padding:10px 12px;border-radius:999px;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.55),0 6px 16px rgba(0,0,0,.08);font-size:12px;color:#777}
+.ff-search b{font-size:16px;color:#333;font-weight:400}
+.ff-search span{flex:1}
+.ff-search i{font-style:normal;color:#1f6b63;font-weight:700}
+.ff-res{margin:0 10px 12px;background:#fff;border-radius:16px;padding:14px 12px;box-shadow:0 10px 24px rgba(0,0,0,.12)}
+.ff-res h4{text-align:center;font:700 18px/1.1 inherit;margin:0;color:#111}
+.ff-res > small{display:block;text-align:center;font-size:11px;color:#777;margin:2px 0 10px}
+.ff-row{display:flex;align-items:center;justify-content:space-between;padding:9px 10px;margin-bottom:6px;border-radius:10px;font-size:12px;font-weight:700;color:#222;opacity:0;transform:translateY(6px)}
+.peek-panel.is-active .ff-row{animation:peekIn .45s ease forwards}
+.ff-row:nth-child(3){animation-delay:.08s!important}.ff-row:nth-child(4){animation-delay:.16s!important}.ff-row:nth-child(5){animation-delay:.24s!important}.ff-row:nth-child(6){animation-delay:.32s!important}.ff-row:nth-child(7){animation-delay:.4s!important}.ff-row:nth-child(8){animation-delay:.48s!important}.ff-row:nth-child(9){animation-delay:.56s!important}
+@keyframes peekIn{to{opacity:1;transform:none}}
+.ff-row em{font-style:normal;font-size:8.5px;letter-spacing:.06em;padding:4px 7px;border-radius:999px}
+.ff-crit{background:#fdecee}.ff-crit em{background:#f8d4d9;color:#c0283d}
+.ff-mod{background:#fff7e0}.ff-mod em{background:#fde9b0;color:#a87500}
+.ff-mild{background:#e8f8ee}.ff-mild em{background:#c9f0d6;color:#1f8a4c}
+.ff-box{border:1px solid #eee;border-radius:12px;padding:10px 12px;margin-top:8px}
+.ff-box b{display:block;font-size:13px}
+.ff-box span{display:block;font-size:10.5px;color:#777;margin-top:2px}
+.ff-label{display:flex;justify-content:space-between;margin:4px 12px 8px;font-size:9px;font-weight:700;letter-spacing:.1em;color:#fff}
+.ff-label span{background:rgba(255,255,255,.85);color:#555;padding:5px 9px;border-radius:999px;letter-spacing:.02em;font-weight:600}
+.ff-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 20px}
+.ff-tile{position:relative;height:120px;border-radius:12px;border:2px solid #f2b03d;padding:8px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;font-size:11px;font-weight:700;line-height:1.2;overflow:hidden}
+.ff-tile small{position:absolute;top:7px;left:7px;background:#fff;color:#333;font-size:8.5px;padding:3px 6px;border-radius:6px}
+.ff-tile span{font-size:9px;font-weight:500;opacity:.85}
 /* whatsapp */
-.peek-wa{background:#efe7dc;text-align:left}
-.peek-wa-top{flex:0 0 auto;padding:44px 12px 10px;background:#f6f6f6;border-bottom:1px solid #e3e3e3;display:flex;align-items:center;gap:9px}
+.peek-wa{background:#efe7dc;display:flex;flex-direction:column}
+.peek-wa-top{position:sticky;top:0;z-index:2;flex:0 0 auto;padding:44px 12px 10px;background:#f6f6f6;border-bottom:1px solid #e3e3e3;display:flex;align-items:center;gap:9px}
 .peek-wa-avatar{width:32px;height:32px;border-radius:50%;background:var(--evergreen);color:#dac49c;display:grid;place-items:center;font:700 10px/1 'Manrope',sans-serif;flex:0 0 32px}
 .peek-wa-top b{display:block;font:700 13px/1.2 'Manrope',sans-serif;color:#111}
 .peek-wa-top span{display:block;font:500 10px/1.2 'Manrope',sans-serif;color:#7a7a7a}
-.peek-wa-feed{flex:1;overflow:hidden;padding:10px 10px 12px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;background-color:#efe7dc;background-image:radial-gradient(rgba(36,48,41,.05) 1px,transparent 1px);background-size:14px 14px}
+.peek-wa-feed{flex:1 0 auto;padding:10px 10px 16px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;background-color:#efe7dc;background-image:radial-gradient(rgba(36,48,41,.05) 1px,transparent 1px);background-size:14px 14px}
 .peek-msg{max-width:84%;padding:7px 10px 6px;border-radius:12px;font:500 11.5px/1.4 'Manrope',sans-serif;color:#111;box-shadow:0 1px 1px rgba(0,0,0,.08);animation:peekMsg .35s cubic-bezier(.2,.8,.2,1) both}
 .peek-msg em{display:block;font-style:normal;font-size:9px;color:#8a8a8a;text-align:right;margin-top:2px}
 .peek-msg.them{align-self:flex-start;background:#fff;border-top-left-radius:4px}
@@ -1719,23 +1809,15 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 .peek-typing i:nth-child(2){animation-delay:.15s}.peek-typing i:nth-child(3){animation-delay:.3s}
 @keyframes peekDot{0%,60%,100%{opacity:.3;transform:none}30%{opacity:1;transform:translateY(-3px)}}
 @keyframes peekMsg{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
-/* toggle */
-.peek-toggle{position:relative;display:inline-grid;grid-template-columns:repeat(4,auto);gap:4px;margin:30px auto 0;padding:6px;background:#fff;border:1px solid rgba(194,164,101,.35);border-radius:999px;box-shadow:0 10px 26px rgba(36,48,41,.08)}
-.peek-pill{position:absolute;top:0;left:0;border-radius:999px;background:var(--evergreen);box-shadow:0 6px 16px rgba(36,48,41,.25);transition:transform .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),height .45s;z-index:0}
-.peek-toggle button{position:relative;z-index:1;border:0;background:none;padding:12px 18px;border-radius:999px;font:700 12px/1 'Manrope',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#4a4d47;cursor:pointer;transition:color .3s;white-space:nowrap}
-.peek-toggle button[aria-selected="true"]{color:#f7f3ec}
-.peek-toggle button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.peek-caption{min-height:3.2em;margin:20px auto 0;max-width:470px;color:#5f625d;font-size:17px;transition:opacity .3s}
 @media(max-width:700px){
   .peek{margin-top:56px}
   .peek-toggle{grid-template-columns:repeat(2,1fr);border-radius:22px;width:min(100%,360px)}
   .peek-toggle button{padding:12px 8px;font-size:11px;letter-spacing:.06em}
   .peek-pill{border-radius:16px}
-  .peek-caption{font-size:16px}
+  .peek-caption{font-size:16px;min-height:4.6em}
 }
 @media(prefers-reduced-motion:reduce){
   .peek-phone,.peek-panel,.peek-pill{transition:none!important}
-  .peek.is-visible .peek-phone{animation:none}
   .peek *{animation-duration:.001s!important;animation-iteration-count:1!important}
 }
 /* Even line breaks: no lone last word on headings or centred lines */
@@ -2093,35 +2175,62 @@ p,li{text-wrap:pretty}
 </div>
 
 <div class="peek" id="peek-inside">
-<div class="peek-head"><div class="eyebrow">TAKE A PEEK INSIDE</div><h3>See what you get access to.</h3><p>Tap between them to see what is waiting for you.</p></div>
-<div class="peek-stage">
-<div class="peek-phone">
-<div class="peek-screen">
-<div aria-label="Private podcast" class="peek-panel peek-podcast is-active" data-peek="podcast" role="tabpanel">
-<video data-src="media/podcast.mp4" loop muted playsinline poster="media/podcast.jpg" preload="none"></video>
-<div class="peek-np"><div class="peek-np-art">EMAN'S<br/>PODCAST</div><div class="peek-np-meta"><b>How to Navigate Negative Influences From Family</b><span>Eman's Private Coaching Podcast</span><div class="peek-np-bar"><i></i></div></div><div class="peek-np-play"></div></div>
-</div>
-<div aria-label="Course videos" class="peek-panel peek-fill" data-peek="course" role="tabpanel">
-<video data-src="media/course.mp4" loop muted playsinline poster="media/course.jpg" preload="none"></video>
-</div>
-<div aria-label="Apps" class="peek-panel peek-fill" data-peek="apps" role="tabpanel">
-<video data-src="media/fitrah-filter.mp4" loop muted playsinline poster="media/fitrah-filter.jpg" preload="none"></video>
-</div>
-<div aria-label="WhatsApp support" class="peek-panel peek-wa" data-peek="whatsapp" role="tabpanel">
-<div class="peek-wa-top"><div class="peek-wa-avatar">PBDD</div><div><b>PBDD Support</b><span>Eman, members</span></div></div>
-<div class="peek-wa-feed" aria-live="off"></div>
-</div>
-</div>
-</div>
-</div>
+<div class="peek-head"><div class="eyebrow">TAKE A PEEK INSIDE</div><h3>See what you get access to.</h3><p>Tap a tab, then scroll inside the phone to look around.</p></div>
 <div aria-label="Peek inside PBDD" class="peek-toggle" role="tablist">
 <span aria-hidden="true" class="peek-pill"></span>
 <button aria-selected="true" data-peek="podcast" role="tab" type="button">Private Podcast</button>
-<button aria-selected="false" data-peek="course" role="tab" type="button">Course Videos</button>
+<button aria-selected="false" data-peek="course" role="tab" type="button">Course Portal</button>
 <button aria-selected="false" data-peek="apps" role="tab" type="button">Apps</button>
 <button aria-selected="false" data-peek="whatsapp" role="tab" type="button">WhatsApp</button>
 </div>
 <p class="peek-caption">A private coaching podcast with 44+ episodes you can learn from on the school run.</p>
+<div class="peek-stage">
+<div class="peek-phone">
+<div class="peek-screen peek-ui">
+<div aria-label="Private podcast" class="peek-panel pp is-active" data-peek="podcast" role="tabpanel" tabindex="0">
+<div class="peek-top"></div>
+<div class="pp-hero"><img alt="Eman's Private Coaching Podcast cover" loading="lazy" src="media/podcast-cover.jpg"/><b>Eman's Ed Corner Coaching Podcast</b><span>Eman Ahmed</span><button class="pp-latest pp-play" data-title="How to Navigate Negative Influences From Family" type="button">▶ Latest Episode</button>
+<p class="pp-desc"><b>May 2: How to Navigate Negative Influences From Family:</b> Assalamu Alekum, Today, we are diving into such an important and nuanced topic regarding negative influences from family.</p></div>
+<div class="pp-list"><h4>Episodes <small>See All</small></h4><div class="pp-ep"><time>MAY 2</time><b>How to Navigate Negative Influences From Family</b><p>Assalamu Alekum, Today, we are diving into such an important and nuanced topic regarding negative influences from family.</p><button class="pp-play" data-title="How to Navigate Negative Influences From Family" type="button">▶ Play</button></div><div class="pp-ep"><time>DEC 10, 2025</time><b>When Your Child Only Wants You: How to Navigate Parent Preference With Confidence</b><p>You love your child deeply, but being the only parent they want can be exhausting.</p><button class="pp-play" data-title="When Your Child Only Wants You: How to Navigate Parent Preference With Confidence" type="button">▶ Play</button></div><div class="pp-ep"><time>NOV 27, 2025</time><b>Bedtime Routines and Parental Perspective</b><p>Assalamu Alekum, If bedtime at your house feels like a marathon, little feet sneaking back to your bed, tears, protests, and “I’m not tired!”</p><button class="pp-play" data-title="Bedtime Routines and Parental Perspective" type="button">▶ Play</button></div><div class="pp-ep"><time>NOV 4, 2025</time><b>How to Come Back and Heal from the Moments You’re Not Proud Of</b><p>Assalamu Alekum! If you’ve ever felt ashamed after yelling, snapping, or being too strict, this conversation is for you.</p><button class="pp-play" data-title="How to Come Back and Heal from the Moments You’re Not Proud Of" type="button">▶ Play</button></div><div class="pp-ep"><time>JUL 16, 2025</time><b>Just Yelled, Hit, or Shoved Your Kid in Time-Out and Now You Feel Guilty? This Episode Will Help You Break the Cycle</b><p>Assalamu Alekum, Ever yelled, hit, or shoved your child and immediately felt the guilt?</p><button class="pp-play" data-title="Just Yelled, Hit, or Shoved Your Kid in Time-Out and Now You Feel Guilty? This Episode Will Help You Break the Cycle" type="button">▶ Play</button></div><div class="pp-ep"><time>JUN 19, 2025</time><b>Unicorns, Dolls, Fantasy Creatures and Islam: What’s Allowed in Your Child’s Playtime?</b><p>Assalamu Alekum! Do you feel torn about the toys and stories your child loves?</p><button class="pp-play" data-title="Unicorns, Dolls, Fantasy Creatures and Islam: What’s Allowed in Your Child’s Playtime?" type="button">▶ Play</button></div><div class="pp-ep"><time>JUN 11, 2025</time><b>The Secret to Building Lifelong Quran Habits in Children Without the Guilt</b><p>Assalamu Alekum, We’re back on track with our coaching podcast episodes, and today we’re talking Quran habits.</p><button class="pp-play" data-title="The Secret to Building Lifelong Quran Habits in Children Without the Guilt" type="button">▶ Play</button></div><div class="pp-ep"><time>MAY 7, 2025</time><b>FEF May Huddle [2025]</b><p>Assalamu Alekum! Today we talked about measuring parenting success, co-parenting, ADHD and more.</p><button class="pp-play" data-title="FEF May Huddle [2025]" type="button">▶ Play</button></div>
+<div class="pp-more"><span>See All (44)</span><span>›</span></div>
+<div class="pp-info"><h5>Information</h5><div><span>Creator</span><span>Eman Ahmed</span></div><div><span>Episodes</span><span>44</span></div><div><span>Access</span><span>PBDD members only</span></div></div></div>
+<div class="pp-np"><img alt="" loading="lazy" src="media/podcast-cover.jpg"/><div><b>How to Navigate Negative Influences From Family</b><i></i></div><button aria-label="Play or pause" type="button">▶</button></div>
+</div>
+<div aria-label="Course portal" class="peek-panel cp" data-peek="course" role="tabpanel" tabindex="0">
+<div class="peek-top"><div class="cp-score"><span class="cp-total">0</span> XP</div></div>
+<div class="cp-sec" style="padding-top:0"><h4 style="margin-top:14px">Welcome to the Most EPIC YEAR of YOU!</h4><p style="font-size:13px">For the next 12 months, we will go on a transformative journey that makes us wiser, softer, and more us inshallah!</p><span class="cp-thumb"><img alt="Welcome PBDD Members video" loading="lazy" src="media/course-welcome.jpg"/></span></div>
+<div class="cp-dark"><div class="cp-card"><small>Important Action Needed</small><b>Let’s cover our legal stuff 👍</b><p>I acknowledge that all rights are reserved. The contents of this program may not be reproduced or distributed.</p><div class="cp-check"><button type="button">Yes. I agree with the terms and conditions.</button><span class="cp-xp" data-xp="3">★ 3 XP</span></div></div></div>
+<div class="cp-sec"><h5>Start with your orientation</h5><p>Please take a few minutes to watch this video. It will set you up for success!</p><span class="cp-thumb"><img alt="Your Orientation video" loading="lazy" src="media/course-orientation.jpg"/></span></div>
+<div class="cp-sec" style="padding-top:4px"><b style="font-size:14px;color:#111">Program Calendar</b><p style="margin-top:6px">Curious what events are coming up? This calendar will give you the complete rundown!</p></div>
+<div class="cp-dark"><div class="cp-card"><small>Action Needed</small><b>Mandatory Intake Form</b><p>Before you dive into your awesome program, please take a few minutes to complete this intake form, then come back here to check it off your list!</p><div class="cp-check"><button type="button">Done!</button><span class="cp-xp" data-xp="3">★ 3 XP</span></div></div>
+<div class="cp-card"><small>Community</small><b>Browse the Forum</b><p>The community forum is your virtual hub for daily questions and connections between you and the rest of the members. Dive right in and say Salam!</p><div class="cp-check"><button type="button">Awesome!</button><span class="cp-xp" data-xp="1">★ 1 XP</span></div></div></div>
+<div class="cp-sec"><b style="font-size:14px;color:#111">Leaderboards Are Back!</b><p style="margin-top:6px">Each month, there will be a virtual prize sent to the person who stays #1 as the most active participant and learner in our program!</p>
+<div class="cp-board"><div><em>1</em><i style="background:#2f8f7d">A</i><span>Member</span><strong>42</strong></div><div><em>2</em><i style="background:#c9a447">H</i><span>Member</span><strong>37</strong></div><div><em>3</em><i style="background:#7b4fd6">S</i><span>Member</span><strong>29</strong></div><div><em>4</em><i style="background:#b0476d">You</i><span>You</span><strong class="cp-total">0</strong></div></div></div>
+<div class="cp-end cp-sec"><h4>Bismillah. Let Your Transformation Begin!</h4></div>
+<div class="cp-bar"><div>🔒 academy.thegoodchild.org</div></div>
+</div>
+<div aria-label="Fitrah Filter app" class="peek-panel" data-peek="apps" role="tabpanel" tabindex="0">
+<div class="ff">
+<div class="peek-top"></div>
+<div class="ff-head"><img alt="Fitrah Filter logo" class="logo" loading="lazy" src="media/fitrah-logo.jpg"/><img alt="" class="me" loading="lazy" src="media/eman-avatar.jpg"/><b>Fitrah <span>Filter</span></b><small>Protecting Fitrah. Empowering Parents.</small></div>
+<div class="ff-hi">Bismillah, what’s on deck for today?</div>
+<div class="ff-search"><b>+</b><span>Roblox</span><i>⌕</i></div>
+<div class="ff-res"><h4>Roblox</h4><small>Game · 2006</small><div class="ff-row ff-crit">▸ Gambling<em>CRITICAL</em></div><div class="ff-row ff-crit">▸ Magic &amp; Sorcery<em>CRITICAL</em></div><div class="ff-row ff-mod">▸ LGBTQ+ Content<em>MODERATE</em></div><div class="ff-row ff-mild">▸ Substance Abuse<em>MILD</em></div><div class="ff-row ff-crit">▸ Immodest Clothing<em>CRITICAL</em></div><div class="ff-row ff-crit">▸ Sexual Content<em>CRITICAL</em></div><div class="ff-row ff-crit">▸ Violence<em>CRITICAL</em></div>
+<div class="ff-box"><b>Alternatives ⌄</b><span>Safer, somewhat-similar picks worth a look</span></div>
+<div class="ff-box"><b>More Islamic Picks ⌄</b><span>Highly Islamic-rated, same media type</span></div>
+<div class="ff-box"><b>Parents’ notes</b><span>Add a note for other parents…</span></div></div>
+<div class="ff-label"><span>All types</span>YOUR ANALYSES<span>All verdicts</span></div>
+<div class="ff-grid"><div class="ff-tile" style="background:linear-gradient(160deg,#3b6fb6,#1e3b6e)"><small>Movie</small>Toy Story 5<span></span></div><div class="ff-tile" style="background:linear-gradient(160deg,#4b4a6b,#22213a)"><small>Book</small>A Series of Unfortunate Events<span>Lemony Snicket</span></div><div class="ff-tile" style="background:linear-gradient(160deg,#7a2f4f,#3a1426)"><small>Movie</small>Wicked: For Good<span>2025</span></div><div class="ff-tile" style="background:linear-gradient(160deg,#3d7fb0,#173a5c)"><small>Movie</small>Frozen 2<span>2019</span></div><div class="ff-tile" style="background:linear-gradient(160deg,#555,#222)"><small>Game</small>Roblox<span>2006</span></div><div class="ff-tile" style="background:linear-gradient(160deg,#b8443a,#5e1d18)"><small>YouTube</small>Kids channel check<span></span></div></div>
+</div>
+</div>
+<div aria-label="WhatsApp support" class="peek-panel peek-wa" data-peek="whatsapp" role="tabpanel" tabindex="0">
+<div class="peek-wa-top"><div class="peek-wa-avatar">PBDD</div><div><b>PBDD Support</b><span>Eman, members</span></div></div>
+<div class="peek-wa-feed" aria-live="off"></div>
+</div>
+</div>
+<div aria-hidden="true" class="peek-hint">Scroll inside ↕</div>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -2497,9 +2606,12 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
   var pill = root.querySelector('.peek-pill');
   var caption = root.querySelector('.peek-caption');
   var feed = root.querySelector('.peek-wa-feed');
+  var waPanel = root.querySelector('.peek-wa');
+  var hint = root.querySelector('.peek-hint');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var current = 'podcast', visible = false, userPicked = false, autoTimer = null, chatTimers = [];
+  var current = 'podcast', visible = false, touched = false, autoTimer = null, chatTimers = [];
 
+  function stopAuto(){ touched = true; clearTimeout(autoTimer); }
   function movePill(){
     var b = root.querySelector('.peek-toggle button[aria-selected="true"]');
     if(!b) return;
@@ -2507,37 +2619,27 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
     pill.style.height = b.offsetHeight + 'px';
     pill.style.transform = 'translate(' + b.offsetLeft + 'px,' + b.offsetTop + 'px)';
   }
-  function syncVideos(){
-    panels.forEach(function(p){
-      var v = p.querySelector('video');
-      if(!v) return;
-      if(p.dataset.peek === current && visible){
-        if(!v.src){ v.src = v.dataset.src; }
-        v.playbackRate = p.dataset.peek === 'podcast' ? .8 : 1;
-        var pr = v.play(); if(pr && pr.catch) pr.catch(function(){});
-      } else if(v.src){ v.pause(); }
-    });
-  }
   function clearChat(){ chatTimers.forEach(clearTimeout); chatTimers = []; }
   function playChat(){
     clearChat(); feed.innerHTML = '';
     var t = 300;
-    chat.forEach(function(m, i){
+    chat.forEach(function(m){
       var typing;
       chatTimers.push(setTimeout(function(){
         typing = document.createElement('div');
         typing.className = 'peek-typing ' + m[0];
         typing.innerHTML = '<i></i><i></i><i></i>';
         feed.appendChild(typing);
+        waPanel.scrollTop = waPanel.scrollHeight;
       }, t));
       t += reduce ? 0 : 900;
       chatTimers.push(setTimeout(function(){
         if(typing) typing.remove();
         var el = document.createElement('div');
         el.className = 'peek-msg ' + m[0];
-        el.innerHTML = (m[0] === 'me' ? '<strong>Eman</strong>' : '<strong>Member</strong>') + m[1] + '<em>' + (m[0] === 'me' ? '✓✓' : '') + '</em>';
+        el.innerHTML = '<strong>' + (m[0] === 'me' ? 'Eman' : 'Member') + '</strong>' + m[1] + '<em>' + (m[0] === 'me' ? '✓✓' : '') + '</em>';
         feed.appendChild(el);
-        while(feed.scrollHeight > feed.clientHeight + 4 && feed.children.length > 1){ feed.removeChild(feed.firstChild); }
+        waPanel.scrollTop = waPanel.scrollHeight;
       }, t));
       t += reduce ? 0 : 1100;
     });
@@ -2550,21 +2652,22 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
       var i = order.indexOf(p.dataset.peek);
       p.classList.toggle('is-active', i === idx);
       p.classList.toggle('is-before', i < idx);
+      if(i === idx && key !== 'whatsapp') p.scrollTop = 0;
     });
     caption.textContent = captions[key];
-    movePill(); syncVideos();
+    movePill();
     if(key === 'whatsapp') playChat(); else clearChat();
   }
   function scheduleAuto(){
     clearTimeout(autoTimer);
-    if(userPicked || reduce || !visible) return;
+    if(touched || reduce || !visible) return;
     autoTimer = setTimeout(function(){
       show(order[(order.indexOf(current) + 1) % order.length]);
       scheduleAuto();
     }, current === 'whatsapp' ? 11000 : 7000);
   }
   buttons.forEach(function(b, i){
-    b.addEventListener('click', function(){ userPicked = true; clearTimeout(autoTimer); show(b.dataset.peek); });
+    b.addEventListener('click', function(){ stopAuto(); show(b.dataset.peek); });
     b.addEventListener('keydown', function(e){
       var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
       if(!d) return;
@@ -2573,13 +2676,50 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
       n.focus(); n.click();
     });
   });
+  // Any touch, scroll or click inside the phone stops the auto-rotation and hides the hint
+  var screen = root.querySelector('.peek-screen');
+  ['pointerdown','wheel','touchstart'].forEach(function(ev){
+    screen.addEventListener(ev, function(){ stopAuto(); hint.classList.add('is-hidden'); }, {passive:true});
+  });
+  panels.forEach(function(p){
+    p.addEventListener('scroll', function(){ if(p.scrollTop > 20) hint.classList.add('is-hidden'); }, {passive:true});
+  });
+
+  // Podcast: play buttons update the now-playing bar
+  var np = root.querySelector('.pp-np'), npTitle = np.querySelector('b'), npBtn = np.querySelector('button');
+  var plays = [].slice.call(root.querySelectorAll('.pp-play'));
+  function setPlaying(title, on){
+    np.classList.toggle('is-playing', on);
+    npBtn.textContent = on ? '❚❚' : '▶';
+    if(title) npTitle.textContent = title;
+    plays.forEach(function(b){
+      var active = on && b.dataset.title === npTitle.textContent && !b.classList.contains('pp-latest');
+      b.classList.toggle('is-on', active);
+      if(!b.classList.contains('pp-latest')) b.textContent = active ? '❚❚ Playing' : '▶ Play';
+    });
+  }
+  plays.forEach(function(b){ b.addEventListener('click', function(){ setPlaying(b.dataset.title, !(np.classList.contains('is-playing') && npTitle.textContent === b.dataset.title)); }); });
+  npBtn.addEventListener('click', function(){ setPlaying(null, !np.classList.contains('is-playing')); });
+
+  // Course portal: tick tasks to earn XP
+  var totals = [].slice.call(root.querySelectorAll('.cp-total')), xp = 0;
+  [].slice.call(root.querySelectorAll('.cp-check')).forEach(function(row){
+    var btn = row.querySelector('button'), chip = row.querySelector('.cp-xp'), pts = +chip.dataset.xp;
+    btn.addEventListener('click', function(){
+      var done = btn.classList.toggle('is-done');
+      chip.classList.toggle('is-earned', done);
+      xp += done ? pts : -pts;
+      totals.forEach(function(t){ t.textContent = xp; });
+    });
+  });
+
   window.addEventListener('resize', movePill);
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(movePill);
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(entries){
       visible = entries[0].isIntersecting;
       if(visible) root.classList.add('is-visible');
-      syncVideos(); scheduleAuto();
+      scheduleAuto();
     }, {threshold:.3}).observe(root);
   } else { visible = true; root.classList.add('is-visible'); }
   show('podcast');
