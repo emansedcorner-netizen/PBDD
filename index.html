@@ -407,6 +407,7 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
   line-height:1.45;
 }
 .vision-close{
+  text-wrap:balance;
   max-width:850px;
   margin:38px auto 0;
   text-align:center;
@@ -478,7 +479,13 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
   text-align:center;
 }
 
+.vision-card:last-child:nth-child(odd){
+  grid-column:1 / -1;
+  justify-self:center;
+  width:calc(50% - 9px);
+}
 @media(max-width:900px){
+  .vision-card:last-child:nth-child(odd){width:auto;justify-self:stretch}
   .reframe-grid{grid-template-columns:1fr;gap:34px}
   .question-stack{grid-template-columns:1fr}
   .vision-grid{grid-template-columns:1fr}
@@ -1357,7 +1364,12 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
   font-family:'Bodoni Moda',Georgia,serif;
   font-style:normal;
   font-size:clamp(68px,7vw,102px);
-  line-height:.88;
+  font-variant-numeric:lining-nums tabular-nums;
+  font-feature-settings:"lnum" 1,"tnum" 1;
+  display:flex;
+  align-items:flex-start;
+  height:1em;
+  line-height:1;
   letter-spacing:-.035em;
   color:var(--evergreen);
   font-weight:700;
@@ -1369,8 +1381,8 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 }
 .header-stat .figure .suffix{
   font-size:.52em;
+  line-height:1;
   color:var(--evergreen);
-  vertical-align:top;
   margin-left:2px;
   font-weight:700;
   font-style:normal;
@@ -1391,16 +1403,16 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 @media(max-width:620px){
   .header-stats-band{padding:14px 0 52px}
   .header-stats-shell{width:min(100%,calc(100% - 18px))}
-  .header-stats-grid{grid-template-columns:1fr}
-  .header-stat{min-height:auto;padding:28px 24px}
-  .header-stat:not(:last-child){border-right:none;border-bottom:1px solid rgba(194,164,101,.28)}
-  .header-stat p{max-width:none;font-size:18px}
+  .header-stats-grid{border-radius:22px}
+  .header-stat{min-height:auto;padding:24px 18px 22px}
+  .header-stat .figure{font-size:clamp(52px,15vw,68px);margin-bottom:14px}
+  .header-stat p{max-width:none;font-size:16px;line-height:1.35}
 }
 
 
 
 /* Compact header stats after removing explanatory copy */
-.header-stat{min-height:160px;justify-content:center}
+.header-stat{min-height:160px;justify-content:flex-start}
 .header-stat p{font-size:18px;line-height:1.35;max-width:230px}
 @media(max-width:620px){.header-stat{min-height:132px}}
 
@@ -1653,6 +1665,82 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
   .header-stat .figure{font-size:64px !important;letter-spacing:-.035em !important;}
 }
 
+
+/* Peek inside: phone mockup with toggles */
+.peek{margin:72px auto 0;max-width:760px;text-align:center}
+.peek-head h3{font-size:clamp(30px,4vw,44px);margin:0 0 10px}
+.peek-head p{margin:0 auto 34px;color:#5f625d;max-width:520px}
+.peek-stage{position:relative;display:flex;justify-content:center;padding:10px 0 6px}
+.peek-stage:before{content:"";position:absolute;inset:6% 12% 0;border-radius:50%;background:radial-gradient(closest-side,rgba(181,150,98,.22),rgba(181,150,98,0));filter:blur(8px)}
+.peek-phone{position:relative;width:min(300px,78vw);aspect-ratio:9/19.5;border-radius:46px;padding:11px;background:#141815;box-shadow:0 0 0 2px #2d332e inset,0 30px 70px rgba(36,48,41,.28),0 8px 20px rgba(36,48,41,.14);opacity:0;transform:translateY(34px) scale(.97);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.peek.is-visible .peek-phone{opacity:1;transform:none;animation:peekFloat 6s ease-in-out 1s infinite}
+@keyframes peekFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.peek-phone:after{content:"";position:absolute;top:19px;left:50%;width:84px;height:24px;margin-left:-42px;border-radius:20px;background:#141815;z-index:5}
+.peek-screen{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#fff;isolation:isolate}
+.peek-panel{position:absolute;inset:0;opacity:0;transform:translateX(14%) scale(.98);transition:opacity .55s ease,transform .65s cubic-bezier(.2,.8,.2,1);pointer-events:none;display:flex;flex-direction:column}
+.peek-panel.is-before{transform:translateX(-14%) scale(.98)}
+.peek-panel.is-active{opacity:1;transform:none;pointer-events:auto}
+.peek-panel video{display:block;width:100%;background:#f2f2f2}
+.peek-fill video{height:100%;object-fit:cover;object-position:top}
+.peek-statusbar{height:40px;flex:0 0 40px}
+/* podcast */
+.peek-podcast{background:#fff}
+.peek-podcast:before{content:"";flex:0 0 34px;background:var(--peek-pod-top,#dedede)}
+.peek-podcast video{flex:0 0 auto;height:auto}
+.peek-podcast .peek-np{margin-top:auto}
+.peek-np{flex:0 0 auto;margin:0 10px 12px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.96);box-shadow:0 6px 18px rgba(0,0,0,.12);display:flex;gap:10px;align-items:center;text-align:left}
+.peek-np-art{width:38px;height:38px;border-radius:8px;flex:0 0 38px;background:linear-gradient(135deg,#ece8e1,#c9c2b6);display:grid;place-items:center;font:700 8px/1.1 'Manrope',sans-serif;color:#3a3a32;letter-spacing:.04em}
+.peek-np-meta{flex:1;min-width:0}
+.peek-np-meta b{display:block;font:700 11px/1.3 'Manrope',sans-serif;color:#1d1d1f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.peek-np-meta span{display:block;font:500 10px/1.3 'Manrope',sans-serif;color:#8a8a8e}
+.peek-np-bar{height:3px;border-radius:3px;background:#e2e2e5;margin-top:6px;overflow:hidden}
+.peek-np-bar i{display:block;height:100%;width:30%;background:#7b4fd6;border-radius:3px}
+.peek-panel.is-active .peek-np-bar i{animation:peekProgress 14s linear infinite}
+@keyframes peekProgress{from{width:18%}to{width:92%}}
+.peek-np-play{width:26px;height:26px;border-radius:50%;background:#1d1d1f;flex:0 0 26px;position:relative}
+.peek-np-play:before,.peek-np-play:after{content:"";position:absolute;top:8px;width:3px;height:10px;background:#fff;border-radius:1px}
+.peek-np-play:before{left:9px}.peek-np-play:after{right:9px}
+/* whatsapp */
+.peek-wa{background:#efe7dc;text-align:left}
+.peek-wa-top{flex:0 0 auto;padding:44px 12px 10px;background:#f6f6f6;border-bottom:1px solid #e3e3e3;display:flex;align-items:center;gap:9px}
+.peek-wa-avatar{width:32px;height:32px;border-radius:50%;background:var(--evergreen);color:#dac49c;display:grid;place-items:center;font:700 10px/1 'Manrope',sans-serif;flex:0 0 32px}
+.peek-wa-top b{display:block;font:700 13px/1.2 'Manrope',sans-serif;color:#111}
+.peek-wa-top span{display:block;font:500 10px/1.2 'Manrope',sans-serif;color:#7a7a7a}
+.peek-wa-feed{flex:1;overflow:hidden;padding:10px 10px 12px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;background-color:#efe7dc;background-image:radial-gradient(rgba(36,48,41,.05) 1px,transparent 1px);background-size:14px 14px}
+.peek-msg{max-width:84%;padding:7px 10px 6px;border-radius:12px;font:500 11.5px/1.4 'Manrope',sans-serif;color:#111;box-shadow:0 1px 1px rgba(0,0,0,.08);animation:peekMsg .35s cubic-bezier(.2,.8,.2,1) both}
+.peek-msg em{display:block;font-style:normal;font-size:9px;color:#8a8a8a;text-align:right;margin-top:2px}
+.peek-msg.them{align-self:flex-start;background:#fff;border-top-left-radius:4px}
+.peek-msg.me{align-self:flex-end;background:#d9fdd3;border-top-right-radius:4px}
+.peek-msg.me strong{display:block;font-size:10px;color:#1f7a5a;margin-bottom:2px}
+.peek-msg.them strong{display:block;font-size:10px;color:#b0476d;margin-bottom:2px}
+.peek-typing{align-self:flex-end;background:#d9fdd3;border-radius:12px;padding:9px 12px;display:flex;gap:4px;animation:peekMsg .3s ease both}
+.peek-typing.them{align-self:flex-start;background:#fff}
+.peek-typing i{width:6px;height:6px;border-radius:50%;background:#8a9a90;animation:peekDot 1s infinite}
+.peek-typing i:nth-child(2){animation-delay:.15s}.peek-typing i:nth-child(3){animation-delay:.3s}
+@keyframes peekDot{0%,60%,100%{opacity:.3;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+@keyframes peekMsg{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+/* toggle */
+.peek-toggle{position:relative;display:inline-grid;grid-template-columns:repeat(4,auto);gap:4px;margin:30px auto 0;padding:6px;background:#fff;border:1px solid rgba(194,164,101,.35);border-radius:999px;box-shadow:0 10px 26px rgba(36,48,41,.08)}
+.peek-pill{position:absolute;top:0;left:0;border-radius:999px;background:var(--evergreen);box-shadow:0 6px 16px rgba(36,48,41,.25);transition:transform .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),height .45s;z-index:0}
+.peek-toggle button{position:relative;z-index:1;border:0;background:none;padding:12px 18px;border-radius:999px;font:700 12px/1 'Manrope',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#4a4d47;cursor:pointer;transition:color .3s;white-space:nowrap}
+.peek-toggle button[aria-selected="true"]{color:#f7f3ec}
+.peek-toggle button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.peek-caption{min-height:3.2em;margin:20px auto 0;max-width:470px;color:#5f625d;font-size:17px;transition:opacity .3s}
+@media(max-width:700px){
+  .peek{margin-top:56px}
+  .peek-toggle{grid-template-columns:repeat(2,1fr);border-radius:22px;width:min(100%,360px)}
+  .peek-toggle button{padding:12px 8px;font-size:11px;letter-spacing:.06em}
+  .peek-pill{border-radius:16px}
+  .peek-caption{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  .peek-phone,.peek-panel,.peek-pill{transition:none!important}
+  .peek.is-visible .peek-phone{animation:none}
+  .peek *{animation-duration:.001s!important;animation-iteration-count:1!important}
+}
+/* Even line breaks: no lone last word on headings or centred lines */
+h1,h2,h3,h4,#join .lead,.pricing-longevity,.pricing-value-strip{text-wrap:balance}
+p,li{text-wrap:pretty}
 </style>
 <meta content="Parenting by Divine Design" property="og:title"/>
 <meta content="Your parenting home for the first 12 years." property="og:description"/>
@@ -1668,7 +1756,7 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 <div class="eyebrow">ROOTED IN THE QURAN + SUNNAH</div>
 <div aria-label="Parenting by Divine Design" class="art-title"><span class="serif">Parenting by</span> <span class="calligraphy">Divine Design</span></div>
 <p class="lead" style="text-align:center;"><strong>Your parenting home for the first 12 years.</strong></p>
-<p class="lead">I’ll teach you how to form the foundations during the early years so you can raise a <strong>strong, grounded, unapologetically Muslim child</strong> without losing yourself in the process.</p>
+<p class="lead">I’ll teach you how to form the right foundations during the early years so you can raise a <strong>strong, grounded, unapologetically Muslim child</strong> without losing yourself in the process.</p>
 <div class="benefit-line"><span class="bubble">Parent education</span><span class="bubble alt">Child Islamic education</span><span class="bubble">Custom tools built for you</span><span class="bubble alt">12 months of support</span></div>
 <div class="hero-cta"><a class="btn" href="#join">JOIN PARENTING BY DIVINE DESIGN NOW</a></div><section aria-label="Five-star reviews from FEF and Parenting by Divine Design parents" class="five-star-banner">
 <div class="five-star-banner-inner">
@@ -1756,6 +1844,7 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 <div class="vision-card"><p>Your child begins salah, and you understand what this stage is actually for instead of expecting the finished habit overnight.</p></div>
 <div class="vision-card"><p>Your child starts approaching puberty, and you know how to prepare them before the physical, emotional, and religious changes arrive instead of scrambling once they are already in it.</p></div>
 <div class="vision-card"><p>Something concerning appears at school, online, or in the culture and instead of running to Instagram asking, “What do Muslim parents do about this?” you know how to think it through.</p></div>
+<div class="vision-card"><p>You know exactly whether or not you want to home educate, and why, and you still have a home curriculum that supports whichever education you choose, because you know how much that matters in the early years.</p></div>
 </div>
 <div class="vision-close">
 <p>You know your principles. You understand your child. You know what your family stands for.</p>
@@ -1785,14 +1874,15 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 <h3>When the “why” questions started getting harder.</h3>
 <div class="story-body">
 <p>When Asma's 7-year-old asked her why they don't celebrate Halloween, she froze.</p>
-<p>She wanted to answer in a way that protected her daughter's fitrah and identity, but every explanation she tried felt clunky, defensive, or guilt-inducing.</p>
+<p>She wanted to answer in a way that protected her daughter's fitrah and identity, but every explanation she tried felt clunky, defensive, or… guilt-inducing.</p>
 <p class="quote-line">“I didn't want my child to feel like being Muslim meant always saying ‘no.’ But I also didn't know how to explain our deen in a way she could actually understand.”</p>
 <p>For months, she avoided the questions, hoping her daughter wouldn't notice. But the questions only got harder:</p>
 <ul><li>“Why can't I get Christmas presents like my friends?”</li><li>“Why can't we decorate our house like theirs?”</li><li>“Why can't I just be like them?”</li></ul>
 <p>Asma joined Forming Early Foundations (FEF) out of desperation, hoping to find better words.</p>
-<p class="quote-line">“I didn't expect what I found. FEF didn't just give me answers. It gave me a framework to explain Islam in a way that's positive, loving, and connected to Allah, not defensive or fear-based.”</p>
-<p>Now, instead of panicking when her daughter asks why, Asma smiles. She knows exactly how to explain deen with confidence and simplicity. Her daughter doesn't feel deprived anymore. She feels proud.</p>
-<p class="quote-line">“I didn't realize how much my uncertainty was shaping her identity. Now, alhamdulillah, she understands what we believe, and why, without me feeling like the ‘fun police.’ That's priceless.”</p>
+<p class="quote-line">“I didn't expect what I found… FEF didn't just give me answers. It gave me a framework to explain Islam in a way that's positive, loving, and connected to Allah, not defensive or fear-based.”</p>
+<p>Now, instead of panicking when her daughter asks why, Asma smiles. She knows exactly how to explain deen with confidence and simplicity.</p>
+<p>Her daughter doesn't feel deprived anymore. She feels proud.</p>
+<p class="quote-line">“I didn't realize how much my uncertainty was shaping her identity. Now, alhamdulillah, she understands what we believe — and why — without me feeling like the ‘fun police.’ That's priceless.”</p>
 </div>
 </div>
 </div>
@@ -1868,7 +1958,7 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 <div class="section-head"><div class="eyebrow">THE PBDD FRAMEWORK</div><h2>We build the foundations in 3 places.</h2><p class="lead">You. Your child. Your home.</p></div>
 <div class="grid3">
 <div class="card"><div class="num">01</div><h3>You</h3><p><strong>Who you are matters.</strong> Your education, obligations, habits, reactions, strengths, weak spots, expectations, and the way you lead.</p><p class="muted">Become more skilled and intentional instead of rebuilding your parenting every time a new problem appears.</p></div>
-<div class="card"><div class="num">02</div><h3>Your Child</h3><p>Understand their development, temperament, behavior, needs, emotional world, and Islamic identity.</p><p class="muted">Know what the child in front of you needs now, not what an imaginary “ideal child” should need.</p></div>
+<div class="card"><div class="num">02</div><h3>Your Child</h3><p><strong>Understand their development</strong>, temperament, behavior, needs, emotional world, and Islamic identity.</p><p class="muted">Know what the child in front of you needs now, not what an imaginary “ideal child” should need.</p></div>
 <div class="card"><div class="num">03</div><h3>Your Home</h3><p><strong>Your home is the third parent.</strong> Build the values, routines, boundaries, relationships, Islamic habits, and culture your child grows inside.</p><p class="muted">Raising a strong Muslim child is not one lesson. It is the life you build around them.</p></div>
 </div>
 </div>
@@ -1890,7 +1980,7 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 <div class="section-head"><div class="eyebrow">ONE PLACE. THREE LAYERS OF SUPPORT.</div><h2>You do not need more random parenting advice. You need a reliable place to return to as your family grows.</h2></div>
 <div class="grid3">
 <div class="card"><div class="eyebrow">01</div><h3>Parent Education</h3><p>Learn the parenting skills and foundations you need through the first 12 years.</p></div>
-<div class="card"><div class="eyebrow">02</div><h3>Child Education</h3><p>Your child gets age-appropriate Islamic education for ages 5–12, including core Islamic subjects and guidance on the mainstream culture they actually encounter.</p></div>
+<div class="card"><div class="eyebrow">02</div><h3>Child Education</h3><p>Your child gets age-appropriate Islamic education for ages 5–12.</p></div>
 <div class="card"><div class="eyebrow">03</div><h3>Support While You Apply It</h3><p>Bring real family situations into the program so you can work out what applies to your child and your home.</p></div>
 </div>
 <div style="text-align:center;margin-top:44px"><h3>You learn. Your child learns. You get support while you put it into practice.</h3></div>
@@ -1999,7 +2089,39 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 <div class="feature"><h3>Custom Tools Built for You</h3><p>Interactive activities, workbooks, apps, and resources that help ease your early years parenting life.</p></div>
 <div class="feature"><h3>12 Months of Support</h3><p>Monthly calls + WhatsApp support with replies within 24 hours when you need help.</p></div>
 <div class="feature"><h3>Community</h3><p>A space with Muslim mothers who understand the kind of family you are trying to build.</p></div>
-<div class="feature"><h3>AI Parenting Village Suite <span style="font-size:.78em;color:var(--gold);font-weight:700;letter-spacing:.04em">(COMING SOON)</span></h3><p>A suite of AI parenting guides trained on my frameworks and methodologies to help you get support, direction, and next steps in real time.</p></div>
+<div class="feature"><h3>AI Parenting Village Suite <span style="font-size:.78em;color:var(--gold);font-weight:700;letter-spacing:.04em">(COMING SOON)</span></h3><p>Bring your lived family situations into the program to get support in real time.</p></div>
+</div>
+
+<div class="peek" id="peek-inside">
+<div class="peek-head"><div class="eyebrow">TAKE A PEEK INSIDE</div><h3>See what you get access to.</h3><p>Tap between them to see what is waiting for you.</p></div>
+<div class="peek-stage">
+<div class="peek-phone">
+<div class="peek-screen">
+<div aria-label="Private podcast" class="peek-panel peek-podcast is-active" data-peek="podcast" role="tabpanel">
+<video data-src="media/podcast.mp4" loop muted playsinline poster="media/podcast.jpg" preload="none"></video>
+<div class="peek-np"><div class="peek-np-art">EMAN'S<br/>PODCAST</div><div class="peek-np-meta"><b>How to Navigate Negative Influences From Family</b><span>Eman's Private Coaching Podcast</span><div class="peek-np-bar"><i></i></div></div><div class="peek-np-play"></div></div>
+</div>
+<div aria-label="Course videos" class="peek-panel peek-fill" data-peek="course" role="tabpanel">
+<video data-src="media/course.mp4" loop muted playsinline poster="media/course.jpg" preload="none"></video>
+</div>
+<div aria-label="Apps" class="peek-panel peek-fill" data-peek="apps" role="tabpanel">
+<video data-src="media/fitrah-filter.mp4" loop muted playsinline poster="media/fitrah-filter.jpg" preload="none"></video>
+</div>
+<div aria-label="WhatsApp support" class="peek-panel peek-wa" data-peek="whatsapp" role="tabpanel">
+<div class="peek-wa-top"><div class="peek-wa-avatar">PBDD</div><div><b>PBDD Support</b><span>Eman, members</span></div></div>
+<div class="peek-wa-feed" aria-live="off"></div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="Peek inside PBDD" class="peek-toggle" role="tablist">
+<span aria-hidden="true" class="peek-pill"></span>
+<button aria-selected="true" data-peek="podcast" role="tab" type="button">Private Podcast</button>
+<button aria-selected="false" data-peek="course" role="tab" type="button">Course Videos</button>
+<button aria-selected="false" data-peek="apps" role="tab" type="button">Apps</button>
+<button aria-selected="false" data-peek="whatsapp" role="tab" type="button">WhatsApp</button>
+</div>
+<p class="peek-caption">A private coaching podcast with 44+ episodes you can learn from on the school run.</p>
 </div>
 </div>
 </section>
@@ -2076,19 +2198,19 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 <div class="video-caption">A real parent perspective before you join</div><div class="video-fallback"><a href="https://www.youtube.com/watch?v=jTsNaD5Zkyg" rel="noopener" target="_blank">Watch this parent story on YouTube ↗</a></div>
 </section>
 <section class="dark" id="join">
-<div class="wrap" style="text-align:center"><div class="eyebrow">JOIN PARENTING BY DIVINE DESIGN</div><h2>One complete 12-month experience.</h2>
+<div class="wrap" style="text-align:center"><div class="eyebrow">JOIN PARENTING BY DIVINE DESIGN</div><h2>One complete <span style="white-space:nowrap">12-month</span> experience.</h2>
 <div class="pricing-longevity">Built to be returned to through the first 12 years.</div>
 <p class="lead">Parent education. Child Islamic education. Custom tools built for you. Community. Ongoing support.</p>
 <div class="pricing-value-strip"><span>Join for one year. Parent from it for years.</span> You are building foundations, tools, and understanding you can keep returning to as your children and family grow.</div>
 <div class="pricing-wrap">
-<div class="price-card"><div class="ribbon">START TODAY</div><h3>Monthly Plan</h3><div class="price">$297 <small>/ month</small></div><p><strong>12 monthly payments</strong></p><p>Get the complete PBDD experience now and spread your investment across the year.</p><a class="btn monthly-cta" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">START PBDD FOR $297</a><p style="font-size:13px;margin-top:18px;color:#6a685f">12-month payment commitment.</p></div>
+<div class="price-card"><div class="ribbon">START TODAY</div><h3>Monthly Plan</h3><div class="price">$297 <small>/ month</small></div><p><strong>12 monthly payments</strong></p><p>Get the complete PBDD experience now and spread your investment across the year.</p><a class="btn monthly-cta" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">START PBDD FOR $297</a><p style="font-size:13px;margin-top:18px;color:#6a685f">12-month payment commitment. <strong style="color:#3f413b;font-size:inherit">Total: $3,564 USD</strong></p></div>
 <div class="price-card best-value"><div class="best-ribbon">BEST VALUE · SAVE $1,064</div><h3>Pay in Full</h3><div class="price">$2,500</div><p><strong>One payment</strong></p><p>Pay once for your complete 12-month supported experience, then keep returning to the foundations as your family grows.</p><a class="btn pif-cta" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">JOIN PBDD + SAVE $1,064</a><p class="best-value-note">The clearest value if you already know PBDD is the parenting home you want to grow with.</p></div>
 </div>
 <div aria-label="7 day refund guarantee for full payments only" class="refund-strip refund-standalone"><div aria-hidden="true" class="refund-badge"><span class="num">7</span></div><div class="refund-copy"><strong>7-day refund guarantee</strong><p>No questions asked for <span class="refund-highlight">full payments only</span>.</p></div></div><div aria-labelledby="bonus-reveal-title" class="bonus-reveal">
 <div class="bonus-reveal-head">
 <div class="eyebrow">EXCLUSIVE BONUSES INCLUDED</div>
 <h3 id="bonus-reveal-title">Peek inside your bonus gifts once you join.</h3>
-<p>You are not just getting the program. You are getting the extra tools, support, and shortcuts that make it easier to live what you learn.</p>
+<p>You are not just getting the program. You are getting the extra tools and support that make it easier to live what you learn.</p>
 <div class="bonus-total-pill">$1,845 in bonus value · included free</div>
 </div>
 <div class="gift-launch-wrap">
@@ -2108,8 +2230,6 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 <span>see every bonus waiting inside</span>
 </div>
 </button>
-<div class="gift-helper">A beautiful bonus reveal designed to feel like opening a present.</div>
-<div class="gift-micro-list"><span>AI Parenting Village</span><span>Fitrah Filter</span><span>Expert Vault</span></div>
 </div>
 </div>
 <div class="bonus-modal" hidden="" id="bonusGiftModal">
@@ -2181,10 +2301,10 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 <details><summary>What if I am very busy?</summary><p>You do not need hours every day or to sit in front of a screen. Many lessons can be taken on the go via podcast-style audio. The goal is not to add more to your life. It is to make the parenting you are already doing more intentional.</p></details>
 </div></div>
 </section>
-<section class="final"><div class="narrow"><div class="eyebrow">THE EARLY YEARS ARE ALREADY HAPPENING</div><div class="gold-rule center-rule"></div><h2>You do not raise a strong unapologetic Muslim 15-year-old at 15.</h2><p class="lead">Their identity. Their confidence. Their character. Their relationship with Allah. Their relationship with you. Their ability to stand in the world without losing themselves.</p><p><strong>You are building those things now.</strong></p><a class="btn" href="#join" style="background:var(--gold);border-color:var(--gold);color:#1c211d">YOU START NOW</a></div></section>
+<section class="final"><div class="narrow"><div class="eyebrow">THE EARLY YEARS ARE ALREADY HAPPENING</div><div class="gold-rule center-rule"></div><h2>You do not raise a strong unapologetic Muslim <span style="white-space:nowrap">15-year-old</span> at 15.</h2><p class="lead">Their identity. Their confidence. Their character. Their relationship with Allah. Their relationship with you. Their ability to stand in the world without losing themselves.</p><a class="btn" href="#join" style="background:var(--gold);border-color:var(--gold);color:#1c211d">YOU START NOW</a></div></section>
 <a class="btn sticky" href="#join">JOIN PBDD</a>
 <script>
-const storyData = {"asma": {"initial": "A", "label": "ASMA'S STORY", "title": "When the “why” questions started getting harder.", "body": "\n<p>When Asma's 7-year-old asked her why they don't celebrate Halloween, she froze.</p>\n<p>She wanted to answer in a way that protected her daughter's fitrah and identity, but every explanation she tried felt clunky, defensive, or guilt-inducing.</p>\n<p class=\"quote-line\">“I didn't want my child to feel like being Muslim meant always saying ‘no.’ But I also didn't know how to explain our deen in a way she could actually understand.”</p>\n<p>For months, she avoided the questions, hoping her daughter wouldn't notice. But the questions only got harder:</p>\n<ul><li>“Why can't I get Christmas presents like my friends?”</li><li>“Why can't we decorate our house like theirs?”</li><li>“Why can't I just be like them?”</li></ul>\n<p>Asma joined Forming Early Foundations (FEF) out of desperation, hoping to find better words.</p>\n<p class=\"quote-line\">“I didn't expect what I found. FEF didn't just give me answers. It gave me a framework to explain Islam in a way that's positive, loving, and connected to Allah, not defensive or fear-based.”</p>\n<p>Now, instead of panicking when her daughter asks why, Asma smiles. She knows exactly how to explain deen with confidence and simplicity. Her daughter doesn't feel deprived anymore. She feels proud.</p>\n<p class=\"quote-line\">“I didn't realize how much my uncertainty was shaping her identity. Now, alhamdulillah, she understands what we believe, and why, without me feeling like the ‘fun police.’ That's priceless.”</p>\n"}, "mariam": {"initial": "M", "label": "MARIAM'S STORY", "title": "When raising Muslim children started feeling like a constant balancing act.", "body": "\n<p>Mariam lives in Toronto, where her kids are surrounded by mainstream celebrations, gender ideology at school, and endless media messages that clash with their Islamic values.</p>\n<p>She spent years trying to “do it all”: teaching Islam at home, correcting what schools were teaching, and still making sure her kids didn't “miss out.” But instead of clarity, she felt lost.</p>\n<p class=\"quote-line\">“I was constantly questioning myself. Was I sheltering too much? Was I compromising too much? I felt guilty no matter what I did.”</p>\n<p>When Mariam joined FEF, she finally felt like she wasn't doing this alone.</p>\n<p class=\"quote-line\">“It wasn't just the curriculum or the parenting tools, though those were incredible. It was the community. Suddenly, I was surrounded by Muslim moms who were navigating the same pressures I was, and we had a roadmap that actually made sense.”</p>\n<p>FEF gave her the language, tools, and confidence to raise children who can thrive in a non-Muslim world without losing their Islamic identity. Her kids now understand birthdays, Christmas, and other cultural norms without confusion, and she no longer feels like she has to choose between belonging and faith.</p>\n<p class=\"quote-line\">“I didn't realize how much peace I was missing until I found it. FEF gave me clarity, and that clarity gave me confidence. That's something no YouTube video or parenting book ever gave me.”</p>\n"}, "samiha": {"initial": "S", "label": "SAMIHA'S STORY", "title": "When she thought she was failing her children.", "body": "\n<p>Samiha used to lie awake at night replaying the day in her head: the times she yelled, the things she wished she hadn't said, the missed prayer times.</p>\n<p class=\"quote-line\">“I thought I was ruining my kids. I'd scroll Instagram and see these perfect, gentle Muslim moms teaching Qur'an on beautifully set-up mats, and I'd spiral. I didn't look like that. My kids didn't act like that. I thought I was failing.”</p>\n<p>By the time she found FEF, Samiha had almost given up.</p>\n<p class=\"quote-line\">“I didn't join because I believed I could change. I joined because I wanted to try one last thing before giving up on myself.”</p>\n<p>What she discovered inside FEF shocked her. She didn't need to be perfect. Her past didn't define her kids' future. And repairing after mistakes was more powerful than “getting it right” every time.</p>\n<p class=\"quote-line\">“I can't describe the relief I felt when Eman said: ‘Allah gave you your children knowing exactly who you are.’ It's like something cracked me. For the first time, I didn't feel behind. I didn't feel broken.”</p>\n<p>Samiha now parents from a place of calm connection and trust in herself, in her kids, and in Allah's plan.</p>\n<p class=\"quote-line\">“FEF gave me back my hope. That's the gift I didn't even know I needed.”</p>\n"}, "tazrine": {"initial": "T", "label": "TAZRINE'S STORY", "title": "When better parenting felt like one more impossible thing to do.", "body": "\n<p>Between homeschooling, cooking, and running a part-time business, Tazrine felt like she was drowning.</p>\n<p>She believed better parenting meant more work: more hours of research, more complicated routines, more worksheets. She'd already bought two Islamic parenting programs but couldn't keep up with either of them.</p>\n<p class=\"quote-line\">“I'd watch the first module and then life would hit. Kids would get sick, my house would explode, and I'd feel guilty for wasting money, again.”</p>\n<p>When she joined FEF, she almost expected the same thing to happen. But this time, something was different.</p>\n<p class=\"quote-line\">“It didn't add more to my plate. It simplified it. The modules are short and practical, the language is simple, and the steps are so doable that even on my busiest weeks, I can still parent differently.”</p>\n<p>For the first time, she's actually finishing a program and seeing results at home, not just on paper.</p>\n<p class=\"quote-line\">“I realized I don't have to do everything. I just have to do the right things consistently. FEF gave me those right things.”</p>\n"}, "wins": {"initial": "WIN", "label": "MEMBER WINS", "title": "Small shifts. Real changes at home.", "body": "\n<div class=\"member-wins\">\n  <details class=\"member-win\" open>\n    <summary>One Simple FEF Tool Helped Calm the Chaos at Home</summary>\n    <div class=\"win-copy\">\n      <p>Before joining FEF, this mom described her mornings as “a war zone.” Her 4-year-old resisted everything, from brushing teeth to getting dressed to sitting in the car seat before school.</p>\n      <p>Inside FEF, she discovered the “I Show, You Do, I Do” method. She tried it the next morning.</p>\n      <p class=\"quote-line\">“There was no yelling, no fighting, no mess. I calmly walked him through the steps, showed him what to do, and he did it on his own without pushback. I couldn't believe it.”</p>\n      <p>Within 48 hours, she'd experienced calm mornings, peaceful energy, and cooperation without force.</p>\n    </div>\n  </details>\n  <details class=\"member-win\">\n    <summary>FEF Helped a 6-Year-Old Embrace Her Deen With Confidence</summary>\n    <div class=\"win-copy\">\n      <p>This mom used to dread October. Every year, her daughter asked why she couldn't celebrate Halloween like her friends.</p>\n      <p>After watching the Halloween module together, her daughter began connecting the dots on her own.</p>\n      <p class=\"quote-line\">“We don't celebrate Halloween because we're Muslim, and I'm happy about that.”</p>\n      <p>Instead of feeling left out, her daughter felt grounded and proud of who she is.</p>\n    </div>\n  </details>\n  <details class=\"member-win\">\n    <summary>FEF Gave Me the Community I Didn't Know I Needed</summary>\n    <div class=\"win-copy\">\n      <p>Before FEF, this mom felt like she was parenting on an island. Friends didn't understand her concerns about identity and fitrah, extended family thought she was overthinking, and online advice felt scattered.</p>\n      <p class=\"quote-line\">“I can't explain the relief of knowing I wasn't the only one. Finally, I had a place to ask questions and hear: ‘You're not crazy. We're doing this together.’”</p>\n      <p>“FEF isn't just a program. It's a support system. It's my village. And now I don't feel alone anymore.”</p>\n    </div>\n  </details>\n  <details class=\"member-win\">\n    <summary>FEF Helped One Mom Reset Her Family's Identity</summary>\n    <div class=\"win-copy\">\n      <p>A Swiss homeschooling mom felt paralyzed by the social norms, subtle messages, and pressure to compromise that surrounded her children.</p>\n      <p>Through FEF, she learned to talk about cultural norms without defensiveness, teach Islamic values proactively, and model confidence.</p>\n      <p class=\"quote-line\">“For the first time, I don't feel like I'm guessing. I know what I believe, I know how to explain it, and my kids see that confidence in me.”</p>\n      <p>“I wanted to raise kids who are Muslim and proud, and now, I finally believe I can.”</p>\n    </div>\n  </details>\n  <details class=\"member-win\">\n    <summary>FEF Helped Me Step Into My Role as a Muslim Parent</summary>\n    <div class=\"win-copy\">\n      <p>This mom joined after watching the Parenting Without Pride module and described the experience as a “rollercoaster of emotions.”</p>\n      <p class=\"quote-line\">“For the first time, I understood that I don't have to get this perfect. My job is to lead with clarity, compassion, and connection, and Allah can change hearts.”</p>\n      <p>Now, instead of parenting from fear, she leads with calm confidence, repairs relationships, rebuilds trust, and watches her kids respond in ways she never thought possible.</p>\n      <p>“FEF gave me permission to be human, and the tools to be better. That combination changed everything.”</p>\n    </div>\n  </details>\n</div>\n"}};
+const storyData = {"asma": {"initial": "A", "label": "ASMA'S STORY", "title": "When the “why” questions started getting harder.", "body": "\n<p>When Asma's 7-year-old asked her why they don't celebrate Halloween, she froze.</p>\n<p>She wanted to answer in a way that protected her daughter's fitrah and identity, but every explanation she tried felt clunky, defensive, or… guilt-inducing.</p>\n<p class=\"quote-line\">“I didn't want my child to feel like being Muslim meant always saying ‘no.’ But I also didn't know how to explain our deen in a way she could actually understand.”</p>\n<p>For months, she avoided the questions, hoping her daughter wouldn't notice. But the questions only got harder:</p>\n<ul><li>“Why can't I get Christmas presents like my friends?”</li><li>“Why can't we decorate our house like theirs?”</li><li>“Why can't I just be like them?”</li></ul>\n<p>Asma joined Forming Early Foundations (FEF) out of desperation, hoping to find better words.</p>\n<p class=\"quote-line\">“I didn't expect what I found… FEF didn't just give me answers. It gave me a framework to explain Islam in a way that's positive, loving, and connected to Allah, not defensive or fear-based.”</p>\n<p>Now, instead of panicking when her daughter asks why, Asma smiles. She knows exactly how to explain deen with confidence and simplicity.</p>\n<p>Her daughter doesn't feel deprived anymore. She feels proud.</p>\n<p class=\"quote-line\">“I didn't realize how much my uncertainty was shaping her identity. Now, alhamdulillah, she understands what we believe — and why — without me feeling like the ‘fun police.’ That's priceless.”</p>\n"}, "mariam": {"initial": "M", "label": "MARIAM'S STORY", "title": "When raising Muslim children started feeling like a constant balancing act.", "body": "\n<p>Mariam lives in Toronto, where her kids are surrounded by mainstream celebrations, gender ideology at school, and endless media messages that clash with their Islamic values.</p>\n<p>She spent years trying to “do it all”:</p>\n<ul><li>Teaching Islam at home,</li><li>Correcting what schools were teaching,</li><li>And still making sure her kids didn't “miss out.”</li></ul>\n<p>But instead of clarity, she felt lost.</p>\n<p class=\"quote-line\">“I was constantly questioning myself… Was I sheltering too much? Was I compromising too much? I felt guilty no matter what I did.”</p>\n<p>When Mariam joined FEF, she finally felt like she wasn't doing this alone.</p>\n<p class=\"quote-line\">“It wasn't just the curriculum or the parenting tools — though those were incredible. It was the community. Suddenly, I was surrounded by Muslim moms who were navigating the same pressures I was, and we had a roadmap that actually made sense.”</p>\n<p>FEF gave her the language, tools, and confidence to raise children who can thrive in a non-Muslim world without losing their Islamic identity.</p>\n<p>Her kids now understand birthdays, Christmas, and other cultural norms without confusion, and she no longer feels like she has to choose between belonging and faith.</p>\n<p class=\"quote-line\">“I didn't realize how much peace I was missing until I found it. FEF gave me clarity, and that clarity gave me confidence. That's something no YouTube video or parenting book ever gave me.”</p>\n"}, "samiha": {"initial": "S", "label": "SAMIHA'S STORY", "title": "When she thought she was failing her children.", "body": "\n<p>Samiha used to lie awake at night replaying the day in her head — the times she yelled, the things she wished she hadn't said, the missed prayer times.</p>\n<p class=\"quote-line\">“I thought I was ruining my kids. I'd scroll Instagram and see these perfect, gentle Muslim moms teaching Qur'an on beautifully set-up mats, and I'd spiral. I didn't look like that. My kids didn't act like that. I thought I was failing.”</p>\n<p>By the time she found FEF, Samiha had almost given up.</p>\n<p class=\"quote-line\">“I didn't join because I believed I could change… I joined because I wanted to try one last thing before giving up on myself.”</p>\n<p>What she discovered inside FEF shocked her:</p>\n<ul><li>She didn't need to be perfect.</li><li>Her past didn't define her kids' future.</li><li>And repairing after mistakes was more powerful than “getting it right” every time.</li></ul>\n<p class=\"quote-line\">“I can't describe the relief I felt when Eman said: ‘Allah gave you your children knowing exactly who you are.’ It's like something cracked open inside me. For the first time, I didn't feel behind. I didn't feel broken.”</p>\n<p>Samiha now parents from a place of calm connection, and trust in herself, in her kids, and in Allah's plan.</p>\n<p class=\"quote-line\">“FEF gave me back my hope. That's the gift I didn't even know I needed.”</p>\n"}, "tazrine": {"initial": "T", "label": "TAZRINE'S STORY", "title": "When better parenting felt like one more impossible thing to do.", "body": "\n<p>Between homeschooling, cooking, and running a part-time business, Tazrine felt like she was drowning.</p>\n<p>She believed better parenting meant more work — more hours of research, more complicated routines, more worksheets. She'd already bought two Islamic parenting programs but couldn't keep up with either of them.</p>\n<p class=\"quote-line\">“I'd watch the first module and then life would hit. Kids would get sick, my house would explode, and I'd feel guilty for wasting money — again.”</p>\n<p>When she joined FEF, she almost expected the same thing to happen. But this time, something was different.</p>\n<p class=\"quote-line\">“It didn't add more to my plate. It simplified it. The modules are short and practical, the language is simple, and the steps are so doable that even on my busiest weeks, I can still parent differently.”</p>\n<p>For the first time, she's actually finishing a program and seeing results at home, not just on paper.</p>\n<p class=\"quote-line\">“I realized I don't have to do everything. I just have to do the right things consistently. FEF gave me those right things.”</p>\n"}, "wins": {"initial": "WIN", "label": "MEMBER WINS", "title": "Small shifts. Real changes at home.", "body": "\n<div class=\"member-wins\">\n  <details class=\"member-win\" open>\n    <summary>One Simple FEF Tool Helped Calm the Chaos at Home</summary>\n    <div class=\"win-copy\">\n      <p>Before joining FEF, this mom described her mornings as “a war zone.” Her 4-year-old resisted everything, from brushing teeth to getting dressed to sitting in the car seat before school.</p>\n      <p>Inside FEF, she discovered the “I Show, You Do, I Do” method. She tried it the next morning.</p>\n      <p class=\"quote-line\">“There was no yelling, no fighting, no mess. I calmly walked him through the steps, showed him what to do, and he did it on his own without pushback. I couldn't believe it.”</p>\n      <p>Within 48 hours, she'd experienced calm mornings, peaceful energy, and cooperation without force.</p>\n    </div>\n  </details>\n  <details class=\"member-win\">\n    <summary>FEF Helped a 6-Year-Old Embrace Her Deen With Confidence</summary>\n    <div class=\"win-copy\">\n      <p>This mom used to dread October. Every year, her daughter asked why she couldn't celebrate Halloween like her friends.</p>\n      <p>After watching the Halloween module together, her daughter began connecting the dots on her own.</p>\n      <p class=\"quote-line\">“We don't celebrate Halloween because we're Muslim, and I'm happy about that.”</p>\n      <p>Instead of feeling left out, her daughter felt grounded and proud of who she is.</p>\n    </div>\n  </details>\n  <details class=\"member-win\">\n    <summary>FEF Gave Me the Community I Didn't Know I Needed</summary>\n    <div class=\"win-copy\">\n      <p>Before FEF, this mom felt like she was parenting on an island. Friends didn't understand her concerns about identity and fitrah, extended family thought she was overthinking, and online advice felt scattered.</p>\n      <p class=\"quote-line\">“I can't explain the relief of knowing I wasn't the only one. Finally, I had a place to ask questions and hear: ‘You're not crazy. We're doing this together.’”</p>\n      <p>“FEF isn't just a program. It's a support system. It's my village. And now I don't feel alone anymore.”</p>\n    </div>\n  </details>\n  <details class=\"member-win\">\n    <summary>FEF Helped One Mom Reset Her Family's Identity</summary>\n    <div class=\"win-copy\">\n      <p>A Swiss homeschooling mom felt paralyzed by the social norms, subtle messages, and pressure to compromise that surrounded her children.</p>\n      <p>Through FEF, she learned to talk about cultural norms without defensiveness, teach Islamic values proactively, and model confidence.</p>\n      <p class=\"quote-line\">“For the first time, I don't feel like I'm guessing. I know what I believe, I know how to explain it, and my kids see that confidence in me.”</p>\n      <p>“I wanted to raise kids who are Muslim and proud, and now, I finally believe I can.”</p>\n    </div>\n  </details>\n  <details class=\"member-win\">\n    <summary>FEF Helped Me Step Into My Role as a Muslim Parent</summary>\n    <div class=\"win-copy\">\n      <p>This mom joined after watching the Parenting Without Pride module and described the experience as a “rollercoaster of emotions.”</p>\n      <p class=\"quote-line\">“For the first time, I understood that I don't have to get this perfect. My job is to lead with clarity, compassion, and connection, and Allah can change hearts.”</p>\n      <p>Now, instead of parenting from fear, she leads with calm confidence, repairs relationships, rebuilds trust, and watches her kids respond in ways she never thought possible.</p>\n      <p>“FEF gave me permission to be human, and the tools to be better. That combination changed everything.”</p>\n    </div>\n  </details>\n</div>\n"}};
 const storyButtons=[...document.querySelectorAll('.story-bubble')];
 const storyPanel=document.getElementById('story-panel');
 
@@ -2275,35 +2395,47 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
 </script>
 <script>
 (function(){
-  function startStatsCount(){
-    const figures = document.querySelectorAll('.header-stats-band .figure[data-target]');
-    if(!figures.length) return;
+  const band = document.querySelector('.header-stats-band');
+  const figures = band ? band.querySelectorAll('.figure[data-target]') : [];
+  if(!figures.length) return;
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    figures.forEach(function(el){
+  function render(el, value){
+    const suffix = el.dataset.suffix || '';
+    el.innerHTML = '<span class="count">' + value + '</span>' + (suffix ? '<span class="suffix">' + suffix + '</span>' : '');
+  }
+
+  function startStatsCount(){
+    figures.forEach(function(el, i){
       const target = parseInt(el.dataset.target || '0', 10);
-      const suffix = el.dataset.suffix || '';
-      const duration = 1600;
-      const startValue = 1;
-      const startTime = performance.now();
+      const duration = 2200;
+      const delay = i * 150;
+      let startTime = null;
 
       function tick(now){
-        const progress = Math.min((now - startTime) / duration, 1);
+        if(startTime === null) startTime = now + delay;
+        const progress = Math.max(0, Math.min((now - startTime) / duration, 1));
         const eased = 1 - Math.pow(1 - progress, 3);
-        const value = Math.max(startValue, Math.round(startValue + (target - startValue) * eased));
-        el.innerHTML = '<span class="count">' + value + '</span>' + (suffix ? '<span class="suffix">' + suffix + '</span>' : '');
+        render(el, Math.round(target * eased));
         if(progress < 1) requestAnimationFrame(tick);
       }
-
       requestAnimationFrame(tick);
     });
   }
 
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){
-      setTimeout(startStatsCount, 250);
-    }, {once:true});
+  if(reduceMotion) return;
+  figures.forEach(function(el){ render(el, 0); });
+
+  if('IntersectionObserver' in window){
+    const observer = new IntersectionObserver(function(entries){
+      if(entries.some(function(e){ return e.isIntersecting; })){
+        observer.disconnect();
+        startStatsCount();
+      }
+    }, {threshold:0.35});
+    observer.observe(band);
   } else {
-    setTimeout(startStatsCount, 250);
+    startStatsCount();
   }
 })();
 </script>
@@ -2339,6 +2471,118 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && !modal.hidden){ closeModal(); }
   });
+})();
+</script>
+<script>
+(function(){
+  var root = document.getElementById('peek-inside');
+  if(!root) return;
+  var order = ['podcast','course','apps','whatsapp'];
+  var captions = {
+    podcast: 'A private coaching podcast with 44+ episodes you can learn from on the school run.',
+    course: 'Your private member portal: short, practical lessons you can actually finish, even on your busiest weeks.',
+    apps: 'Custom tools like the Fitrah Filter: check any movie, book, or game before it comes into your home.',
+    whatsapp: 'Bring real questions from your home and get answers within 24 hours.'
+  };
+  var chat = [
+    ['them','Assalamu alaikum Eman! My daughter just started nursery and bedtime has turned into a battle 😩'],
+    ['me','Walaikum assalam! I’m sorry this transition has been hard. What time does she go, and how long does she stay?'],
+    ['them','7:30 until 4:30, and she naps there for 1–2 hours.'],
+    ['me','She’s still adjusting. Bedtime may feel like another separation from you, so she’s stalling. Use concrete transitions: “After we clean up, it’s pjs, then book!”'],
+    ['them','That makes so much sense. Thank you Eman 🥹'],
+    ['me','You know your why. You’re doing great, and she will adjust soon inshallah ❤️']
+  ];
+  var buttons = [].slice.call(root.querySelectorAll('.peek-toggle button'));
+  var panels = [].slice.call(root.querySelectorAll('.peek-panel'));
+  var pill = root.querySelector('.peek-pill');
+  var caption = root.querySelector('.peek-caption');
+  var feed = root.querySelector('.peek-wa-feed');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var current = 'podcast', visible = false, userPicked = false, autoTimer = null, chatTimers = [];
+
+  function movePill(){
+    var b = root.querySelector('.peek-toggle button[aria-selected="true"]');
+    if(!b) return;
+    pill.style.width = b.offsetWidth + 'px';
+    pill.style.height = b.offsetHeight + 'px';
+    pill.style.transform = 'translate(' + b.offsetLeft + 'px,' + b.offsetTop + 'px)';
+  }
+  function syncVideos(){
+    panels.forEach(function(p){
+      var v = p.querySelector('video');
+      if(!v) return;
+      if(p.dataset.peek === current && visible){
+        if(!v.src){ v.src = v.dataset.src; }
+        v.playbackRate = p.dataset.peek === 'podcast' ? .8 : 1;
+        var pr = v.play(); if(pr && pr.catch) pr.catch(function(){});
+      } else if(v.src){ v.pause(); }
+    });
+  }
+  function clearChat(){ chatTimers.forEach(clearTimeout); chatTimers = []; }
+  function playChat(){
+    clearChat(); feed.innerHTML = '';
+    var t = 300;
+    chat.forEach(function(m, i){
+      var typing;
+      chatTimers.push(setTimeout(function(){
+        typing = document.createElement('div');
+        typing.className = 'peek-typing ' + m[0];
+        typing.innerHTML = '<i></i><i></i><i></i>';
+        feed.appendChild(typing);
+      }, t));
+      t += reduce ? 0 : 900;
+      chatTimers.push(setTimeout(function(){
+        if(typing) typing.remove();
+        var el = document.createElement('div');
+        el.className = 'peek-msg ' + m[0];
+        el.innerHTML = (m[0] === 'me' ? '<strong>Eman</strong>' : '<strong>Member</strong>') + m[1] + '<em>' + (m[0] === 'me' ? '✓✓' : '') + '</em>';
+        feed.appendChild(el);
+        while(feed.scrollHeight > feed.clientHeight + 4 && feed.children.length > 1){ feed.removeChild(feed.firstChild); }
+      }, t));
+      t += reduce ? 0 : 1100;
+    });
+  }
+  function show(key){
+    current = key;
+    var idx = order.indexOf(key);
+    buttons.forEach(function(b){ b.setAttribute('aria-selected', b.dataset.peek === key ? 'true' : 'false'); b.tabIndex = b.dataset.peek === key ? 0 : -1; });
+    panels.forEach(function(p){
+      var i = order.indexOf(p.dataset.peek);
+      p.classList.toggle('is-active', i === idx);
+      p.classList.toggle('is-before', i < idx);
+    });
+    caption.textContent = captions[key];
+    movePill(); syncVideos();
+    if(key === 'whatsapp') playChat(); else clearChat();
+  }
+  function scheduleAuto(){
+    clearTimeout(autoTimer);
+    if(userPicked || reduce || !visible) return;
+    autoTimer = setTimeout(function(){
+      show(order[(order.indexOf(current) + 1) % order.length]);
+      scheduleAuto();
+    }, current === 'whatsapp' ? 11000 : 7000);
+  }
+  buttons.forEach(function(b, i){
+    b.addEventListener('click', function(){ userPicked = true; clearTimeout(autoTimer); show(b.dataset.peek); });
+    b.addEventListener('keydown', function(e){
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if(!d) return;
+      e.preventDefault();
+      var n = buttons[(i + d + buttons.length) % buttons.length];
+      n.focus(); n.click();
+    });
+  });
+  window.addEventListener('resize', movePill);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(movePill);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      visible = entries[0].isIntersecting;
+      if(visible) root.classList.add('is-visible');
+      syncVideos(); scheduleAuto();
+    }, {threshold:.3}).observe(root);
+  } else { visible = true; root.classList.add('is-visible'); }
+  show('podcast');
 })();
 </script>
 </body></html>
