@@ -1954,6 +1954,38 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 .flag:hover:after{opacity:1;transform:translate(-50%,0)}
 @media(max-width:600px){.flag{width:32px;height:32px}.flag-row{flex-direction:column;gap:8px;margin-top:10px;padding-top:10px}.flag-label{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.flag{animation:none;opacity:1;transform:none}}
+/* Instructions analogy */
+.manual-section{padding:100px 0;background:linear-gradient(180deg,#f3ece0 0%,#fbf8f2 100%)}
+.manual-head{text-align:center;max-width:820px;margin:0 auto 40px}
+.manual-head h2{margin:0}
+.manual{position:relative;max-width:720px;margin:0 auto;padding:44px 48px 40px;background:#fffdf8;border:1.5px dashed rgba(181,150,98,.6);border-radius:22px;box-shadow:0 22px 50px rgba(36,48,41,.08)}
+.manual-tag{position:absolute;top:-14px;left:40px;padding:6px 14px;border-radius:999px;background:var(--evergreen);color:#e8c46a;font:700 11px/1 'Manrope',sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.manual-parts{position:absolute;top:22px;right:26px;display:flex;gap:6px;opacity:.7}
+.manual-parts i{width:8px;height:22px;border-radius:3px;background:linear-gradient(#cdb487,#a88a55);transform:rotate(-18deg)}
+.manual-parts i:nth-child(2){transform:rotate(12deg);height:18px;margin-top:3px}
+.manual-parts i:nth-child(3){transform:rotate(-4deg);height:20px}
+.manual p{margin:0}
+.manual-lead{font:500 clamp(22px,2.4vw,28px)/1.35 'Bodoni Moda',Georgia,serif;color:var(--ink);margin-bottom:22px!important}
+.manual-steps{list-style:none;margin:0 0 22px;padding:0}
+.manual-steps li{display:flex;align-items:baseline;gap:14px;padding:10px 0;border-bottom:1px solid #efe7da;font-size:19px;color:#3f413b;opacity:0;transform:translateX(-12px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.manual-steps li span{font:700 11px/1 'Manrope',sans-serif;letter-spacing:.12em;color:var(--gold);flex:0 0 auto}
+.manual-steps li.is-in{opacity:1;transform:none}
+.manual-floor{font-size:19px;line-height:1.55;color:#3f413b;opacity:0;transition:opacity .7s ease}
+.manual-floor.is-in{opacity:1}
+.manual-turn{max-width:720px;margin:34px auto 0;padding:34px 40px;border-radius:22px;background:var(--evergreen);color:#f7f3ec;text-align:center}
+.manual-turn p{margin:0 0 10px;font-size:18px;line-height:1.6;color:#d7d5ce}
+.manual-turn p.big{font:500 clamp(24px,2.6vw,32px)/1.25 'Bodoni Moda',Georgia,serif;color:#fff;margin-bottom:14px}
+.manual-turn p.pay{margin:18px 0 0;font:500 clamp(24px,2.6vw,30px)/1.2 'Bodoni Moda',Georgia,serif;color:#e8c46a}
+@media(max-width:700px){
+  .manual-section{padding:70px 0}
+  .manual{padding:36px 22px 28px}
+  .manual-tag{left:22px}
+  .manual-lead{padding-right:44px}
+  .manual-steps li,.manual-floor{font-size:17px}
+  .manual-turn{padding:28px 22px}
+  .manual-turn p{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){.manual-steps li,.manual-floor{opacity:1;transform:none;transition:none}}
 /* Even line breaks: no lone last word on headings or centred lines */
 h1,h2,h3,h4,#join .lead,.pricing-longevity,.pricing-value-strip{text-wrap:balance}
 p,li{text-wrap:pretty}
@@ -2456,6 +2488,28 @@ p,li{text-wrap:pretty}
 </div>
 <div class="video-caption">A real parent perspective before you join</div><div class="video-fallback"><a href="https://www.youtube.com/watch?v=jTsNaD5Zkyg" rel="noopener" target="_blank">Watch this parent story on YouTube ↗</a></div>
 </section>
+<section aria-labelledby="manual-title" class="manual-section">
+<div class="wrap">
+<div class="manual-head"><div class="eyebrow">A QUICK QUESTION</div><h2 id="manual-title">Are you trying to build parenting without the instructions?</h2></div>
+<div class="manual">
+<div class="manual-tag">147 pieces · no instructions</div>
+<div aria-hidden="true" class="manual-parts"><i></i><i></i><i></i></div>
+<p class="manual-lead">Imagine someone hands you an IKEA wardrobe with 147 pieces and no instructions.</p>
+<ul class="manual-steps">
+<li><span>01</span>You can be intelligent.</li>
+<li><span>02</span>You can care deeply.</li>
+<li><span>03</span>You can really want that wardrobe built.</li>
+</ul>
+<p class="manual-floor">And you can still end up furious on the floor, holding three screws that apparently belong somewhere. 😅</p>
+</div>
+<div class="manual-turn">
+<p class="big">Parenting can feel the same way.</p>
+<p>Frustration is not always a character problem.</p>
+<p>Sometimes you simply don’t understand what you’re looking at or what to do next.</p>
+<p class="pay">PBDD is the instructions.</p>
+</div>
+</div>
+</section>
 <section aria-labelledby="fit-title" class="fit-section">
 <div class="wrap">
 <div class="fit-head"><div class="eyebrow">IS PBDD RIGHT FOR YOU?</div><h2 id="fit-title">This program is not for everyone.</h2><p>It is for the mother who is ready to lead her home with intention.</p></div>
@@ -2952,6 +3006,20 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
     var e=es[0];
     setBar(!e.isIntersecting && e.boundingClientRect.bottom < 0);
   },{threshold:0}).observe(join);
+})();
+</script>
+<script>
+(function(){
+  var box=document.querySelector('.manual'); if(!box) return;
+  var items=[].slice.call(box.querySelectorAll('.manual-steps li')).concat([box.querySelector('.manual-floor')]);
+  if(!('IntersectionObserver' in window)){ items.forEach(function(el){el.classList.add('is-in');}); return; }
+  var io=new IntersectionObserver(function(es){
+    if(es.some(function(e){ return e.isIntersecting || e.boundingClientRect.top < 0; })){
+      io.disconnect();
+      items.forEach(function(el,i){ setTimeout(function(){ el.classList.add('is-in'); }, 250 + i*550); });
+    }
+  },{threshold:.35});
+  io.observe(box);
 })();
 </script>
 </body></html>
