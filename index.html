@@ -1885,6 +1885,61 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
   .cost-card{padding:24px 22px}
 }
 @media(prefers-reduced-motion:reduce){.cost-row{opacity:1;transform:none;transition:none}.cost-pbdd:after{display:none}}
+/* Countries line under stats */
+.stats-countries{margin:22px auto 0;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 10px;font:600 13px/1.3 'Manrope',sans-serif;color:#6b6b63}
+.stats-countries b{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:#8a7b62;margin-right:4px}
+.stats-countries span{padding:7px 13px;border-radius:999px;background:#fff;border:1px solid rgba(194,164,101,.35)}
+/* Results quotes */
+.results-band{padding:96px 0;background:#fbf8f2}
+.results-head{text-align:center;max-width:760px;margin:0 auto 46px}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1120px;margin:0 auto}
+.result{position:relative;margin:0;padding:34px 30px 28px;border-radius:22px;background:#fff;border:1px solid rgba(194,164,101,.3);box-shadow:0 18px 40px rgba(36,48,41,.06);display:flex;flex-direction:column;opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.result.is-in{opacity:1;transform:none}
+.result:before{content:"\201C";position:absolute;top:6px;right:22px;font:400 110px/1 'Bodoni Moda',Georgia,serif;color:rgba(181,150,98,.18)}
+.result small{padding-right:64px;font:700 11px/1.2 'Manrope',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.result blockquote{margin:0 0 18px;font:500 clamp(22px,2.2vw,28px)/1.25 'Bodoni Moda',Georgia,serif;color:var(--ink);flex:1}
+.result cite{font:600 13px/1.3 'Manrope',sans-serif;font-style:normal;color:#6b6b63}
+.result.featured{background:linear-gradient(140deg,#243029,#33453a);border-color:transparent}
+.result.featured blockquote{color:#fff}.result.featured cite{color:#d7d5ce}.result.featured small{color:#e8c46a}
+.result.featured:before{color:rgba(232,196,106,.22)}
+/* For / not for */
+.fit-section{background:var(--evergreen);color:var(--ivory);padding:96px 0}
+.fit-head{text-align:center;max-width:780px;margin:0 auto 46px}
+.fit-head h2{color:#fff}
+.fit-head p{color:#d7d5ce;font-size:18px;margin:0}
+.fit-cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:1120px;margin:0 auto}
+.fit-col h3{font:500 clamp(24px,2.6vw,32px)/1.15 'Bodoni Moda',Georgia,serif;margin:0 0 18px;color:#fff;letter-spacing:.01em}
+.fit-col.no h3{color:#cfc9bd}
+.fit-card{display:flex;gap:16px;align-items:flex-start;padding:22px 24px;margin-bottom:14px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(232,196,106,.28);opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.fit-card.is-in{opacity:1;transform:none}
+.fit-col.no .fit-card{border-color:rgba(255,255,255,.14);background:rgba(0,0,0,.08)}
+.fit-card i{flex:0 0 30px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 14px/1 'Manrope',sans-serif;font-style:normal;margin-top:2px}
+.fit-col.yes .fit-card i{background:#e8c46a;color:#243029}
+.fit-col.no .fit-card i{background:rgba(255,255,255,.12);color:#e9b3b3}
+.fit-card b{display:block;font:700 17px/1.35 'Manrope',sans-serif;color:#fff;margin-bottom:6px}
+.fit-card p{margin:0;font-size:15px;line-height:1.6;color:#d7d5ce}
+.fit-col.no .fit-card p{color:#bdb8ad}
+/* Sticky join bar */
+.join-bar{position:fixed;left:50%;bottom:18px;z-index:60;transform:translate(-50%,140%);display:flex;align-items:center;gap:18px;padding:10px 10px 10px 22px;border-radius:999px;background:rgba(36,48,41,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 16px 40px rgba(20,24,21,.28);color:#f7f3ec;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s;opacity:0;max-width:calc(100% - 24px)}
+.join-bar.is-on{transform:translate(-50%,0);opacity:1}
+.join-bar span{font:600 14px/1.3 'Manrope',sans-serif;white-space:nowrap}
+.join-bar span em{font-style:normal;color:#e8c46a}
+.join-bar a{flex:0 0 auto;padding:11px 20px;border-radius:999px;background:#e8c46a;color:#1c211d;font:700 12px/1 'Manrope',sans-serif;letter-spacing:.1em;text-decoration:none}
+.join-bar a:hover{background:#f0d27f}
+.join-bar .jb-short{display:none}
+@media(max-width:700px){.join-bar .jb-short{display:inline}}
+@media(max-width:900px){.results-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){
+  .results-band,.fit-section{padding:68px 0}
+  .results-grid,.fit-cols{grid-template-columns:1fr}
+  .result{padding:28px 24px 24px}
+  .fit-card{padding:18px}
+  .join-bar{left:12px;right:12px;bottom:12px;max-width:none;justify-content:space-between;gap:10px;padding:8px 8px 8px 16px;transform:translateY(140%)}
+  .join-bar.is-on{transform:none}
+  .join-bar span{font-size:12.5px}
+  .join-bar span .jb-long,.join-bar span .jb-name{display:none}
+}
+@media(prefers-reduced-motion:reduce){.result,.fit-card{opacity:1;transform:none;transition:none}.join-bar{transition:none}}
 /* Even line breaks: no lone last word on headings or centred lines */
 h1,h2,h3,h4,#join .lead,.pricing-longevity,.pricing-value-strip{text-wrap:balance}
 p,li{text-wrap:pretty}
@@ -1939,6 +1994,7 @@ p,li{text-wrap:pretty}
 </div>
 </div>
 </div>
+<p class="stats-countries"><b>Families enrolled from</b><span>United States</span><span>United Kingdom</span><span>Australia</span><span>Germany</span><span>United Arab Emirates</span></p>
 </section>
 
 <section class="dark goal-section">
@@ -2098,6 +2154,19 @@ p,li{text-wrap:pretty}
 </div>
 </div>
 <div class="video-caption">Parent experience • Parenting by Divine Design / FEF</div><div class="video-fallback"><a href="https://www.youtube.com/watch?v=PQM_r2OLEx4" rel="noopener" target="_blank">Watch this case study on YouTube ↗</a></div>
+</section>
+<section aria-labelledby="results-title" class="results-band">
+<div class="wrap">
+<div class="results-head"><div class="eyebrow">REAL RESULTS FROM REAL FAMILIES</div><h2 id="results-title">What changes when the foundations are in place.</h2></div>
+<div class="results-grid">
+<figure class="result featured"><small>Better than therapy</small><blockquote>“Your content is BETTER THAN THERAPY... and you have tangible actions after each newsletter, podcast, module episode…”</blockquote><cite>— PBDD Parent</cite></figure>
+<figure class="result "><small>Within 48 hours, calm mornings</small><blockquote>“There was no yelling, no fighting, no mess. I calmly walked him through the steps… and he did it on his own without pushback.”</blockquote><cite>— PBDD Parent, mother of a 4-year-old</cite></figure>
+<figure class="result "><small>The answer to her duas</small><blockquote>“Before joining FEF, I knew that I wanted to raise my child based on Islamic values. However, I didn’t know how to go about it. FEF has been the answer to my duas.”</blockquote><cite>— Zaynah, PBDD Parent</cite></figure>
+<figure class="result "><small>Holidays without the stress</small><blockquote>“It gave me a game plan of how to approach my 5yo about his growing interests towards the mainstream holidays… and I am not stressed out about it.”</blockquote><cite>— PBDD Parent</cite></figure>
+<figure class="result "><small>Kids asking for more</small><blockquote>“My son and I just watched your Christmas workshop and HE CHOSE to binge the whole thing today!”</blockquote><cite>— PBDD Parent</cite></figure>
+<figure class="result featured"><small>Children who love learning their deen</small><blockquote>“Thank you for the program, my children loved every minute of it!!! They cannot stop raving about you.”</blockquote><cite>— Khadijah, PBDD Parent</cite></figure>
+</div>
+</div>
 </section>
 <section>
 <div class="wrap">
@@ -2369,6 +2438,25 @@ p,li{text-wrap:pretty}
 </div>
 </div>
 <div class="video-caption">A real parent perspective before you join</div><div class="video-fallback"><a href="https://www.youtube.com/watch?v=jTsNaD5Zkyg" rel="noopener" target="_blank">Watch this parent story on YouTube ↗</a></div>
+</section>
+<section aria-labelledby="fit-title" class="fit-section">
+<div class="wrap">
+<div class="fit-head"><div class="eyebrow">IS PBDD RIGHT FOR YOU?</div><h2 id="fit-title">This program is not for everyone.</h2><p>It is for the mother who is ready to lead her home with intention.</p></div>
+<div class="fit-cols">
+<div class="fit-col yes"><h3>It is right for you if:</h3>
+<div class="fit-card"><i aria-hidden="true">✓</i><div><b>You are done with auto-pilot and default parenting</b><p>Parenting by Divine Design was built for Muslim mothers who are ready to stop defaulting and start leading with intention. This isn’t a surface-level parenting tips program. It’s a 12-month ecosystem designed for parents who are ready to do the inner work, raise faith-rooted kids, and build a divine-led home in the early years, when it matters most.</p></div></div>
+<div class="fit-card"><i aria-hidden="true">✓</i><div><b>You are a visionary parent who leads with intention</b><p>If you already know that parenting isn’t just about managing behaviour, but about shaping hearts and identities for life, this program gives you the framework and tools to do it with ihsan, without burnout, overwhelm, or losing yourself in the process.</p></div></div>
+<div class="fit-card"><i aria-hidden="true">✓</i><div><b>You are the kind of parent who invests in impact</b><p>If you value proximity to experts, faith-centred guidance, and done-for-you Islamic education, Parenting by Divine Design is your space to go all in, because you know the early years are where everything begins.</p></div></div>
+<div class="fit-card"><i aria-hidden="true">✓</i><div><b>You are the parent who wants peace without compromise</b><p>If you’re tired of leading your home without a coherent framework that actually fits your values, this program integrates developmental science, Islamic wisdom, and hands-on coaching so you can finally lead with ease and alignment.</p></div></div>
+</div>
+<div class="fit-col no"><h3>It is not right for you if:</h3>
+<div class="fit-card"><i aria-hidden="true">✕</i><div><b>You are looking for quick fixes</b><p>If you’re just looking for a list of hacks to “manage” your child’s behaviour or a few guides to survive the week, this isn’t that. PBDD is about deep transformation, not band-aid strategies.</p></div></div>
+<div class="fit-card"><i aria-hidden="true">✕</i><div><b>You want to DIY everything</b><p>If you prefer Googling and GPT-ing your way through parenting, collecting free resources, and figuring it out alone, this program isn’t designed for you. PBDD is built for parents who value proximity, expertise, and proven frameworks.</p></div></div>
+<div class="fit-card"><i aria-hidden="true">✕</i><div><b>You aren’t ready to lead</b><p>If you’re not ready to shift your mindset, regulate your nervous system, and parent from a place of confidence and clarity, this won’t work. PBDD works when you’re ready to step into leadership for yourself and your family.</p></div></div>
+<div class="fit-card"><i aria-hidden="true">✕</i><div><b>You see parenting as “one-size-fits-all”</b><p>If you believe parenting can be copied, pasted, and applied the same way to every child, this program isn’t for you. PBDD honours the uniqueness of each child while giving you principles and frameworks rooted in Islamic wisdom and developmental science, not cookie-cutter solutions.</p></div></div>
+</div>
+</div>
+</div>
 </section>
 <section aria-labelledby="cost-title" class="cost-section" id="compare">
 <div class="wrap">
@@ -2820,6 +2908,33 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
     if(es.some(function(e){ return e.isIntersecting || e.boundingClientRect.top < 0; })){ io.disconnect(); reveal(); }
   },{threshold:0});
   io.observe(table);
+})();
+</script>
+<div aria-hidden="true" class="join-bar" id="joinBar"><span><span class="jb-name">Parenting by Divine Design · </span><span class="jb-short">PBDD </span><em>from $297/mo</em><span class="jb-long"> · 12 months of support</span></span><a href="#join" tabindex="-1">JOIN PBDD</a></div>
+<script>
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  // Fade-in for result quotes and fit cards (revealed per group so nothing gets skipped)
+  [['.results-grid','.result'],['.fit-cols','.fit-card']].forEach(function(g){
+    var box=document.querySelector(g[0]); if(!box) return;
+    var items=[].slice.call(box.querySelectorAll(g[1]));
+    var io=new IntersectionObserver(function(es){
+      if(es.some(function(e){ return e.isIntersecting || e.boundingClientRect.top < 0; })){
+        io.disconnect();
+        items.forEach(function(el,i){ setTimeout(function(){ el.classList.add('is-in'); }, i*110); });
+      }
+    },{threshold:0});
+    io.observe(box);
+  });
+  // Sticky join bar: only after the visitor has scrolled past pricing, hidden while pricing is on screen
+  var bar=document.getElementById('joinBar'), join=document.getElementById('join');
+  if(!bar||!join) return;
+  var link=bar.querySelector('a');
+  function setBar(on){ bar.classList.toggle('is-on',on); bar.setAttribute('aria-hidden',on?'false':'true'); link.tabIndex=on?0:-1; }
+  new IntersectionObserver(function(es){
+    var e=es[0];
+    setBar(!e.isIntersecting && e.boundingClientRect.bottom < 0);
+  },{threshold:0}).observe(join);
 })();
 </script>
 </body></html>
