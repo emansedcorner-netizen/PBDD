@@ -2019,6 +2019,7 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 .fc-no h4{color:#8a2f2a}
 .fc-no li:before,.fc-part li.out:before{content:"✕";flex:0 0 20px;height:20px;border-radius:50%;background:#c4534b;color:#fff;font:700 11px/20px 'Manrope',sans-serif;text-align:center;margin-top:2px}
 .fc-part li:not(.out):before{content:"✓";flex:0 0 20px;height:20px;border-radius:50%;background:#2f8f5d;color:#fff;font:700 11px/20px 'Manrope',sans-serif;text-align:center;margin-top:2px}
+.fc-result li.note:before{content:"i";flex:0 0 20px;height:20px;border-radius:50%;background:var(--gold);color:#fff;font:700 12px/20px Georgia,serif;font-style:italic;text-align:center;margin-top:2px}
 .fc-care{background:#f2f0fa;border:1.5px solid #c3bce6}
 .fc-care h4{color:#3f3586}
 .fc-more{background:#f6f3ee;border:1.5px solid #e2d6c2}
@@ -3090,7 +3091,8 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
   ];
   var OUT=[
     ['quick', /quick fix|quickly|fast fix|hack|overnight|instant|magic|just (want|need) (a )?(tip|trick|script)s?|one tip|asap/i, 'PBDD is a 12-month journey of deep, root-level change. It isn’t a set of quick hacks.'],
-    ['special', /autis|asd\b|special needs|\bsen\b|sensory processing|\bodd\b|oppositional|diagnos|speech delay|developmental delay|adhd|disabilit|down syndrome|cerebral palsy|occupational therap/i, 'PBDD isn’t designed as specialised support for diagnosed or additional needs. A qualified specialist will serve your child best.'],
+    ['clinical', /special needs|diagnos|assessment|early intervention|\bintervention|therap(y|ist)|occupational|\baba\b|behaviou?r plan|\biep\b/i, 'PBDD doesn’t provide diagnosis, assessment, early intervention or therapy. A qualified specialist will serve your child best for that.'],
+    ['needs', /adhd|autis|\basd\b|sensory|\bodd\b|oppositional|dyslex|speech delay|developmental delay|down syndrome|cerebral palsy|disabilit/i, 'PBDD supports your parenting and helps you design family life rooted in the Quran and Sunnah, but it doesn’t provide a diagnosis or early intervention. Please keep working with a qualified specialist for that.'],
     ['adult', /marriage|husband|divorce|custody|co-?parent dispute|my spouse/i, 'PBDD focuses on parenting your children rather than marriage or relationship support.']
   ];
   var CRISIS=/suicid|self.harm|kill (my|him|her)self|hurt(ing)? (my|him|her)self|abuse|abusing|unsafe at home|danger/i;
@@ -3112,11 +3114,14 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
     var hits=TOPICS.filter(function(x){return x[1].test(t);});
     var outs=OUT.filter(function(x){return x[1].test(t);});
     var hitList=hits.slice(0,4).map(function(x){return '<li><span><b>'+x[0]+':</b> '+x[2]+'</span></li>';}).join('');
-    var outList=outs.map(function(x){return '<li class="out"><span>'+x[2]+'</span></li>';}).join('');
+    var needs=outs.some(function(x){return x[0]==='needs';});
+    if(!hitList && needs) hitList='<li><span><b>Parenting support:</b> A framework, tools and WhatsApp support for parenting and family life rooted in the Quran and Sunnah.</span></li>';
+    var hardNo=outs.some(function(x){return x[0]==='quick'||x[0]==='clinical';});
+    var outList=outs.filter(function(x){return !(hardNo && x[0]==='needs');}).map(function(x){return '<li class="'+(x[0]==='needs'?'note':'out')+'"><span>'+x[2]+'</span></li>';}).join('');
     if(outAge.length) outList+='<li class="out"><span>PBDD is built for the first 12 years, so it isn’t designed for your '+outAge.map(function(n){return n+'-year-old';}).join(' and ')+'.</span></li>';
     var cta='<a class="fc-cta" href="#join">See how to join</a>';
     var blocked=outs.length||outAge.length;
-    if(hits.length && blocked && (inAge.length || !outAge.length) && !outs.some(function(x){return x[0]==='quick'||x[0]==='special';})){
+    if((hits.length||needs) && blocked && (inAge.length || !outAge.length) && !outs.some(function(x){return x[0]==='quick'||x[0]==='clinical';})){
       return '<div class="fc-result fc-part"><h4>PBDD could be a good fit, with one note.</h4><p>Much of what you described is exactly what PBDD covers:</p><ul>'+hitList+'</ul><p>But please keep in mind:</p><ul>'+outList+'</ul>'+cta+'</div>';
     }
     if(blocked){
