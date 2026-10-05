@@ -1986,6 +1986,44 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
   .manual-turn p{font-size:16px}
 }
 @media(prefers-reduced-motion:reduce){.manual-steps li,.manual-floor{opacity:1;transform:none;transition:none}}
+/* Fit checker */
+.fitcheck{max-width:820px;margin:46px auto 0;padding:34px 34px 30px;border-radius:24px;background:#fffdf8;color:var(--ink);box-shadow:0 24px 60px rgba(0,0,0,.25);text-align:left}
+.fitcheck-head small{display:block;font:700 11px/1.2 'Manrope',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.fitcheck-head h3{font:500 clamp(24px,2.6vw,32px)/1.2 'Bodoni Moda',Georgia,serif;margin:0 0 8px;color:var(--ink)}
+.fitcheck-head p{margin:0 0 18px;color:#5f625d;font-size:16px}
+.fitcheck textarea{width:100%;min-height:110px;resize:vertical;box-sizing:border-box;padding:16px 18px;border-radius:16px;border:1.5px solid #e2d6c2;background:#fff;font:500 16px/1.5 'Manrope',sans-serif;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.fitcheck textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(181,150,98,.18)}
+.fitcheck-chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.fitcheck-chips button{border:1px solid #e2d6c2;background:#f8f4ec;color:#5f625d;border-radius:999px;padding:7px 12px;font:600 12.5px/1.2 'Manrope',sans-serif;cursor:pointer;transition:background .2s,border-color .2s}
+.fitcheck-chips button:hover{background:#fff;border-color:var(--gold);color:var(--ink)}
+.fitcheck-go{border:0;border-radius:14px;background:var(--evergreen);color:#f7f3ec;padding:15px 24px;font:700 13px/1 'Manrope',sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:transform .2s,background .2s}
+.fitcheck-go:hover{background:#30403a;transform:translateY(-1px)}
+.fitcheck-note{margin:12px 0 0;font-size:12.5px;color:#8a8a82}
+.fitcheck-out{margin-top:20px}
+.fitcheck-out:empty{display:none}
+.fc-thinking{display:inline-flex;gap:5px;padding:14px 16px;border-radius:14px;background:#f3ede2}
+.fc-thinking i{width:7px;height:7px;border-radius:50%;background:#a99b80;animation:peekDot 1s infinite}
+.fc-thinking i:nth-child(2){animation-delay:.15s}.fc-thinking i:nth-child(3){animation-delay:.3s}
+.fc-result{border-radius:18px;padding:22px 24px;animation:peekMsg .45s cubic-bezier(.2,.8,.2,1) both}
+.fc-result h4{font:500 24px/1.25 'Bodoni Moda',Georgia,serif;margin:0 0 8px}
+.fc-result p{margin:0 0 10px;font-size:15.5px;line-height:1.6}
+.fc-result ul{margin:6px 0 14px;padding:0;list-style:none}
+.fc-result li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:15px;line-height:1.5}
+.fc-result li b{font-weight:700}
+.fc-yes{background:#f0f6f1;border:1.5px solid #9cc5a8}
+.fc-yes h4{color:#1f5a3a}
+.fc-yes li:before{content:"✓";flex:0 0 20px;height:20px;border-radius:50%;background:#2f8f5d;color:#fff;font:700 11px/20px 'Manrope',sans-serif;text-align:center;margin-top:2px}
+.fc-part{background:#fff8e8;border:1.5px solid #e5c97d}
+.fc-part h4{color:#7a5a12}
+.fc-no{background:#fbf1f0;border:1.5px solid #e2b4b0}
+.fc-no h4{color:#8a2f2a}
+.fc-no li:before,.fc-part li.out:before{content:"✕";flex:0 0 20px;height:20px;border-radius:50%;background:#c4534b;color:#fff;font:700 11px/20px 'Manrope',sans-serif;text-align:center;margin-top:2px}
+.fc-part li:not(.out):before{content:"✓";flex:0 0 20px;height:20px;border-radius:50%;background:#2f8f5d;color:#fff;font:700 11px/20px 'Manrope',sans-serif;text-align:center;margin-top:2px}
+.fc-care{background:#f2f0fa;border:1.5px solid #c3bce6}
+.fc-care h4{color:#3f3586}
+.fc-more{background:#f6f3ee;border:1.5px solid #e2d6c2}
+.fc-cta{display:inline-block;margin-top:4px;padding:13px 20px;border-radius:12px;background:var(--gold);color:#1c211d;font:700 12.5px/1 'Manrope',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
+@media(max-width:700px){.fitcheck{padding:26px 20px 22px;margin-top:34px}.fitcheck-go{width:100%}.fc-result{padding:18px}}
 /* Even line breaks: no lone last word on headings or centred lines */
 h1,h2,h3,h4,#join .lead,.pricing-longevity,.pricing-value-strip{text-wrap:balance}
 p,li{text-wrap:pretty}
@@ -2527,6 +2565,15 @@ p,li{text-wrap:pretty}
 <div class="fit-card"><i aria-hidden="true">✕</i><div><b>You see parenting as “one-size-fits-all”</b><p>If you believe parenting can be copied, pasted, and applied the same way to every child, this program isn’t for you. PBDD honours the uniqueness of each child while giving you principles and frameworks rooted in Islamic wisdom and developmental science, not cookie-cutter solutions.</p></div></div>
 </div>
 </div>
+<div class="fitcheck" id="fit-check">
+<div class="fitcheck-head"><small>Quick fit check</small><h3>Want to find out if PBDD is for you?</h3><p>Tell us your children’s ages, what feels hard right now, and what you hope for. We’ll give you an honest answer.</p></div>
+<label class="sr-only" for="fitcheckText" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your situation</label>
+<textarea id="fitcheckText" placeholder="e.g. I have a 4 and 7 year old. I’m yelling more than I want to, and I don’t know how to explain why we don’t celebrate Christmas…"></textarea>
+<div class="fitcheck-chips"><button type="button">My 6-year-old keeps asking about Halloween</button><button type="button">I yell more than I want to and feel guilty</button><button type="button">I just want a quick fix for tantrums</button><button type="button">I need help with my 15-year-old</button></div>
+<button class="fitcheck-go" id="fitcheckGo" type="button">Check my fit</button>
+<p class="fitcheck-note">An automatic guide based on what PBDD covers, not a personal assessment. What you type stays on your device and isn’t sent anywhere.</p>
+<div aria-live="polite" class="fitcheck-out" id="fitcheckOut"></div>
+</div>
 </div>
 </section>
 <section aria-labelledby="cost-title" class="cost-section" id="compare">
@@ -3020,6 +3067,77 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
     }
   },{threshold:.35});
   io.observe(box);
+})();
+</script>
+<script>
+(function(){
+  var go=document.getElementById('fitcheckGo'), ta=document.getElementById('fitcheckText'), out=document.getElementById('fitcheckOut');
+  if(!go||!ta||!out) return;
+  // What PBDD covers: keywords -> how PBDD helps
+  var TOPICS=[
+    ['Mainstream holidays', /hallowe+n|christmas|valentine|birthday|easter|thanksgiving|holiday|celebrat|santa|trick or treat|pride month/i, 'Child-friendly workshops and scripts for the holidays children struggle to connect with.'],
+    ['Islamic identity & confidence', /identity|proud|muslim|deen|islam|allah|fitrah|faith|hijab|different from (his|her|their) friends|fit in/i, 'Islamic education for ages 5–12 that builds identity, belief and pride.'],
+    ['Yelling, guilt & reactions', /yell|shout|scream|snap|lose my (temper|cool)|angry|anger|guilt|guilty|regret|trigger|calm/i, 'Re-parenting work and tools to respond instead of react, and to repair after hard moments.'],
+    ['Behaviour, tantrums & boundaries', /tantrum|meltdown|boundar|push(es|ing)? back|defian|listen|disrespect|whin|hit(s|ting)?\b|bit(es|ing)?\b|behaviou?r|discipline|consequence|strict|too soft|lenient/i, 'Developmental understanding of what is normal at each age, and how to lead with clear boundaries.'],
+    ['Screen time', /screen|ipad|tablet|youtube|tv\b|television|phone|device|video game|gaming|roblox|minecraft/i, 'A clear plan for screens in your home, plus the Fitrah Filter app for checking content.'],
+    ['Salah, Quran & worship', /salah|salat|pray|prayer|quran|qur'an|dua|ramadan|fast(ing)?\b|wudu|masjid|mosque|surah/i, 'Age-appropriate expectations and habits for worship, without pressure or guilt.'],
+    ['Puberty & growing up', /pubert|body changes|period|menstru|growing up|where do babies|private parts|modesty|awrah|gender/i, 'Preparation for physical, emotional and religious changes before they arrive.'],
+    ['Routines, sleep & home life', /routine|bedtime|sleep|morning|chores|overwhelm|chaos|organi[sz]|mental load|house|home life|nap/i, 'Systems for your home, routines and a family culture that support your values.'],
+    ['School, nursery & home education', /school|nursery|daycare|preschool|kindergarten|homeschool|home ?educat|curriculum|teacher/i, 'Guidance for school and home education, with a home curriculum that supports either.'],
+    ['Siblings & family dynamics', /sibling|brother|sister|new baby|jealous|share|sharing|fight(s|ing)? with/i, 'Tools for sibling relationships and the dynamics in your home.'],
+    ['Culture, media & tough questions', /lgbt|gay|trans|culture|media|friends|peer|influence|questions|why do we|why can't|why don't/i, 'Ways to talk through the culture and media your child meets, in a way they understand.'],
+    ['Feeling unsure as a parent', /confus|unsure|don't know (what|how)|no idea|lost|alone|unsupported|support|overwhelmed|doubt|second.guess|not sure/i, 'A clear framework, a community of Muslim mothers, and WhatsApp support with replies within 24 hours.']
+  ];
+  var OUT=[
+    ['quick', /quick fix|quickly|fast fix|hack|overnight|instant|magic|just (want|need) (a )?(tip|trick|script)s?|one tip|asap/i, 'PBDD is a 12-month journey of deep, root-level change. It isn’t a set of quick hacks.'],
+    ['special', /autis|asd\b|special needs|\bsen\b|sensory processing|\bodd\b|oppositional|diagnos|speech delay|developmental delay|adhd|disabilit|down syndrome|cerebral palsy|occupational therap/i, 'PBDD isn’t designed as specialised support for diagnosed or additional needs. A qualified specialist will serve your child best.'],
+    ['adult', /marriage|husband|divorce|custody|co-?parent dispute|my spouse/i, 'PBDD focuses on parenting your children rather than marriage or relationship support.']
+  ];
+  var CRISIS=/suicid|self.harm|kill (my|him|her)self|hurt(ing)? (my|him|her)self|abuse|abusing|unsafe at home|danger/i;
+
+  function ages(t){
+    var a=[], m, re=/(\d{1,2})\s*(?:-|\s)?\s*(?:yo\b|y\/o|yrs?\b|years?|year-old|month)/gi;
+    while((m=re.exec(t))){ var n=+m[1]; if(/month/i.test(m[0])) n=0; a.push(n); }
+    var list=t.match(/\b(\d{1,2})\s*(?:,|and|&)\s*(\d{1,2})\s*(?:yo|y\/o|years?|year)/i);
+    if(list) a.push(+list[1]);
+    if(/teen|adolescen|high school|secondary school/i.test(t)) a.push(14);
+    if(/toddler|baby|infant|newborn/i.test(t)) a.push(2);
+    return a;
+  }
+  function render(t){
+    if(CRISIS.test(t)){
+      return '<div class="fc-result fc-care"><h4>Thank you for sharing this with us.</h4><p>What you’ve described sounds like it needs more care than a program can give. Please reach out to a qualified professional, your doctor, or your local emergency services if anyone is at risk. You don’t have to carry this alone.</p></div>';
+    }
+    var a=ages(t), inAge=a.filter(function(n){return n<=12;}), outAge=a.filter(function(n){return n>12;});
+    var hits=TOPICS.filter(function(x){return x[1].test(t);});
+    var outs=OUT.filter(function(x){return x[1].test(t);});
+    var hitList=hits.slice(0,4).map(function(x){return '<li><span><b>'+x[0]+':</b> '+x[2]+'</span></li>';}).join('');
+    var outList=outs.map(function(x){return '<li class="out"><span>'+x[2]+'</span></li>';}).join('');
+    if(outAge.length) outList+='<li class="out"><span>PBDD is built for the first 12 years, so it isn’t designed for your '+outAge.map(function(n){return n+'-year-old';}).join(' and ')+'.</span></li>';
+    var cta='<a class="fc-cta" href="#join">See how to join</a>';
+    var blocked=outs.length||outAge.length;
+    if(hits.length && blocked && (inAge.length || !outAge.length) && !outs.some(function(x){return x[0]==='quick'||x[0]==='special';})){
+      return '<div class="fc-result fc-part"><h4>PBDD could be a good fit, with one note.</h4><p>Much of what you described is exactly what PBDD covers:</p><ul>'+hitList+'</ul><p>But please keep in mind:</p><ul>'+outList+'</ul>'+cta+'</div>';
+    }
+    if(blocked){
+      return '<div class="fc-result fc-no"><h4>PBDD probably isn’t the right fit right now.</h4><p>We’d rather tell you honestly than have you join something that isn’t built for you:</p><ul>'+outList+'</ul><p>If your situation changes, PBDD will be here, inshaAllah.</p></div>';
+    }
+    if(hits.length){
+      return '<div class="fc-result fc-yes"><h4>Yes, this sounds like exactly what PBDD was built for.</h4><p>'+(inAge.length?'With children in the early years, ':'')+'here’s how PBDD would support you:</p><ul>'+hitList+'</ul>'+cta+'</div>';
+    }
+    return '<div class="fc-result fc-more"><h4>Tell us a little more.</h4><p>How old are your children, and what feels hardest at home right now? For example: yelling, holidays, screen time, salah, bedtime, or questions about being Muslim.</p></div>';
+  }
+  function check(){
+    var t=ta.value.trim();
+    if(t.length<3){ ta.focus(); return; }
+    out.innerHTML='<div class="fc-thinking" aria-label="Checking"><i></i><i></i><i></i></div>';
+    setTimeout(function(){ out.innerHTML=render(t); }, 700);
+  }
+  go.addEventListener('click',check);
+  ta.addEventListener('keydown',function(e){ if(e.key==='Enter' && (e.metaKey||e.ctrlKey)) check(); });
+  [].slice.call(document.querySelectorAll('.fitcheck-chips button')).forEach(function(b){
+    b.addEventListener('click',function(){ ta.value=b.textContent; check(); });
+  });
 })();
 </script>
 </body></html>
