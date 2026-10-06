@@ -2673,7 +2673,7 @@ p,li{text-wrap:pretty}
 </div>
 <div class="vstack">
 <div class="vcol else"><h3>What families typically pay for</h3><ul><li><span>Quran classes<small>per child, every month</small></span><b>$150–$250<i>/mo</i></b></li><li><span>Sunday school<small>per child, every month</small></span><b>$200–$900<i>/mo</i></b></li><li><span>Islamic school<small>per child, every month</small></span><b>$1,500–$3,000<i>/mo</i></b></li><li><span>Parenting courses &amp; memberships<small>per year</small></span><b>$37–$1,500</b></li><li><span>Parenting coach<small>per session</small></span><b>$50–$250</b></li><li><span>Early years consultant<small>per session</small></span><b>$300–$500</b></li><li><span>Child development / behaviour consult<small>per visit</small></span><b>$250+</b></li></ul>
-<div class="vtotal"><span>Total, for one child<small>and it keeps adding up, month after month</small></span><b>$2,487–$6,650+</b></div><div class="vfreq month">↻ Every single month</div></div>
+<div class="vtotal"><span>Total, for one child<small>and it keeps adding up, month after month</small></span><b><span class="vcount" data-to="2487">$2,487</span>–<span class="vcount" data-to="6650">$6,650</span>+</b></div><div class="vfreq month">↻ Every single month</div></div>
 <div class="vcol pbdd"><h3>What’s inside PBDD</h3><ul><li><span>Parent education<small>Paid once. Revisit it anytime, for every stage of the first 12 years.</small></span><b>$3,000+</b></li><li><span>Child Islamic education<small>Paid once. Revisit it anytime, and share it with every sibling in your household.</small></span><b>$2,000+</b></li><li><span>Consults, coaching &amp; daily real-time support<small>A full year of support whenever you need it, not one session and done.</small></span><b>$12,000</b></li></ul>
 <div class="vtotal"><span>Total value<small>for your whole household, to revisit for years</small></span><b><span class="vcount" data-to="17000">$17,000</span>+</b></div><div class="vfreq once">✓ Paid once</div>
 </div>
@@ -2791,7 +2791,7 @@ p,li{text-wrap:pretty}
 </div>
 </div>
 </section>
-<section aria-labelledby="vroom-title" class="vroom" id="first-week">
+<section aria-labelledby="vroom-title" class="vroom" hidden="" id="first-week">
 <div class="wrap">
 <div class="vroom-head"><div class="eyebrow">A PEEK AT YOUR FIRST WEEK</div><h2 id="vroom-title">Join today, and start with Halloween this week.</h2><p>It’s October. Here’s exactly what you and your child would open first, before the costumes and candy show up at school.</p></div>
 <div class="vroom-grid">
@@ -3131,14 +3131,16 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
 <script>
 (function(){
   var stack=document.querySelector('.vstack'); if(!stack) return;
-  var cols=[].slice.call(stack.querySelectorAll('.vcol')), num=stack.querySelector('.vcount');
+  var cols=[].slice.call(stack.querySelectorAll('.vcol')), nums=[].slice.call(stack.querySelectorAll('.vcount'));
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function countUp(){
-    if(!num||reduce) return;
-    var to=+num.dataset.to, t0=null, dur=1800;
-    function tick(t){ if(t0===null) t0=t; var p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,3);
-      num.textContent='$'+Math.round(to*e).toLocaleString('en-US'); if(p<1) requestAnimationFrame(tick); }
-    num.textContent='$0'; setTimeout(function(){ requestAnimationFrame(tick); },450);
+    if(reduce) return;
+    nums.forEach(function(num){
+      var to=+num.dataset.to, t0=null, dur=1800;
+      function tick(t){ if(t0===null) t0=t; var p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,3);
+        num.textContent='$'+Math.round(to*e).toLocaleString('en-US'); if(p<1) requestAnimationFrame(tick); }
+      num.textContent='$0'; setTimeout(function(){ requestAnimationFrame(tick); },450);
+    });
   }
   function show(){ cols.forEach(function(c){ c.classList.add('is-in'); }); countUp(); }
   if(!('IntersectionObserver' in window)){ show(); return; }
@@ -3264,7 +3266,7 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
 <script>
 (function(){
   var bk=document.querySelector('.booklet'); if(!bk) return;
-  var srcs=(bk.dataset.pages||'').split('|').filter(Boolean);
+  var srcs=(bk.dataset.pages||'').split('|').filter(function(x){return x && x!=='BOOKLET_PAGES';});
   var card=bk.closest('.vroom-card');
   if(!srcs.length){ if(card) card.style.display='none'; var g=document.querySelector('.vroom-grid'); if(g) g.style.gridTemplateColumns='1fr'; return; }
   var stage=bk.querySelector('.booklet-stage'), prev=bk.querySelector('.bk-prev'), next=bk.querySelector('.bk-next'), count=bk.querySelector('.booklet-count'), i=0;
