@@ -2093,6 +2093,43 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 .paybox-switch:hover .pb-pill{transform:translateY(-2px) scale(1.03)}
 @keyframes pbGlow{0%,100%{box-shadow:0 0 0 4px rgba(232,196,106,.22),0 12px 26px rgba(181,150,98,.3)}50%{box-shadow:0 0 0 10px rgba(232,196,106,.12),0 14px 30px rgba(181,150,98,.4)}}
 @media(prefers-reduced-motion:reduce){.pb-arrow,.pb-pill{animation:none}}
+/* Viewing room: Halloween first week */
+.vroom{padding:96px 0;background:linear-gradient(180deg,#1d2822 0%,#243029 55%,#2c3d33 100%);color:#f1ece2}
+.vroom-head{text-align:center;max-width:780px;margin:0 auto 46px}
+.vroom-head .eyebrow{color:#e8c46a}
+.vroom-head h2{color:#fff;margin-bottom:14px}
+.vroom-head p{color:#d7d5ce;font-size:18px;margin:0}
+.vroom-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;max-width:1160px;margin:0 auto;align-items:start}
+.vroom-card{background:rgba(255,255,255,.04);border:1px solid rgba(232,196,106,.28);border-radius:24px;padding:22px}
+.vroom-card h3{font:500 22px/1.25 'Bodoni Moda',Georgia,serif;color:#fff;margin:0 0 4px}
+.vroom-card small{display:block;font:700 11px/1.2 'Manrope',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#e8c46a;margin-bottom:8px}
+.vroom-card p.note{margin:6px 0 16px;color:#cfc9bd;font-size:15px;line-height:1.55}
+.vroom-video{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/9;background:#000;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.vroom-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vroom-video .live{position:absolute;top:12px;left:12px;z-index:2;padding:6px 10px;border-radius:999px;background:rgba(20,24,21,.8);color:#fff;font:700 10px/1 'Manrope',sans-serif;letter-spacing:.14em;pointer-events:none}
+.vroom-video .live:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#e8c46a;margin-right:6px;vertical-align:1px;animation:vrPulse 1.6s ease-in-out infinite}
+@keyframes vrPulse{50%{opacity:.25}}
+.booklet{position:relative;perspective:1600px;margin:4px auto 0;max-width:380px}
+.booklet-stage{position:relative;aspect-ratio:8.5/11;border-radius:6px 14px 14px 6px;background:#fffdf8;box-shadow:0 26px 60px rgba(0,0,0,.4),inset 10px 0 18px -10px rgba(0,0,0,.25);overflow:hidden}
+.booklet-stage:before{content:"";position:absolute;left:0;top:0;bottom:0;width:14px;background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(0,0,0,0));z-index:3;pointer-events:none}
+.booklet-page{position:absolute;inset:0;transform-origin:left center;transition:transform .7s cubic-bezier(.4,.1,.2,1),opacity .7s;backface-visibility:hidden}
+.booklet-page img{display:block;width:100%;height:100%;object-fit:cover}
+.booklet-page.turned{transform:rotateY(-105deg);opacity:0}
+.booklet-page.ahead{opacity:0}
+.booklet-ribbon{position:absolute;top:16px;right:-34px;z-index:4;transform:rotate(45deg);background:#e8c46a;color:#1c211d;font:800 10px/1 'Manrope',sans-serif;letter-spacing:.16em;padding:7px 40px;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+.booklet-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+.booklet-nav button{width:42px;height:42px;border-radius:50%;border:1px solid rgba(232,196,106,.5);background:transparent;color:#e8c46a;font:700 18px/1 'Manrope',sans-serif;cursor:pointer;transition:background .2s}
+.booklet-nav button:hover{background:rgba(232,196,106,.15)}
+.booklet-nav button:disabled{opacity:.3;cursor:default}
+.booklet-count{font:600 13px/1 'Manrope',sans-serif;color:#cfc9bd}
+.vroom-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1160px;margin:30px auto 0;counter-reset:vr}
+.vroom-steps div{position:relative;padding:20px 20px 20px 62px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);font-size:15.5px;line-height:1.5;color:#e6e0d3}
+.vroom-steps div:before{counter-increment:vr;content:counter(vr);position:absolute;left:18px;top:18px;width:30px;height:30px;border-radius:50%;background:#e8c46a;color:#1c211d;font:800 14px/30px 'Manrope',sans-serif;text-align:center}
+.vroom-steps b{color:#fff}
+.vroom-cta{text-align:center;margin-top:36px}
+@media(max-width:900px){.vroom-grid,.vroom-steps{grid-template-columns:1fr}}
+@media(max-width:700px){.vroom{padding:68px 0}.vroom-card{padding:16px}.vroom-head p{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.booklet-page{transition:none}}
 /* Even line breaks: no lone last word on headings or centred lines */
 h1,h2,h3,h4,#join .lead,.pricing-longevity,.pricing-value-strip{text-wrap:balance}
 p,li{text-wrap:pretty}
@@ -2754,6 +2791,20 @@ p,li{text-wrap:pretty}
 </div>
 </div>
 </section>
+<section aria-labelledby="vroom-title" class="vroom" id="first-week">
+<div class="wrap">
+<div class="vroom-head"><div class="eyebrow">A PEEK AT YOUR FIRST WEEK</div><h2 id="vroom-title">Join today, and start with Halloween this week.</h2><p>It’s October. Here’s exactly what you and your child would open first, before the costumes and candy show up at school.</p></div>
+<div class="vroom-grid">
+<div class="vroom-card"><small>For your child</small><h3>The Halloween workshop</h3><p class="note">A child-friendly lesson on why we don’t celebrate, taught in a way that builds pride instead of feeling left out.</p>
+<div class="vroom-video"><span class="live">WORKSHOP PREVIEW</span><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/HHcmvBLfbjY?rel=0&amp;modestbranding=1" title="PBDD Halloween workshop preview"></iframe></div></div>
+<div class="vroom-card"><small>For you, together</small><h3>The Halloween family workbook</h3><p class="note">Activities and conversation prompts to work through together after the workshop. Flip through a few sample pages.</p>
+<div class="booklet" data-pages="BOOKLET_PAGES"><div class="booklet-stage"><span class="booklet-ribbon">SAMPLE</span></div>
+<div class="booklet-nav"><button aria-label="Previous page" class="bk-prev" type="button">←</button><span class="booklet-count"></span><button aria-label="Next page" class="bk-next" type="button">→</button></div></div></div>
+</div>
+<div class="vroom-steps"><div><b>Join today.</b> You get access straight away, with nothing to wait for.</div><div><b>Watch the Halloween workshop</b> with your child this week.</div><div><b>Work through the workbook together</b> and have the conversation with confidence, not guilt.</div></div>
+<div class="vroom-cta"><a class="btn" href="#join" style="background:var(--gold);border-color:var(--gold);color:#1c211d">START THIS WEEK</a></div>
+</div>
+</section>
 <section>
 <div class="narrow"><div class="eyebrow">FAQ</div><h2>Before you join</h2><div class="faq">
 <details><summary>Is this another course I have to finish?</summary><p>No. You do not need to binge PBDD or complete a giant checklist. Learn the foundations, use them in real life, and return to the program as your child and family grow.</p></details>
@@ -3208,6 +3259,23 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
     box.dataset.plan=full?'full':'monthly';
     views.forEach(function(v){ v.setAttribute('aria-hidden', v.classList.contains(full?'full':'monthly')?'false':'true'); });
   });
+})();
+</script>
+<script>
+(function(){
+  var bk=document.querySelector('.booklet'); if(!bk) return;
+  var srcs=(bk.dataset.pages||'').split('|').filter(Boolean);
+  var card=bk.closest('.vroom-card');
+  if(!srcs.length){ if(card) card.style.display='none'; var g=document.querySelector('.vroom-grid'); if(g) g.style.gridTemplateColumns='1fr'; return; }
+  var stage=bk.querySelector('.booklet-stage'), prev=bk.querySelector('.bk-prev'), next=bk.querySelector('.bk-next'), count=bk.querySelector('.booklet-count'), i=0;
+  var pages=srcs.map(function(src,n){ var d=document.createElement('div'); d.className='booklet-page'; d.style.zIndex=srcs.length-n;
+    d.innerHTML='<img alt="Halloween workbook sample page '+(n+1)+'" loading="lazy" src="'+src+'"/>'; stage.appendChild(d); return d; });
+  function show(){ pages.forEach(function(p,n){ p.classList.toggle('turned',n<i); p.classList.toggle('ahead',n>i); });
+    count.textContent='Sample page '+(i+1)+' of '+pages.length; prev.disabled=i===0; next.disabled=i===pages.length-1; }
+  prev.addEventListener('click',function(){ if(i>0){i--;show();} });
+  next.addEventListener('click',function(){ if(i<pages.length-1){i++;show();} });
+  stage.addEventListener('click',function(){ i=(i+1)%pages.length; show(); });
+  show();
 })();
 </script>
 </body></html>
