@@ -3189,10 +3189,16 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
   if(!bar||!join) return;
   var link=bar.querySelector('a');
   function setBar(on){ bar.classList.toggle('is-on',on); bar.setAttribute('aria-hidden',on?'false':'true'); link.tabIndex=on?0:-1; }
-  new IntersectionObserver(function(es){
-    var e=es[0];
-    setBar(!e.isIntersecting && e.boundingClientRect.bottom < 0);
-  },{threshold:0}).observe(join);
+  var foot=document.querySelector('.site-foot'), ticking=false;
+  function update(){
+    ticking=false;
+    var pastJoin=join.getBoundingClientRect().bottom<0;
+    var atFoot=foot && foot.getBoundingClientRect().top<window.innerHeight;
+    setBar(pastJoin && !atFoot);
+  }
+  window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
+  window.addEventListener('resize',update);
+  update();
 })();
 </script>
 <script>
