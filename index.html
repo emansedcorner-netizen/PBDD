@@ -2058,6 +2058,28 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 .signature-card .signature-star{color:#e8c46a;text-shadow:0 0 14px rgba(232,196,106,.55)}
 .signature-card .program-syllabus{box-shadow:0 18px 45px rgba(0,0,0,.25)!important}
 @media(prefers-reduced-motion:reduce){.signature-card:before{animation:none}}
+/* Pricing toggle box */
+.paybox{position:relative;max-width:560px;margin:34px auto 26px;padding:46px 40px 30px;border-radius:28px;background:#fffdf8;color:var(--ink);text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.28);border:1.5px solid rgba(232,196,106,.7)}
+.paybox-tag{position:absolute;top:-15px;left:50%;transform:translateX(-50%);padding:8px 16px;border-radius:999px;background:#e8c46a;color:#1c211d;font:800 11px/1 'Manrope',sans-serif;letter-spacing:.16em;white-space:nowrap}
+.paybox-view{display:none}
+.paybox[data-plan="monthly"] .paybox-view.monthly,.paybox[data-plan="full"] .paybox-view.full{display:block;animation:payIn .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes payIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.paybox-label{margin:0 0 10px;font:600 15px/1.4 'Manrope',sans-serif;color:#6b6b63}
+.paybox-price{font:600 clamp(64px,9vw,92px)/1 'Bodoni Moda',Georgia,serif;color:var(--evergreen);letter-spacing:-.02em}
+.paybox-price small{display:block;margin-top:8px;font:700 13px/1 'Manrope',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8a7b62}
+.paybox-sub{margin:18px auto 22px;max-width:400px;font-size:16px;line-height:1.55;color:#4a4d47}
+.paybox-was{margin:2px 0 8px;display:flex;justify-content:center;align-items:baseline;gap:10px}
+.paybox-was s{font:500 30px/1 'Bodoni Moda',Georgia,serif;color:#a8403a;text-decoration-thickness:2px}
+.paybox-was span{font:600 13px/1 'Manrope',sans-serif;color:#8a8a82}
+.paybox-save{display:inline-block;margin:16px 0 22px;padding:9px 16px;border-radius:999px;background:#e9f4ec;color:#1f6a3e;font:800 14px/1 'Manrope',sans-serif;letter-spacing:.06em}
+.paybox-cta{display:block;padding:19px 22px;border-radius:14px;background:var(--evergreen);color:#fff;font:800 14px/1.2 'Manrope',sans-serif;letter-spacing:.12em;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.paybox-cta.gold{background:#e8c46a;color:#1c211d}
+.paybox-cta:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(36,48,41,.22)}
+.paybox-fine{margin:12px 0 0;font-size:13px;color:#8a8a82}
+.paybox-switch{margin-top:22px;border:0;background:none;padding:6px;font:700 15px/1.3 'Manrope',sans-serif;color:#8a6a2a;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(181,150,98,.5)}
+.paybox-switch:hover{color:var(--evergreen)}
+.paybox[data-plan="monthly"] .to-monthly,.paybox[data-plan="full"] .to-full{display:none}
+@media(max-width:600px){.paybox{padding:40px 20px 24px;margin-top:28px}.paybox-cta{font-size:13px}}
 /* Even line breaks: no lone last word on headings or centred lines */
 h1,h2,h3,h4,#join .lead,.pricing-longevity,.pricing-value-strip{text-wrap:balance}
 p,li{text-wrap:pretty}
@@ -2614,9 +2636,24 @@ p,li{text-wrap:pretty}
 <div class="pricing-longevity">Built to be returned to through the first 12 years.</div>
 <p class="lead">Parent education. Child Islamic education. Custom tools built for you. Community. Ongoing support.</p>
 <div class="pricing-value-strip"><span>Join for one year. Parent from it for years.</span> You are building foundations, tools, and understanding you can keep returning to as your children and family grow.</div>
-<div class="pricing-wrap">
-<div class="price-card"><div class="ribbon">START TODAY</div><h3>Monthly Plan</h3><div class="price">$297 <small>/ month</small></div><p><strong>12 monthly payments</strong></p><p>Get the complete PBDD experience now and spread your investment across the year.</p><a class="btn monthly-cta" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">START PBDD FOR $297</a><p style="font-size:13px;margin-top:18px;color:#6a685f">12-month payment commitment. <strong style="color:#3f413b;font-size:inherit">Total: $3,564 USD</strong></p></div>
-<div class="price-card best-value"><div class="best-ribbon">BEST VALUE · SAVE $1,064</div><h3>Pay in Full</h3><div class="price">$2,500</div><p><strong>One payment</strong></p><p>Pay once for your complete 12-month supported experience, then keep returning to the foundations as your family grows.</p><a class="btn pif-cta" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">JOIN PBDD + SAVE $1,064</a><p class="best-value-note">The clearest value if you already know PBDD is the parenting home you want to grow with.</p></div>
+<div class="paybox" id="paybox" data-plan="monthly">
+<div class="paybox-tag">ENROLLMENT IS OPEN</div>
+<div class="paybox-view monthly" aria-hidden="false">
+<p class="paybox-label">Join Parenting by Divine Design today for</p>
+<div class="paybox-price">$297<small>/month</small></div>
+<p class="paybox-sub">The complete 12-month PBDD experience. Start today and spread your investment across the year.</p>
+<a class="paybox-cta" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">ENROLL NOW FOR $297</a>
+<p class="paybox-fine">12 monthly payments of $297 USD</p>
+</div>
+<div class="paybox-view full" aria-hidden="true">
+<p class="paybox-label">Pay in full and save</p>
+<div class="paybox-was"><s>$3,564</s><span>12 × $297</span></div>
+<div class="paybox-price">$2,500<small>one payment</small></div>
+<div class="paybox-save">You save $1,064</div>
+<a class="paybox-cta gold" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">PAY IN FULL &amp; SAVE $1,064</a>
+<p class="paybox-fine">Includes the 7-day refund guarantee</p>
+</div>
+<button class="paybox-switch" type="button" aria-controls="paybox"><span class="to-full">Save $1,064 when you pay in full →</span><span class="to-monthly">← Prefer monthly? $297/month</span></button>
 </div>
 <div aria-label="7 day refund guarantee for full payments only" class="refund-strip refund-standalone"><div aria-hidden="true" class="refund-badge"><span class="num">7</span></div><div class="refund-copy"><strong>7-day refund guarantee</strong><p>No questions asked for <span class="refund-highlight">full payments only</span>.</p></div></div><div aria-labelledby="bonus-reveal-title" class="bonus-reveal">
 <div class="bonus-reveal-head">
@@ -3146,6 +3183,17 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
   ta.addEventListener('keydown',function(e){ if(e.key==='Enter' && (e.metaKey||e.ctrlKey)) check(); });
   [].slice.call(document.querySelectorAll('.fitcheck-chips button')).forEach(function(b){
     b.addEventListener('click',function(){ ta.value=b.textContent; check(); });
+  });
+})();
+</script>
+<script>
+(function(){
+  var box=document.getElementById('paybox'); if(!box) return;
+  var btn=box.querySelector('.paybox-switch'), views=box.querySelectorAll('.paybox-view');
+  btn.addEventListener('click',function(){
+    var full=box.dataset.plan!=='full';
+    box.dataset.plan=full?'full':'monthly';
+    views.forEach(function(v){ v.setAttribute('aria-hidden', v.classList.contains(full?'full':'monthly')?'false':'true'); });
   });
 })();
 </script>
