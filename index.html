@@ -2086,6 +2086,13 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 .phase-grid .phase:hover .eyebrow{color:#a8823c}
 @media(hover:none){.phase-grid .phase:active{transform:translateY(-6px) scale(1.02)!important}}
 @media(prefers-reduced-motion:reduce){.phase-grid .phase{transition:box-shadow .2s!important}.phase-grid .phase:hover{transform:none!important}}
+.paybox[data-plan="monthly"] .paybox-switch{margin-top:30px;text-decoration:none}
+.pb-arrow{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--evergreen);color:#e8c46a;margin:0 auto 10px;box-shadow:0 6px 14px rgba(36,48,41,.25);animation:pbBounce 1.3s ease-in-out infinite}
+@keyframes pbBounce{0%,100%{transform:translateY(-4px)}50%{transform:translateY(6px)}}
+.pb-pill{display:inline-block;padding:15px 24px;border-radius:999px;background:linear-gradient(135deg,#f6e3a8 0%,#e8c46a 55%,#d9ae4f 100%);color:#1c211d;font:800 clamp(16px,2vw,19px)/1.2 'Manrope',sans-serif;letter-spacing:.01em;box-shadow:0 0 0 4px rgba(232,196,106,.25),0 12px 26px rgba(181,150,98,.35);animation:pbGlow 2.4s ease-in-out infinite;transition:transform .2s}
+.paybox-switch:hover .pb-pill{transform:translateY(-2px) scale(1.03)}
+@keyframes pbGlow{0%,100%{box-shadow:0 0 0 4px rgba(232,196,106,.22),0 12px 26px rgba(181,150,98,.3)}50%{box-shadow:0 0 0 10px rgba(232,196,106,.12),0 14px 30px rgba(181,150,98,.4)}}
+@media(prefers-reduced-motion:reduce){.pb-arrow,.pb-pill{animation:none}}
 /* Even line breaks: no lone last word on headings or centred lines */
 h1,h2,h3,h4,#join .lead,.pricing-longevity,.pricing-value-strip{text-wrap:balance}
 p,li{text-wrap:pretty}
@@ -2659,7 +2666,7 @@ p,li{text-wrap:pretty}
 <a class="paybox-cta gold" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">PAY IN FULL &amp; SAVE $1,064</a>
 <p class="paybox-fine">Includes the 7-day refund guarantee</p>
 </div>
-<button class="paybox-switch" type="button" aria-controls="paybox"><span class="to-full">Save $1,064 when you pay in full →</span><span class="to-monthly">← Prefer monthly? $297/month</span></button>
+<button class="paybox-switch" type="button" aria-controls="paybox"><span class="to-full"><i class="pb-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 4v15M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span class="pb-pill">Save $1,064 when you <span style="white-space:nowrap">pay in full →</span></span></span><span class="to-monthly">← Prefer monthly? $297/month</span></button>
 </div>
 <div aria-label="7 day refund guarantee for full payments only" class="refund-strip refund-standalone"><div aria-hidden="true" class="refund-badge"><span class="num">7</span></div><div class="refund-copy"><strong>7-day refund guarantee</strong><p>No questions asked for <span class="refund-highlight">full payments only</span>.</p></div></div><div aria-labelledby="bonus-reveal-title" class="bonus-reveal">
 <div class="bonus-reveal-head">
