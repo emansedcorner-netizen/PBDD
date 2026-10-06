@@ -2080,6 +2080,12 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 .paybox-switch:hover{color:var(--evergreen)}
 .paybox[data-plan="monthly"] .to-monthly,.paybox[data-plan="full"] .to-full{display:none}
 @media(max-width:600px){.paybox{padding:40px 20px 24px;margin-top:28px}.paybox-cta{font-size:13px}}
+/* Phase cards: lift on hover */
+.phase-grid .phase{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,border-color .35s ease!important;will-change:transform;position:relative}
+.phase-grid .phase:hover{transform:translateY(-10px) scale(1.03)!important;box-shadow:0 28px 60px rgba(36,48,41,.16)!important;border-color:rgba(181,150,98,.7)!important;z-index:2}
+.phase-grid .phase:hover .eyebrow{color:#a8823c}
+@media(hover:none){.phase-grid .phase:active{transform:translateY(-6px) scale(1.02)!important}}
+@media(prefers-reduced-motion:reduce){.phase-grid .phase{transition:box-shadow .2s!important}.phase-grid .phase:hover{transform:none!important}}
 /* Even line breaks: no lone last word on headings or centred lines */
 h1,h2,h3,h4,#join .lead,.pricing-longevity,.pricing-value-strip{text-wrap:balance}
 p,li{text-wrap:pretty}
