@@ -2210,6 +2210,21 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 /* Even line breaks: no lone last word on headings or centred lines */
 h1,h2,h3,h4,#join .lead,.pricing-longevity,.pricing-value-strip{text-wrap:balance}
 p,li{text-wrap:pretty}
+/* Recent-enrolment popup */
+.sp-pop{position:fixed;left:18px;bottom:18px;z-index:70;display:flex;align-items:center;gap:14px;width:min(360px,calc(100% - 24px));padding:14px 38px 14px 14px;border-radius:18px;background:#fffdf8;border:1px solid rgba(181,150,98,.35);box-shadow:0 18px 44px rgba(29,40,34,.22);font-family:'Manrope',sans-serif;color:#20231f;opacity:0;transform:translateY(130%);transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .4s;pointer-events:none}
+.sp-pop.is-on{opacity:1;transform:none;pointer-events:auto}
+.sp-flag{flex:0 0 auto;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#243029;font-size:24px;line-height:1;box-shadow:0 0 0 3px #f6e6b4}
+.sp-flag.is-heart{color:#e8c46a;font-size:20px}
+.sp-body{min-width:0}
+.sp-who{margin:0;font:700 15px/1.3 'Manrope',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-what{margin:2px 0 0;font:500 13px/1.35 'Manrope',sans-serif;color:#354238}
+.sp-what b{color:#243029;font-weight:700}
+.sp-when{margin:4px 0 0;font:600 11px/1.2 'Manrope',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#9b8e7d}
+.sp-when:before{content:"\2713 ";color:#5f8f63}
+.sp-x{position:absolute;top:6px;right:8px;width:26px;height:26px;border:0;border-radius:50%;background:transparent;color:#9b8e7d;font-size:18px;line-height:1;cursor:pointer}
+.sp-x:hover{background:#f7f3ec;color:#243029}
+@media (max-width:640px){.sp-pop{left:12px;bottom:84px;padding:11px 34px 11px 11px;gap:11px}.sp-flag{width:40px;height:40px;font-size:21px}.sp-who{font-size:14px}.sp-what{font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){.sp-pop{transition:opacity .3s;transform:none}}
 </style>
 <meta content="Parenting by Divine Design" property="og:title"/>
 <meta content="Your parenting home for the first 12 years." property="og:description"/>
@@ -3445,6 +3460,41 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
       if(o) requestAnimationFrame(function(){ nudge(l); }); else l.style.translate='';
     });
   });
+})();
+</script>
+<div aria-live="polite" class="sp-pop" id="spPop" role="status"><span aria-hidden="true" class="sp-flag"></span><div class="sp-body"><p class="sp-who"></p><p class="sp-what">Joined <b>Parenting by Divine Design</b></p><p class="sp-when"></p></div><button aria-label="Hide these notifications" class="sp-x" type="button">×</button></div>
+<script>
+/* Recent-enrolment popup. Add real PBDD students here:
+   n = first name, c = city (optional), cc = 2-letter country code, d = purchase date (YYYY-MM-DD) */
+(function(){
+  var BUYERS = [
+  ];
+  var pop=document.getElementById('spPop');
+  if(!pop||!BUYERS.length)return;
+  try{if(sessionStorage.getItem('spOff'))return;}catch(e){}
+  function flag(cc){cc=(cc||'').toUpperCase();if(!/^[A-Z]{2}$/.test(cc))return '';return String.fromCodePoint(127397+cc.charCodeAt(0),127397+cc.charCodeAt(1));}
+  function ago(d){
+    var t=new Date(d+'T12:00:00'),days=Math.floor((Date.now()-t)/864e5);
+    if(isNaN(days))return '';
+    if(days<1)return 'Today';if(days<2)return 'Yesterday';
+    if(days<7)return days+' days ago';
+    if(days<30){var w=Math.floor(days/7);return w+(w>1?' weeks ago':' week ago');}
+    if(days<365){var m=Math.floor(days/30.4);return m+(m>1?' months ago':' month ago');}
+    return 'Enrolled in '+t.getFullYear();
+  }
+  var list=BUYERS.slice().sort(function(){return Math.random()-.5}),i=0,shown=0,MAX=8,timer;
+  var f=pop.querySelector('.sp-flag'),who=pop.querySelector('.sp-who'),when=pop.querySelector('.sp-when');
+  function show(){
+    if(shown>=MAX)return;
+    var b=list[i++%list.length],fl=flag(b.cc);
+    f.textContent=fl||'\u2665';f.classList.toggle('is-heart',!fl);
+    who.textContent=b.n+(b.c?' ('+b.c+')':'');
+    when.textContent=ago(b.d);when.hidden=!b.d;
+    pop.classList.add('is-on');shown++;
+    timer=setTimeout(function(){pop.classList.remove('is-on');timer=setTimeout(show,14000+Math.random()*10000);},6500);
+  }
+  pop.querySelector('.sp-x').addEventListener('click',function(){clearTimeout(timer);pop.classList.remove('is-on');try{sessionStorage.setItem('spOff','1')}catch(e){}});
+  timer=setTimeout(show,9000);
 })();
 </script>
 </body></html>
