@@ -2178,43 +2178,33 @@ section{padding:96px 0}.hero{padding:36px 0 88px;background:linear-gradient(180d
 @keyframes enrollRoll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(max-width:600px){.enroll-set span{font-size:11px;padding:10px 0}.enroll-set i{margin:0 18px}.enroll-track{animation-duration:30s}}
 @media(prefers-reduced-motion:reduce){.enroll-track{animation:none;justify-content:center;width:auto}.enroll-set+.enroll-set{display:none}}
-/* Dream clouds */
+/* Dream tree */
 .dreams{margin:38px auto 34px;max-width:860px}
-.dclouds{max-width:760px;margin:0 auto}
-.dreams-intro{margin:0 0 30px;font:500 clamp(20px,2.4vw,26px)/1.3 'Bodoni Moda',Georgia,serif;color:#fff}
+.dreams-intro{margin:0 0 26px;font:500 clamp(20px,2.4vw,26px)/1.3 'Bodoni Moda',Georgia,serif;color:#fff}
 .dreams-intro span{display:block;margin-top:8px;font:700 11px/1 'Manrope',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#e8c46a}
-.dclouds{display:flex;flex-wrap:wrap;justify-content:center;gap:34px 22px;padding-top:14px}
-.dcloud{position:relative;isolation:isolate;border:0;cursor:pointer;background:#fffdf8;color:#243029;border-radius:999px;padding:15px 24px 14px;min-width:120px;max-width:300px;
-  font:700 14px/1.35 'Manrope',sans-serif;box-shadow:0 14px 30px rgba(0,0,0,.25);animation:dFloat var(--t,6s) ease-in-out var(--d,0s) infinite;transition:max-width .4s,padding .4s,background .3s}
-.dcloud:before,.dcloud:after{content:"";position:absolute;z-index:-1;background:inherit;border-radius:50%}
-.dcloud:before{width:42px;height:42px;top:-18px;left:20%}
-.dcloud:after{width:56px;height:56px;top:-26px;right:16%}
-.dcloud:nth-child(3n+2){margin-top:22px}.dcloud:nth-child(3n){margin-top:8px}
-.dcloud:hover{box-shadow:0 18px 36px rgba(0,0,0,.32),0 0 0 3px rgba(232,196,106,.5)}
-.dcloud:focus-visible{outline:3px solid #e8c46a;outline-offset:4px}
-.dc-full{display:none}
-.dc-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.dcloud:not(.open){width:118px;height:58px;padding:0}
-.dcloud:not(.open):nth-child(even){width:96px;height:50px}
-.dcloud.open{background:#f6e6b4;max-width:340px;padding:18px 26px;animation:dPop .5s cubic-bezier(.2,1.6,.4,1) both, dFloat var(--t,6s) ease-in-out .5s infinite}
-
-.dcloud.open .dc-full{display:block;font:500 17px/1.35 'Bodoni Moda',Georgia,serif;color:#1c211d}
-@keyframes dFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-@keyframes dPop{0%{transform:scale(.7)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
-.dreams-close{margin:40px 0 0;font:500 clamp(22px,2.8vw,30px)/1.3 'Bodoni Moda',Georgia,serif;color:#e8c46a}
-@media(max-width:600px){.dcloud:not(.open){width:96px;height:48px}.dcloud:not(.open):nth-child(even){width:80px;height:42px}.dclouds{gap:30px 14px}.dcloud{min-width:0;padding:13px 18px;font-size:13px}.dcloud.open .dc-full{font-size:16px}.dcloud:before{width:34px;height:34px;top:-14px}.dcloud:after{width:44px;height:44px;top:-20px}}
-@media(prefers-reduced-motion:reduce){.dcloud,.dcloud.open{animation:none}}
-/* Clouds orbiting the sun */
-.dclouds{position:relative!important;display:block!important;width:min(100%,720px);aspect-ratio:1.35;margin:0 auto!important;padding:0!important}
-.dclouds .dcloud{position:absolute;translate:-50% -50%;margin:0!important;z-index:2}
-.dclouds .dcloud.open{z-index:5;width:300px;max-width:none}
-.dreams-intro{margin-bottom:46px!important}
-.dsun{position:absolute;left:50%;top:50%;width:34%;max-width:230px;translate:-50% -50%;fill:none;stroke:#e8c46a;stroke-width:3;stroke-linecap:round;opacity:.85;pointer-events:none}
-.dsun .eye{fill:#e8c46a;stroke:none}
-.dsun-rays{transform-origin:100px 100px;animation:dSpin 40s linear infinite}
-@keyframes dSpin{to{transform:rotate(360deg)}}
-@media(max-width:600px){.dclouds{aspect-ratio:.95}.dsun{width:36%}.dclouds .dcloud:not(.open){width:72px;height:38px}.dclouds .dcloud:not(.open):nth-child(even){width:62px;height:34px}.dclouds .dcloud.open{width:min(240px,66vw)}}
-@media(prefers-reduced-motion:reduce){.dsun-rays{animation:none}}
+.dtree-wrap{position:relative;width:min(100%,600px);aspect-ratio:400/440;margin:0 auto}
+.dtree{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:#e8c46a;stroke-width:2.6;stroke-linecap:round;opacity:.85;pointer-events:none}
+.dtree .eye{fill:#e8c46a;stroke:none}
+.dtree .br path{stroke-width:1.8}
+.dtree .br path:nth-child(-n+3){stroke-width:2.6}
+.dtree .roots path{stroke-width:2.2;opacity:.85}
+.dtree .ground{stroke-width:1.2;opacity:.35}
+.dleaf{position:absolute;translate:-50% -50%;z-index:2;width:58px;height:58px;padding:0;border:0;cursor:pointer;border-radius:0 72% 0 72%;
+  background:linear-gradient(135deg,#9fc39a 0%,#5f8f63 60%,#45704b 100%);box-shadow:0 8px 18px rgba(0,0,0,.28);transform:rotate(var(--r,0deg));
+  animation:lSway 4.8s ease-in-out var(--d,0s) infinite;transition:border-radius .35s,background .3s}
+.dleaf:before{content:"";position:absolute;left:14%;top:14%;width:100%;height:2px;background:rgba(255,255,255,.45);transform-origin:0 0;transform:rotate(45deg) scaleX(.95)}
+.dleaf:hover{box-shadow:0 10px 22px rgba(0,0,0,.34),0 0 0 3px rgba(232,196,106,.55)}
+.dleaf:focus-visible{outline:3px solid #e8c46a;outline-offset:4px}
+.dleaf .dc-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.dleaf .dc-full{display:none}
+.dleaf.open{z-index:6;width:260px;height:auto;padding:16px 22px;border-radius:22px 4px 22px 4px;background:#f6e6b4;transform:none;animation:lPop .45s cubic-bezier(.2,1.6,.4,1) both}
+.dleaf.open:before{display:none}
+.dleaf.open .dc-full{display:block;font:500 17px/1.35 'Bodoni Moda',Georgia,serif;color:#1c211d}
+@keyframes lSway{0%,100%{transform:rotate(var(--r,0deg)) translateY(0)}50%{transform:rotate(calc(var(--r,0deg) + 8deg)) translateY(-4px)}}
+@keyframes lPop{0%{transform:scale(.6)}70%{transform:scale(1.06)}100%{transform:scale(1)}}
+.dreams-close{margin:22px 0 0;font:500 clamp(22px,2.8vw,30px)/1.3 'Bodoni Moda',Georgia,serif;color:#e8c46a}
+@media(max-width:600px){.dleaf{width:44px;height:44px}.dleaf.open{width:min(230px,64vw)}.dleaf.open .dc-full{font-size:15.5px}.dtree{stroke-width:2.2}}
+@media(prefers-reduced-motion:reduce){.dleaf,.dleaf.open{animation:none}}
 /* Even line breaks: no lone last word on headings or centred lines */
 h1,h2,h3,h4,#join .lead,.pricing-longevity,.pricing-value-strip{text-wrap:balance}
 p,li{text-wrap:pretty}
@@ -2877,7 +2867,11 @@ p,li{text-wrap:pretty}
 <details><summary>What if I am very busy?</summary><p>You do not need hours every day or to sit in front of a screen. Many lessons can be taken on the go via podcast-style audio. The goal is not to add more to your life. It is to make the parenting you are already doing more intentional.</p></details>
 </div></div>
 </section>
-<section class="final"><div class="narrow"><div class="eyebrow">THE EARLY YEARS ARE ALREADY HAPPENING</div><div class="gold-rule center-rule"></div><h2>You raise a strong, unapologetic Muslim <span style="white-space:nowrap">15-year-old</span> from birth.</h2><p class="lead">Their identity. Their confidence. Their character. Their relationship with Allah. Their relationship with you. Their ability to stand in the world without losing themselves.</p><div class="dreams"><p class="dreams-intro">Every Muslim parent’s dream. <span>Tap a cloud to see what’s inside.</span></p><div class="dclouds"><svg aria-hidden="true" class="dsun" viewBox="0 0 200 200"><g class="dsun-rays"><line x1="100" y1="14" x2="100" y2="34" transform="rotate(0 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(30 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(60 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(90 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(120 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(150 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(180 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(210 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(240 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(270 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(300 100 100)"/><line x1="100" y1="14" x2="100" y2="34" transform="rotate(330 100 100)"/></g><circle cx="100" cy="100" r="52"/><circle class="eye" cx="82" cy="90" r="4"/><circle class="eye" cx="118" cy="90" r="4"/><path d="M76 110 Q100 136 124 110"/></svg><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Salah" style="--d:0.00s;--t:5.5s" type="button"><span class="dc-label">Salah</span><span class="dc-full">Your child prays without being reminded.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Fasting" style="--d:0.55s;--t:6.4s" type="button"><span class="dc-label">Fasting</span><span class="dc-full">They fast willingly.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Sadaqah" style="--d:1.10s;--t:7.3s" type="button"><span class="dc-label">Sadaqah</span><span class="dc-full">They give charity from their own allowance.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Quran" style="--d:1.65s;--t:5.5s" type="button"><span class="dc-label">Quran</span><span class="dc-full">They read Quran daily.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Du’a" style="--d:2.20s;--t:6.4s" type="button"><span class="dc-label">Du’a</span><span class="dc-full">They say their daily du’as.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Halal & haram" style="--d:2.75s;--t:7.3s" type="button"><span class="dc-label">Halal &amp; haram</span><span class="dc-full">They know what is halal and haram, and they follow it.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Their Lord" style="--d:3.30s;--t:5.5s" type="button"><span class="dc-label">Their Lord</span><span class="dc-full">They know their Lord and their aqeedah.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Islamic identity" style="--d:3.85s;--t:6.4s" type="button"><span class="dc-label">Islamic identity</span><span class="dc-full">They are confident and proud of their Islamic identity.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Secure attachment" style="--d:4.95s;--t:6.4s" type="button"><span class="dc-label">Secure attachment</span><span class="dc-full">They are securely attached to you.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Emotional intelligence" style="--d:5.5s;--t:5.9s" type="button"><span class="dc-label">Emotional intelligence</span><span class="dc-full">They have emotional intelligence.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: Capable and confident" style="--d:6.05s;--t:6.8s" type="button"><span class="dc-label">Capable and confident</span><span class="dc-full">They are capable and confident in their skills.</span></button><button aria-expanded="false" class="dcloud" data-track="Dream cloud: A life you’re proud of" style="--d:4.40s;--t:7.3s" type="button"><span class="dc-label">A life you’re proud of</span><span class="dc-full">They lead a life you know leads to Jannah, and you are proud of them.</span></button></div><p class="dreams-close">All because you formed the right foundations.</p></div><a class="btn" data-track="Final: You start now" href="#join" style="background:var(--gold);border-color:var(--gold);color:#1c211d">YOU START NOW</a></div></section>
+<section class="final"><div class="narrow"><div class="eyebrow">THE EARLY YEARS ARE ALREADY HAPPENING</div><div class="gold-rule center-rule"></div><h2>You raise a strong, unapologetic Muslim <span style="white-space:nowrap">15-year-old</span> from birth.</h2><p class="lead">Their identity. Their confidence. Their character. Their relationship with Allah. Their relationship with you. Their ability to stand in the world without losing themselves.</p><div class="dreams"><p class="dreams-intro">Every Muslim parent’s dream. <span>Tap a leaf to see what’s inside.</span></p><div class="dtree-wrap"><svg aria-hidden="true" class="dtree" preserveAspectRatio="none" viewBox="0 0 400 440"><g class="br"><path d="M190 262 C186 240 172 222 150 205"/><path d="M210 262 C214 240 228 222 250 205"/><path d="M200 262 C200 236 200 212 200 190"/><path d="M200 190 Q200 145 200 41"/><path d="M150 205 Q144 161 124 58"/><path d="M250 205 Q256 161 276 58"/><path d="M150 205 Q128 174 60 102"/><path d="M250 205 Q272 174 340 102"/><path d="M150 205 Q150 181 152 124"/><path d="M250 205 Q250 181 248 124"/><path d="M150 205 Q122 194 36 168"/><path d="M250 205 Q278 194 364 168"/><path d="M150 205 Q138 201 100 190"/><path d="M250 205 Q262 201 300 190"/><path d="M200 190 Q200 190 200 190"/></g>
+<path d="M186 258 C180 300 176 332 164 362"/><path d="M214 258 C220 300 224 332 236 362"/>
+<circle class="eye" cx="189" cy="300" r="3.4"/><circle class="eye" cx="211" cy="300" r="3.4"/><path d="M187 314 Q200 327 213 314"/>
+<g class="roots"><path d="M168 362 C150 380 130 396 104 410"/><path d="M178 364 C170 392 156 412 140 432"/><path d="M200 362 C200 390 200 410 200 436"/><path d="M222 364 C230 392 244 412 260 432"/><path d="M232 362 C250 380 270 396 296 410"/></g>
+<path class="ground" d="M90 362 H310"/></svg><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Salah" style="left:50%;top:7%;--r:0deg;--d:0.0s" type="button"><span class="dc-label">Salah</span><span class="dc-full">Your child prays without being reminded.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Fasting" style="left:31%;top:11%;--r:23deg;--d:0.4s" type="button"><span class="dc-label">Fasting</span><span class="dc-full">They fast willingly.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Sadaqah" style="left:69%;top:11%;--r:-24deg;--d:0.8s" type="button"><span class="dc-label">Sadaqah</span><span class="dc-full">They give charity from their own allowance.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Quran" style="left:15%;top:21%;--r:-1deg;--d:1.2s" type="button"><span class="dc-label">Quran</span><span class="dc-full">They read Quran daily.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Du’a" style="left:85%;top:21%;--r:22deg;--d:1.6s" type="button"><span class="dc-label">Du’a</span><span class="dc-full">They say their daily du’as.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Halal & haram" style="left:38%;top:26%;--r:-25deg;--d:2.0s" type="button"><span class="dc-label">Halal &amp; haram</span><span class="dc-full">They know what is halal and haram, and they follow it.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Their Lord" style="left:62%;top:26%;--r:-2deg;--d:2.4s" type="button"><span class="dc-label">Their Lord</span><span class="dc-full">They know their Lord and their aqeedah.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Islamic identity" style="left:9%;top:36%;--r:21deg;--d:2.8s" type="button"><span class="dc-label">Islamic identity</span><span class="dc-full">They are confident and proud of their Islamic identity.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Secure attachment" style="left:91%;top:36%;--r:-26deg;--d:3.2s" type="button"><span class="dc-label">Secure attachment</span><span class="dc-full">They are securely attached to you.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Emotional intelligence" style="left:25%;top:41%;--r:-3deg;--d:3.6s" type="button"><span class="dc-label">Emotional intelligence</span><span class="dc-full">They have emotional intelligence.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: Capable and confident" style="left:75%;top:41%;--r:20deg;--d:4.0s" type="button"><span class="dc-label">Capable and confident</span><span class="dc-full">They are capable and confident in their skills.</span></button><button aria-expanded="false" class="dleaf" data-track="Dream leaf: A life you’re proud of" style="left:50%;top:41%;--r:-27deg;--d:4.4s" type="button"><span class="dc-label">A life you’re proud of</span><span class="dc-full">They lead a life you know leads to Jannah, and you are proud of them.</span></button></div><p class="dreams-close">All because you formed the right foundations.</p></div><a class="btn" data-track="Final: You start now" href="#join" style="background:var(--gold);border-color:var(--gold);color:#1c211d">YOU START NOW</a></div></section>
 <footer class="site-foot">
 <p class="foot-copy">© 2026 The Good Child. All rights reserved. <span class="foot-sep" aria-hidden="true">✦</span> <span class="foot-ai-note"><strong>Disclaimer:</strong> The Good Child educational materials are the original work of Eman Ahmed and are not AI-generated. AI tools were used only to support proofreading and design.</span></p>
 </footer>
@@ -3434,13 +3428,20 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
 </script>
 <script>
 (function(){
-  var wrap=document.querySelector('.dclouds');
-  function place(){ if(!wrap) return; var cs=[].slice.call(wrap.querySelectorAll('.dcloud')), n=cs.length, mob=window.innerWidth<=600;
-    cs.forEach(function(c,i){ var a=-Math.PI/2+i*2*Math.PI/n, rx=mob?36:40, ry=mob?40:38;
-      c.style.left=(50+rx*Math.cos(a))+'%'; c.style.top=(50+ry*Math.sin(a))+'%'; }); }
-  place(); window.addEventListener('resize',place);
-  document.querySelectorAll('.dcloud').forEach(function(c){
-    c.addEventListener('click',function(){ var o=!c.classList.contains('open'); c.classList.toggle('open',o); c.setAttribute('aria-expanded',o?'true':'false'); });
+  var wrap=document.querySelector('.dtree-wrap'); if(!wrap) return;
+  var leaves=[].slice.call(wrap.querySelectorAll('.dleaf'));
+  function nudge(el){
+    el.style.translate='';
+    var w=wrap.getBoundingClientRect(), vw=document.documentElement.clientWidth;
+    var half=el.offsetWidth/2, cx=w.left+el.offsetLeft, dx=0;
+    if(cx-half<10) dx=10-(cx-half); else if(cx+half>vw-10) dx=vw-10-(cx+half);
+    if(dx) el.style.translate='calc(-50% + '+dx+'px) -50%';
+  }
+  leaves.forEach(function(l){
+    l.addEventListener('click',function(){
+      var o=!l.classList.contains('open'); l.classList.toggle('open',o); l.setAttribute('aria-expanded',o?'true':'false');
+      if(o) requestAnimationFrame(function(){ nudge(l); }); else l.style.translate='';
+    });
   });
 })();
 </script>
