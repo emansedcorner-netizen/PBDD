@@ -1,10 +1,24 @@
 # The Yelling Rescue Tool
 
-A standalone, self-contained interactive tool (no backend — all state is saved to the browser's `localStorage`). Lives in this subfolder so it can be deployed as its own Vercel project on its own subdomain, separate from the main PBDD sales page at the repo root.
+A standalone interactive tool. Progress is saved to the browser's `localStorage`; the only server-side piece is the Flodesk subscribe call below. Lives in this subfolder so it can be deployed as its own Vercel project on its own subdomain, separate from the main PBDD sales page at the repo root.
 
 ## Files
 - `index.html` — the full tool
+- `api/subscribe.js` — Vercel serverless function that adds the submitted email to Flodesk
 - `vercel.json` — security headers for this site
+
+## Flodesk integration
+When someone enters their email on the lead-capture screen, the page calls `/api/subscribe`, which adds them to this Flodesk segment: https://app.flodesk.com/segment/6ac6ad1d751120d0163874d2
+
+This requires one setup step that only you can do (it needs your Flodesk account):
+1. In Flodesk, go to **Settings → Integrations → API keys** and create/copy an API key.
+2. In the `pbdd-yelling-rescue` Vercel project, go to **Settings → Environment Variables** and add:
+   - Name: `FLODESK_API_KEY`
+   - Value: the key you copied
+   - Environment: Production (and Preview, if you want preview deploys to also subscribe people)
+3. Redeploy (Vercel → Deployments → latest → ⋯ → Redeploy) so the function picks up the new variable.
+
+Until that variable is set, the page still works fine for visitors — the subscribe call just fails silently in the background (caught, non-blocking) and nothing is added to Flodesk. I can't test this end-to-end myself: I don't have a Flodesk API key, and this environment can't reach Flodesk's API to verify the request shape. After you add the key, submit a test email on the live page and confirm it shows up in that Flodesk segment.
 
 ## Fixed for this launch
 The hero illustration's layout box was intrinsically wider than its grid column, so at desktop widths it overlapped and sat on top of the "Let's start" button — the button was unclickable. Fixed by constraining `.portrait` to `width:100%;min-width:0` so it respects its grid column instead of forcing the column to grow. Verified headlessly end-to-end (all 14 screens) at both 1440×900 (desktop) and 390×844 (mobile) with no console errors.
