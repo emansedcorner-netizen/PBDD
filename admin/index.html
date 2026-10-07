@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>PBDD Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#20231f;--muted:#6b6b63;--faint:#9c978c;--line:#e6dccb;--bg:#f7f3ec;--card:#fffdf8;--green:#243029;--gold:#b59662;--gold2:#e8c46a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 15px/1.5 'Manrope',system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 16px 60px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:22px}
+h1{font:500 clamp(26px,4vw,36px)/1.1 'Bodoni Moda',Georgia,serif;margin:0}
+.eyebrow{font:700 11px/1 'Manrope',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 16px;font:700 12px/1 'Manrope',sans-serif;letter-spacing:.06em;cursor:pointer}
+.btn:hover{border-color:var(--gold)}
+.btn.primary{background:var(--green);color:#fff;border-color:var(--green)}
+.muted{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.kpi small{display:block;font:700 11px/1.2 'Manrope',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.kpi b{display:block;font:500 clamp(30px,4vw,40px)/1 'Bodoni Moda',Georgia,serif;color:var(--green)}
+.kpi span{display:block;margin-top:8px;font-size:12.5px;color:var(--faint)}
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+h2{font:700 13px/1.2 'Manrope',sans-serif;letter-spacing:.1em;text-transform:uppercase;margin:0 0 4px}
+.sub{margin:0 0 14px;font-size:13px;color:var(--muted)}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:220px;overflow:visible}
+.chart .grid{stroke:#ece4d6;stroke-width:1}
+.chart .axis{fill:var(--faint);font:600 10.5px 'Manrope',sans-serif}
+.chart rect.bar{fill:var(--green)}
+.chart rect.hit{fill:transparent;cursor:default}
+.chart rect.bar.on{fill:#3d5446}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;border-radius:10px;padding:8px 10px;font-size:12px;line-height:1.4;white-space:nowrap;transform:translate(-50%,-100%);opacity:0;transition:opacity .12s}
+.tip b{font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font:700 11px/1.2 'Manrope',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 0 10px;border-bottom:1px solid var(--line)}
+td{padding:10px 0;border-bottom:1px solid #f0e8da;vertical-align:middle}
+td.n{text-align:right;font-weight:800;width:56px;font-variant-numeric:tabular-nums}
+.barcell{display:flex;align-items:center;gap:10px}
+.barcell i{display:block;height:6px;border-radius:3px;background:var(--gold2);min-width:2px}
+.tag{display:inline-block;font:800 9.5px/1 'Manrope',sans-serif;letter-spacing:.1em;padding:4px 6px;border-radius:6px;background:#eef5ef;color:#1f6a3e;margin-right:6px;vertical-align:1px}
+details{margin-top:12px}
+summary{cursor:pointer;font-size:13px;color:var(--muted)}
+.login{max-width:380px;margin:12vh auto 0;text-align:center}
+.login input{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);font:500 16px 'Manrope',sans-serif;margin:16px 0 12px;background:#fff}
+.login input:focus{outline:none;border-color:var(--gold)}
+.err{color:#a8403a;font-size:13.5px;min-height:20px;margin-top:10px}
+.note{font-size:12.5px;color:var(--faint);margin-top:18px}
+@media(max-width:860px){.kpis{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="login card" id="login">
+    <div class="eyebrow">Parenting by Divine Design</div>
+    <h1>Admin</h1>
+    <form id="loginForm">
+      <input autocomplete="current-password" id="pw" placeholder="Admin password" type="password" aria-label="Admin password">
+      <button class="btn primary" style="width:100%;padding:14px" type="submit">View dashboard</button>
+    </form>
+    <div class="err" id="err" role="alert"></div>
+  </section>
+
+  <main hidden id="dash">
+    <header>
+      <div><div class="eyebrow">Sales page analytics</div><h1>program.thegoodchild.org</h1></div>
+      <div><button class="btn" id="refresh" type="button">Refresh</button> <button class="btn" id="logout" type="button">Log out</button></div>
+    </header>
+
+    <div class="kpis">
+      <div class="card kpi"><small>Visits</small><b id="kVisits">–</b><span id="kVisitsToday"></span></div>
+      <div class="card kpi"><small>Unique visitors</small><b id="kUnique">–</b><span id="kUniqueToday"></span></div>
+      <div class="card kpi"><small>Checkout clicks</small><b id="kCheckout">–</b><span>Enroll and pay-in-full buttons</span></div>
+      <div class="card kpi"><small>Visitor → checkout</small><b id="kRate">–</b><span>Share of visitors who clicked through to checkout</span></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h2>Unique visitors per day</h2>
+        <p class="sub">Last 30 days (UTC). Hover a bar for details.</p>
+        <div class="chart" id="chart"><svg id="svg" role="img" aria-label="Unique visitors per day, last 30 days"></svg><div class="tip" id="tip"></div></div>
+        <details><summary>Show as a table</summary><table id="dayTable"></table></details>
+      </div>
+      <div class="card">
+        <h2>Button clicks</h2>
+        <p class="sub">All time, most clicked first.</p>
+        <table><thead><tr><th>Button</th><th style="text-align:right">Clicks</th></tr></thead><tbody id="clickRows"></tbody></table>
+      </div>
+    </div>
+    <p class="note">Counts are anonymous: no names or emails are collected. Visits from the same browser count once per day as a unique visitor. Bots and this admin page are excluded. Updated <span id="updated"></span>.</p>
+  </main>
+</div>
+
+<script>
+(function(){
+  var KEY='pbdd-admin', pw=null, timer=null;
+  var $=function(id){return document.getElementById(id)};
+  var fmt=function(n){return Number(n||0).toLocaleString('en-US')};
+  try{ pw=sessionStorage.getItem(KEY); }catch(e){}
+
+  function showErr(code){
+    var m={ 'wrong-password':'That password is not right.',
+      'admin-password-not-set':'The admin password has not been set up in Vercel yet.',
+      'storage-not-configured':'The analytics database has not been connected in Vercel yet.' }[code] || 'Could not load the numbers. Please try again.';
+    $('err').textContent=m;
+  }
+
+  function load(){
+    $('err').textContent='';
+    fetch('/api/stats',{headers:{'x-admin-key':pw},cache:'no-store'}).then(function(r){
+      return r.json().catch(function(){return {}}).then(function(j){ if(!r.ok) throw (j.error||'error'); return j; });
+    }).then(function(d){
+      try{ sessionStorage.setItem(KEY,pw); }catch(e){}
+      $('login').hidden=true; $('dash').hidden=false; render(d);
+    }).catch(function(code){
+      if(code==='wrong-password'){ try{ sessionStorage.removeItem(KEY); }catch(e){} pw=null; }
+      $('dash').hidden=true; $('login').hidden=false; showErr(code);
+    });
+  }
+
+  function render(d){
+    var t=d.totals, today=d.daily[d.daily.length-1]||{};
+    var checkout=0; Object.keys(d.clicks).forEach(function(k){ if(/^Checkout:/.test(k)) checkout+=d.clicks[k]; });
+    $('kVisits').textContent=fmt(t.visits); $('kVisitsToday').textContent=fmt(today.visits)+' today';
+    $('kUnique').textContent=fmt(t.unique); $('kUniqueToday').textContent=fmt(today.unique)+' today';
+    $('kCheckout').textContent=fmt(checkout);
+    $('kRate').textContent=t.unique? (Math.min(100,t.checkoutVisitors/t.unique*100)).toFixed(1)+'%' : '–';
+    renderClicks(d.clicks); renderChart(d.daily);
+    $('updated').textContent=new Date().toLocaleString();
+  }
+
+  function renderClicks(c){
+    var rows=Object.keys(c).map(function(k){return [k,c[k]]}).sort(function(a,b){return b[1]-a[1]});
+    var max=rows.length?rows[0][1]:1;
+    $('clickRows').innerHTML=rows.length? rows.map(function(r){
+      var name=r[0].replace(/[&<>]/g,function(x){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[x]});
+      var tag=/^Checkout:/.test(r[0])?'<span class="tag">CHECKOUT</span>':'';
+      return '<tr><td><div class="barcell"><div style="flex:1;min-width:0">'+tag+name.replace(/^Checkout:\s*/,'')+'<i style="width:'+Math.max(2,r[1]/max*100)+'%;margin-top:6px"></i></div></div></td><td class="n">'+fmt(r[1])+'</td></tr>';
+    }).join('') : '<tr><td class="muted" colspan="2">No clicks yet.</td></tr>';
+  }
+
+  function renderChart(days){
+    var svg=$('svg'), W=svg.clientWidth||600, H=220, L=30, B=22, T=10, n=days.length;
+    var max=Math.max(4,Math.max.apply(null,days.map(function(d){return d.unique})));
+    var step=Math.pow(10,Math.floor(Math.log10(max))); var top=Math.ceil(max/step)*step; if(top/step<=2) step/=2;
+    var y=function(v){return T+(H-T-B)*(1-v/top)}, bw=(W-L)/n;
+    var h='', hits='';
+    for(var g=0;g<=top;g+=step){ h+='<line class="grid" x1="'+L+'" x2="'+W+'" y1="'+y(g)+'" y2="'+y(g)+'"/><text class="axis" x="'+(L-6)+'" y="'+(y(g)+3.5)+'" text-anchor="end">'+g+'</text>'; }
+    days.forEach(function(d,i){
+      var x=L+i*bw+1, w=Math.max(2,bw-2), yy=y(d.unique), hh=Math.max(0,y(0)-yy);
+      var r=Math.min(4,w/2,hh);
+      if(hh>0) h+='<rect class="bar" data-b="'+i+'" x="'+x+'" y="'+yy+'" width="'+w+'" height="'+hh+'" rx="'+r+'"/>';
+      hits+='<rect class="hit" data-i="'+i+'" x="'+(L+i*bw)+'" y="'+T+'" width="'+bw+'" height="'+(H-T-B)+'"/>';
+      if(i%5===0||i===n-1){ var dt=new Date(d.date+'T00:00:00Z'); h+='<text class="axis" x="'+(x+w/2)+'" y="'+(H-6)+'" text-anchor="middle">'+dt.toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'})+'</text>'; }
+    });
+    svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.innerHTML=h+hits;
+    var tip=$('tip');
+    svg.querySelectorAll('rect.hit').forEach(function(el){
+      el.addEventListener('mouseenter',function(){
+        var d=days[+el.dataset.i], dt=new Date(d.date+'T00:00:00Z').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'UTC'});
+        tip.innerHTML='<b>'+dt+'</b><br>'+fmt(d.unique)+' unique visitors<br>'+fmt(d.visits)+' visits · '+fmt(d.checkout)+' checkout clicks';
+        svg.querySelectorAll('rect.bar.on').forEach(function(b){b.classList.remove('on')}); var bar=svg.querySelector('rect.bar[data-b="'+el.dataset.i+'"]'); if(bar) bar.classList.add('on');
+        var bx=el.getBBox(); tip.style.left=((bx.x+bx.width/2)/W*100)+'%'; tip.style.top=(y(d.unique)-6)+'px'; tip.style.opacity=1;
+      });
+      el.addEventListener('mouseleave',function(){ tip.style.opacity=0; svg.querySelectorAll('rect.bar.on').forEach(function(b){b.classList.remove('on')}); });
+    });
+    $('dayTable').innerHTML='<tr><th>Date</th><th style="text-align:right">Unique</th><th style="text-align:right">Visits</th><th style="text-align:right">Checkout</th></tr>'+
+      days.slice().reverse().map(function(d){return '<tr><td>'+d.date+'</td><td class="n">'+fmt(d.unique)+'</td><td class="n">'+fmt(d.visits)+'</td><td class="n">'+fmt(d.checkout)+'</td></tr>'}).join('');
+  }
+
+  $('loginForm').addEventListener('submit',function(e){ e.preventDefault(); pw=$('pw').value; if(pw) load(); });
+  $('refresh').addEventListener('click',load);
+  $('logout').addEventListener('click',function(){ try{ sessionStorage.removeItem(KEY); }catch(e){} pw=null; $('dash').hidden=true; $('login').hidden=false; $('pw').value=''; });
+  window.addEventListener('resize',function(){ clearTimeout(timer); timer=setTimeout(function(){ if(!$('dash').hidden) load(); },300); });
+  if(pw) load();
+})();
+</script>
+</body>
+</html>
