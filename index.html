@@ -3462,12 +3462,22 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
   });
 })();
 </script>
-<div aria-live="polite" class="sp-pop" id="spPop" role="status"><span aria-hidden="true" class="sp-flag"></span><div class="sp-body"><p class="sp-who"></p><p class="sp-what">Joined <b>Parenting by Divine Design</b></p><p class="sp-when"></p></div><button aria-label="Hide these notifications" class="sp-x" type="button">×</button></div>
+<div aria-live="polite" class="sp-pop" id="spPop" role="status"><span aria-hidden="true" class="sp-flag"></span><div class="sp-body"><p class="sp-who"></p><p class="sp-what">Bought <b>PBDD</b></p><p class="sp-when"></p></div><button aria-label="Hide these notifications" class="sp-x" type="button">×</button></div>
 <script>
 /* Recent-enrolment popup. Add real PBDD students here:
-   n = first name, c = city (optional), cc = 2-letter country code, d = purchase date (YYYY-MM-DD) */
+   n = first name, c = country shown, cc = 2-letter country code for the flag, d = purchase date YYYY-MM-DD (optional) */
 (function(){
   var BUYERS = [
+    {n:"Saniya",c:"United States",cc:"US"},
+    {n:"Rezwana",c:"UK",cc:"GB"},
+    {n:"Nazeerah",c:"UK",cc:"GB"},
+    {n:"Binesh",c:"United States",cc:"US"},
+    {n:"Huda",c:"UAE",cc:"AE"},
+    {n:"Madiha",c:"United States",cc:"US"},
+    {n:"Mena",c:"Saudi Arabia",cc:"SA"},
+    {n:"Sameen",c:"United States",cc:"US"},
+    {n:"Asma",c:"UK",cc:"GB"},
+    {n:"Samiha",c:"Canada",cc:"CA"}
   ];
   var pop=document.getElementById('spPop');
   if(!pop||!BUYERS.length)return;
