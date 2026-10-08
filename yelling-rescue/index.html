@@ -17,6 +17,10 @@
 .topbar{position:sticky;top:0;z-index:10;background:rgba(247,243,236,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(216,205,186,.7)}
 .topbar-inner{max-width:var(--max);margin:auto;padding:14px 18px 12px}.brand-row{display:grid;grid-template-columns:84px 1fr 84px;align-items:center;gap:8px}.brand{letter-spacing:.13em;text-transform:uppercase;font-size:11px;font-weight:600;color:var(--forest);justify-self:center}.step-copy{font-size:11px;color:var(--muted);justify-self:end}@media (max-width:699px){.step-copy{text-align:center}}.back-btn{border:1px solid var(--line);background:rgba(255,253,248,.9);color:var(--forest);padding:9px 15px;border-radius:999px;font-size:12px;font-weight:700;min-height:38px}.back-btn.is-invisible{visibility:hidden;pointer-events:none}.progress{height:2px;background:rgba(12,44,40,.12);margin-top:10px;overflow:hidden}.progress>span{display:block;height:100%;background:var(--bronze);width:0;transition:width .25s ease}
 .screen{display:none;min-height:calc(100vh - 58px)}.screen.active{display:block}.stage{max-width:var(--max);margin:auto;padding:42px 20px 56px}.eyebrow{color:var(--bronze);font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+.top-hero{padding:40px 0 8px}
+.top-hero .stage{max-width:900px;text-align:center}
+.top-hero-title{font-size:clamp(32px,6vw,54px);line-height:1.08;margin:0 0 28px}
+.top-hero-img{width:100%;max-width:640px;height:auto;display:block;margin:0 auto;border-radius:20px}
 .start-here{border-bottom:1px solid var(--line);padding:36px 0}
 .start-here .stage{max-width:1180px}
 .start-here h2{font-size:clamp(24px,4vw,34px);margin-bottom:28px}
@@ -49,6 +53,10 @@ h1,h2,h3{font-family:"Bodoni Moda",Georgia,serif;color:var(--forest);font-weight
 <body>
 <div class="app-shell">
 <div class="topbar"><div class="topbar-inner"><div class="brand-row"><button class="back-btn is-invisible" id="backBtn" onclick="prevScreen()">← Back</button><div class="brand">@emansedcorner</div><div class="step-copy" id="stepCopy">The Yelling Rescue Tool</div></div><div class="progress"><span id="progressBar"></span></div></div></div>
+<section class="top-hero"><div class="stage">
+<h1 class="top-hero-title">Yell-Free Parenting In The Early Years</h1>
+<img alt="A mother in a hijab gently holding her young son's hands, sitting face to face" class="top-hero-img" src="media/yell-free-hero.webp" />
+</div></section>
 <section class="start-here"><div class="stage">
 <div class="eyebrow">Start Here</div>
 <h2>Watch the workshop, then use the tool below.</h2>
@@ -93,7 +101,7 @@ h1,h2,h3{font-family:"Bodoni Moda",Georgia,serif;color:var(--forest);font-weight
 <script src="config.js"></script>
 <script>
 const STORAGE_KEY='yellingRescueV1';let state=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');let current=Number(state._step||0);const screens=[...document.querySelectorAll('.screen')],progressBar=document.getElementById('progressBar'),stepCopy=document.getElementById('stepCopy');
-function save(){state._step=current;localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}function show(n){current=Math.max(0,Math.min(n,screens.length-1));screens.forEach((s,i)=>s.classList.toggle('active',i===current));progressBar.style.width=(current/(screens.length-1)*100)+'%';stepCopy.textContent=current===0?'The Yelling Rescue Tool':`Step ${Math.min(current,12)} of 12`;document.getElementById('backBtn').classList.toggle('is-invisible',current===0);window.scrollTo({top:0,behavior:'smooth'});save();if(current===9)updateLogicPreview()}function screenIncomplete(){const active=screens[current];if(!active)return false;const groups=active.querySelectorAll('.field-group:not(.hidden)');for(const g of groups){const label=g.querySelector('.field-label');if(label&&/^optional/i.test(label.textContent.trim()))continue;const field=g.querySelector('[data-key]');if(field&&!field.value.trim())return true}const choiceGroups=active.querySelectorAll('[data-multi],[data-single]');for(const cg of choiceGroups){if(cg.offsetParent===null)continue;if(!cg.querySelector('.selected'))return true}return false}
+function save(){state._step=current;localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}function show(n){current=Math.max(0,Math.min(n,screens.length-1));screens.forEach((s,i)=>s.classList.toggle('active',i===current));progressBar.style.width=(current/(screens.length-1)*100)+'%';stepCopy.textContent=current===0?'':`Step ${Math.min(current,12)} of 12`;document.getElementById('backBtn').classList.toggle('is-invisible',current===0);window.scrollTo({top:0,behavior:'smooth'});save();if(current===9)updateLogicPreview()}function screenIncomplete(){const active=screens[current];if(!active)return false;const groups=active.querySelectorAll('.field-group:not(.hidden)');for(const g of groups){const label=g.querySelector('.field-label');if(label&&/^optional/i.test(label.textContent.trim()))continue;const field=g.querySelector('[data-key]');if(field&&!field.value.trim())return true}const choiceGroups=active.querySelectorAll('[data-multi],[data-single]');for(const cg of choiceGroups){if(cg.offsetParent===null)continue;if(!cg.querySelector('.selected'))return true}return false}
 function nextScreen(){if(screenIncomplete()){alert("Sorry, you can't move on without doing the work on this page first — it's for your benefit.");return}show(current+1)}function prevScreen(){show(current-1)}function restart(){const keepEmail=state.email||'';state={email:keepEmail};localStorage.setItem(STORAGE_KEY,JSON.stringify(state));hydrate();show(0)}
 document.querySelectorAll('[data-key]').forEach(el=>{const key=el.dataset.key;if(state[key]!=null)el.value=state[key];el.addEventListener('input',()=>{state[key]=el.value;save()})});
 document.querySelectorAll('[data-multi]').forEach(group=>{const key=group.dataset.multi;state[key]=state[key]||[];group.querySelectorAll('.choice').forEach(btn=>{const text=btn.textContent.trim();if(state[key].includes(text))btn.classList.add('selected');btn.addEventListener('click',()=>{btn.classList.toggle('selected');state[key]=[...group.querySelectorAll('.choice.selected')].map(b=>b.textContent.trim());save()})})});
