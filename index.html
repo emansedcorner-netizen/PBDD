@@ -2251,7 +2251,7 @@ p,li{text-wrap:pretty}
 .closed-cover{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:40px 30px;border-radius:inherit;background:radial-gradient(ellipse at center,rgba(255,253,248,.97) 45%,rgba(255,253,248,.85) 100%)}
 .closed-title{margin:0;font:500 clamp(28px,4vw,38px)/1.1 'Bodoni Moda',Georgia,serif;color:#243029}
 .closed-sub{margin:0;max-width:340px;font:500 16px/1.5 'Manrope',sans-serif;color:#354238}
-.closed-btn{margin-top:8px;padding:17px 30px;border:0;border-radius:12px;background:#243029;color:#f6e6b4;font:800 14px/1 'Manrope',sans-serif;letter-spacing:.14em;cursor:pointer;box-shadow:0 12px 26px rgba(36,48,41,.3);transition:transform .2s,background .2s}
+.closed-btn{display:inline-block;text-decoration:none;margin-top:8px;padding:17px 30px;border:0;border-radius:12px;background:#243029;color:#f6e6b4;font:800 14px/1 'Manrope',sans-serif;letter-spacing:.14em;cursor:pointer;box-shadow:0 12px 26px rgba(36,48,41,.3);transition:transform .2s,background .2s}
 .closed-btn:hover{background:#354238;transform:translateY(-2px)}
 .closed-btn:focus-visible{outline:3px solid #e8c46a;outline-offset:3px}
 @media(max-width:600px){.closed-band{top:34px;right:-92px}.closed-band span{font-size:12px}.closed-cover{padding:40px 20px}}
@@ -2781,7 +2781,7 @@ p,li{text-wrap:pretty}
 <div class="paybox is-closed" id="paybox" data-plan="monthly">
 <div class="paybox-tag">ENROLLMENT IS CLOSED</div>
 <div class="closed-clip" aria-hidden="true"><div class="closed-band"><span>Now closed</span></div></div>
-<div class="closed-cover"><p class="closed-title">Enrollment is now closed.</p><p class="closed-sub">Join the waitlist to be the first to know when doors open again.</p><button class="closed-btn js-waitlist" data-track="Waitlist: Payment area" type="button">JOIN THE WAITLIST</button></div>
+<div class="closed-cover"><p class="closed-title">Enrollment is now closed.</p><p class="closed-sub">Join the waitlist to be the first to know when doors open again.</p><a class="closed-btn" data-track="Waitlist: Payment area" href="https://emansedcorner.myflodesk.com/k7xtskyv4z" rel="noopener" target="_blank">JOIN THE WAITLIST</a></div>
 <div class="paybox-view monthly" aria-hidden="false">
 <p class="paybox-label">Join Parenting by Divine Design today for</p>
 <div class="paybox-price">$297<small>/month</small></div>
@@ -2880,7 +2880,7 @@ p,li{text-wrap:pretty}
 <div class="bonus-value">Valued at $500 — <strong>yours free.</strong></div>
 </article>
 </div>
-<div class="bonus-modal-foot"><a class="btn js-waitlist" data-track="Waitlist: From bonus gifts" href="#join">JOIN THE WAITLIST</a></div>
+<div class="bonus-modal-foot"><a class="btn" data-track="Waitlist: From bonus gifts" href="https://emansedcorner.myflodesk.com/k7xtskyv4z" rel="noopener" target="_blank">JOIN THE WAITLIST</a></div>
 </div>
 </div>
 </div>
@@ -3255,7 +3255,7 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
   io.observe(stack);
 })();
 </script>
-<div aria-hidden="true" class="join-bar" id="joinBar"><span><span class="jb-name">Parenting by Divine Design · </span><span class="jb-short">PBDD · </span><em>Enrollment closed</em></span><a class="js-waitlist" data-track="Sticky bar: Join waitlist" href="#join" tabindex="-1">JOIN THE WAITLIST</a></div>
+<div aria-hidden="true" class="join-bar" id="joinBar"><span><span class="jb-name">Parenting by Divine Design · </span><span class="jb-short">PBDD · </span><em>Enrollment closed</em></span><a data-track="Sticky bar: Join waitlist" href="https://emansedcorner.myflodesk.com/k7xtskyv4z" rel="noopener" tabindex="-1" target="_blank">JOIN THE WAITLIST</a></div>
 <script>
 (function(){
   if(!('IntersectionObserver' in window)) return;
@@ -3552,29 +3552,6 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
     setTimeout(tick,1000-Date.now()%1000);
   }
   tick();
-})();
-</script>
-<script>
-/* Flodesk waitlist popup (form 6acb68e907e54fbb33c3a607) */
-(function(){
-  var FORM_ID='6acb68e907e54fbb33c3a607';
-  if(!document.querySelector('script[src*="flodesk"]')){
-    (function(w,d,t,h,s,n){
-      w.FlodeskObject=n;
-      var fn=function(){(w[n].q=w[n].q||[]).push(arguments);};
-      w[n]=w[n]||fn;
-      var f=d.getElementsByTagName(t)[0];
-      var v='?v='+Math.floor(new Date().getTime()/(120*1000))*60;
-      var sm=d.createElement(t);sm.async=true;sm.type='module';sm.src=h+s+'.mjs'+v;f.parentNode.insertBefore(sm,f);
-      var sn=d.createElement(t);sn.async=true;sn.noModule=true;sn.src=h+s+'.js'+v;f.parentNode.insertBefore(sn,f);
-    })(window,document,'script','https://assets.flodesk.com','/universal','fd');
-  }
-  window.fd('form',{formId:FORM_ID});
-  document.addEventListener('click',function(e){
-    var b=e.target.closest&&e.target.closest('.js-waitlist'); if(!b) return;
-    e.preventDefault();
-    window.fd('form',{formId:FORM_ID});
-  });
 })();
 </script>
 </body></html>
