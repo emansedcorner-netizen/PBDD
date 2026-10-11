@@ -2270,18 +2270,6 @@ p,li{text-wrap:pretty}
 .unlock.shake{animation:uShake .4s}
 @keyframes uShake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 .paybox.is-unlocked .paybox-tag{background:#5f8f63;color:#fffdf8}
-/* Waitlist email form */
-.wl-form{width:100%;max-width:420px;margin:6px 0 0}
-.wl-row{display:flex;flex-direction:column;gap:10px}
-.wl-row input{width:100%;padding:15px 16px;border:1.5px solid #d9cdb6;border-radius:12px;background:#fff;font:500 16px/1.2 'Manrope',sans-serif;color:#20231f;text-align:center}
-.wl-row input:focus{outline:none;border-color:#b59662;box-shadow:0 0 0 3px rgba(181,150,98,.22)}
-.wl-row .closed-btn{margin-top:0;width:100%}
-.wl-row .closed-btn[disabled]{opacity:.7;cursor:wait}
-.wl-msg{min-height:18px;margin:8px 0 0;font:600 13.5px/1.45 'Manrope',sans-serif;color:#9a4b3a}
-.wl-msg.ok{color:#3f6b44}
-.wl-msg a{color:inherit}
-.wl-form.done .wl-row{display:none}
-.wl-form.done .wl-msg{font:500 19px/1.4 'Bodoni Moda',Georgia,serif;color:#243029}
 </style>
 <meta content="Parenting by Divine Design" property="og:title"/>
 <meta content="Your parenting home for the first 12 years." property="og:description"/>
@@ -2808,7 +2796,7 @@ p,li{text-wrap:pretty}
 <div class="paybox is-closed" id="paybox" data-plan="monthly">
 <div class="paybox-tag">ENROLLMENT IS CLOSED</div>
 <div class="closed-clip" aria-hidden="true"><div class="closed-band"><span>Now closed</span></div></div>
-<div class="closed-cover"><p class="closed-title">Enrollment is now closed.</p><p class="closed-sub">Join the waitlist to be the first to know when doors open again.</p><form class="wl-form" id="wlForm" novalidate><div class="wl-row"><input aria-label="Your email address" autocomplete="email" id="wlEmail" inputmode="email" placeholder="Your email address" required type="email"/><button class="closed-btn" data-track="Waitlist: Payment area" type="submit">JOIN THE WAITLIST</button></div><p aria-live="polite" class="wl-msg" id="wlMsg"></p></form><form class="unlock" id="unlockForm" novalidate><p class="unlock-q">Joining from a workshop? Enter your code to unlock registration.</p><div class="unlock-row"><input aria-label="Workshop code" autocapitalize="characters" autocomplete="off" id="unlockCode" maxlength="64" placeholder="Workshop code" spellcheck="false" type="text"/><button data-track="Workshop code: Unlock" type="submit">UNLOCK</button></div><p aria-live="polite" class="unlock-msg" id="unlockMsg"></p></form></div>
+<div class="closed-cover"><p class="closed-title">Enrollment is now closed.</p><p class="closed-sub">Join the waitlist to be the first to know when doors open again.</p><a class="closed-btn" data-track="Waitlist: Payment area" href="https://emansedcorner.myflodesk.com/k7xtskyv4z" rel="noopener" target="_blank">JOIN THE WAITLIST</a><form class="unlock" id="unlockForm" novalidate><p class="unlock-q">Joining from a workshop? Enter your code to unlock registration.</p><div class="unlock-row"><input aria-label="Workshop code" autocapitalize="characters" autocomplete="off" id="unlockCode" maxlength="64" placeholder="Workshop code" spellcheck="false" type="text"/><button data-track="Workshop code: Unlock" type="submit">UNLOCK</button></div><p aria-live="polite" class="unlock-msg" id="unlockMsg"></p></form></div>
 <div class="paybox-view monthly" aria-hidden="false">
 <p class="paybox-label">Join Parenting by Divine Design today for</p>
 <div class="paybox-price">$297<small>/month</small></div>
@@ -3626,28 +3614,6 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
   if(fromUrl){input.value=fromUrl;check(fromUrl,false);
     try{var u=new URL(location.href);u.searchParams.delete('code');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}}
   else{var saved=null;try{saved=localStorage.getItem(KEY)}catch(e){} if(saved) check(saved,true);}
-})();
-</script>
-<script>
-/* Waitlist email form: /api/waitlist adds the email to the Flodesk waitlist segment */
-(function(){
-  var f=document.getElementById('wlForm'); if(!f) return;
-  var inp=document.getElementById('wlEmail'),msg=document.getElementById('wlMsg'),btn=f.querySelector('button');
-  var FALLBACK='https://emansedcorner.myflodesk.com/k7xtskyv4z';
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    var email=inp.value.trim();
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.className='wl-msg';msg.textContent='Please enter a valid email address.';inp.focus();return;}
-    btn.disabled=true;msg.className='wl-msg';msg.textContent='Adding you…';
-    fetch('/api/waitlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})})
-      .then(function(r){return r.json().catch(function(){return {};});})
-      .then(function(j){
-        btn.disabled=false;
-        if(j&&j.ok){f.classList.add('done');msg.className='wl-msg ok';msg.textContent='You’re on the waitlist. We’ll email you the moment doors open again.';return;}
-        msg.className='wl-msg';msg.innerHTML='Sorry, that didn’t go through. <a href="'+FALLBACK+'" rel="noopener" target="_blank">Join the waitlist here instead</a>.';
-      })
-      .catch(function(){btn.disabled=false;msg.className='wl-msg';msg.innerHTML='Sorry, that didn’t go through. <a href="'+FALLBACK+'" rel="noopener" target="_blank">Join the waitlist here instead</a>.';});
-  });
 })();
 </script>
 </body></html>
