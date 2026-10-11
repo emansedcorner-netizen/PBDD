@@ -2255,6 +2255,21 @@ p,li{text-wrap:pretty}
 .closed-btn:hover{background:#354238;transform:translateY(-2px)}
 .closed-btn:focus-visible{outline:3px solid #e8c46a;outline-offset:3px}
 @media(max-width:600px){.closed-band{top:34px;right:-92px}.closed-band span{font-size:12px}.closed-cover{padding:40px 20px}}
+/* Workshop code unlock */
+.unlock{width:100%;max-width:360px;margin:18px 0 0;padding-top:18px;border-top:1px solid rgba(181,150,98,.35)}
+.unlock-q{margin:0 0 10px;font:600 13.5px/1.45 'Manrope',sans-serif;color:#5f625d}
+.unlock-row{display:flex;gap:8px}
+.unlock-row input{flex:1;min-width:0;padding:13px 14px;border:1.5px solid #d9cdb6;border-radius:10px;background:#fff;font:700 14px/1 'Manrope',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#20231f}
+.unlock-row input::placeholder{letter-spacing:.06em;text-transform:none;font-weight:500;color:#9b8e7d}
+.unlock-row input:focus{outline:none;border-color:#b59662;box-shadow:0 0 0 3px rgba(181,150,98,.22)}
+.unlock-row button{padding:0 18px;border:0;border-radius:10px;background:#e8c46a;color:#1c211d;font:800 12.5px/1 'Manrope',sans-serif;letter-spacing:.12em;cursor:pointer}
+.unlock-row button:hover{background:#f0d27f}
+.unlock-row button[disabled]{opacity:.6;cursor:wait}
+.unlock-msg{min-height:18px;margin:8px 0 0;font:600 13px/1.4 'Manrope',sans-serif;color:#9a4b3a}
+.unlock-msg.ok{color:#5f8f63}
+.unlock.shake{animation:uShake .4s}
+@keyframes uShake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.paybox.is-unlocked .paybox-tag{background:#5f8f63;color:#fffdf8}
 </style>
 <meta content="Parenting by Divine Design" property="og:title"/>
 <meta content="Your parenting home for the first 12 years." property="og:description"/>
@@ -2781,7 +2796,7 @@ p,li{text-wrap:pretty}
 <div class="paybox is-closed" id="paybox" data-plan="monthly">
 <div class="paybox-tag">ENROLLMENT IS CLOSED</div>
 <div class="closed-clip" aria-hidden="true"><div class="closed-band"><span>Now closed</span></div></div>
-<div class="closed-cover"><p class="closed-title">Enrollment is now closed.</p><p class="closed-sub">Join the waitlist to be the first to know when doors open again.</p><a class="closed-btn" data-track="Waitlist: Payment area" href="https://emansedcorner.myflodesk.com/k7xtskyv4z" rel="noopener" target="_blank">JOIN THE WAITLIST</a></div>
+<div class="closed-cover"><p class="closed-title">Enrollment is now closed.</p><p class="closed-sub">Join the waitlist to be the first to know when doors open again.</p><a class="closed-btn" data-track="Waitlist: Payment area" href="https://emansedcorner.myflodesk.com/k7xtskyv4z" rel="noopener" target="_blank">JOIN THE WAITLIST</a><form class="unlock" id="unlockForm" novalidate><p class="unlock-q">Joining from a workshop? Enter your code to unlock registration.</p><div class="unlock-row"><input aria-label="Workshop code" autocapitalize="characters" autocomplete="off" id="unlockCode" maxlength="64" placeholder="Workshop code" spellcheck="false" type="text"/><button data-track="Workshop code: Unlock" type="submit">UNLOCK</button></div><p aria-live="polite" class="unlock-msg" id="unlockMsg"></p></form></div>
 <div class="paybox-view monthly" aria-hidden="false">
 <p class="paybox-label">Join Parenting by Divine Design today for</p>
 <div class="paybox-price">$297<small>/month</small></div>
@@ -3552,6 +3567,53 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
     setTimeout(tick,1000-Date.now()%1000);
   }
   tick();
+})();
+</script>
+<script>
+/* Workshop code: unlocks the payment area. Codes are checked by /api/unlock (WORKSHOP_CODES in Vercel). */
+(function(){
+  var box=document.getElementById('paybox'),form=document.getElementById('unlockForm');
+  if(!box||!form) return;
+  var input=document.getElementById('unlockCode'),msg=document.getElementById('unlockMsg'),btn=form.querySelector('button');
+  var KEY='pbddWorkshopCode';
+  function open(url){
+    box.classList.remove('is-closed');box.classList.add('is-unlocked');
+    box.querySelector('.paybox-tag').textContent='WORKSHOP ACCESS UNLOCKED';
+    var cc=box.querySelector('.closed-clip'),cv=box.querySelector('.closed-cover');
+    if(cc)cc.remove(); if(cv)cv.remove();
+    var labels={'paybox-cta':'Checkout: Monthly $297','paybox-cta gold':'Checkout: Pay in full $2,500'};
+    [].forEach.call(box.querySelectorAll('.paybox-cta'),function(a){
+      a.href=url;a.rel='noopener';a.removeAttribute('aria-disabled');a.removeAttribute('tabindex');
+      a.setAttribute('data-track',labels[a.className]||'Checkout');
+    });
+    var bar=document.getElementById('joinBar');
+    if(bar){var em=bar.querySelector('em'),a=bar.querySelector('a');if(em)em.textContent='from $297/mo';
+      if(a){a.href='#join';a.removeAttribute('target');a.textContent='JOIN PBDD';a.setAttribute('data-track','Sticky bar: Join');}}
+    [].forEach.call(document.querySelectorAll('[data-track="Waitlist: From bonus gifts"]'),function(a){
+      a.href=url;a.textContent='JOIN PBDD';a.setAttribute('data-track','Checkout: From bonus gifts');});
+  }
+  function check(code,quiet){
+    code=String(code||'').trim(); if(!code) return;
+    btn.disabled=true; if(!quiet){msg.className='unlock-msg';msg.textContent='Checking…';}
+    fetch('/api/unlock',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:code})})
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){return {s:r.status,j:j};});})
+      .then(function(x){
+        btn.disabled=false;
+        if(x.j&&x.j.ok&&x.j.url){try{localStorage.setItem(KEY,code)}catch(e){}
+          msg.className='unlock-msg ok';msg.textContent='Unlocked. Welcome!';open(x.j.url);return;}
+        if(x.s===401){try{localStorage.removeItem(KEY)}catch(e){}}
+        if(quiet) return;
+        msg.className='unlock-msg';
+        msg.textContent=x.s===401?'That code didn’t work. Please check it and try again.':'Something went wrong. Please try again in a moment.';
+        form.classList.remove('shake');void form.offsetWidth;form.classList.add('shake');
+      })
+      .catch(function(){btn.disabled=false;if(!quiet){msg.className='unlock-msg';msg.textContent='Something went wrong. Please try again in a moment.';}});
+  }
+  form.addEventListener('submit',function(e){e.preventDefault();check(input.value,false);});
+  var fromUrl=null;try{fromUrl=new URLSearchParams(location.search).get('code');}catch(e){}
+  if(fromUrl){input.value=fromUrl;check(fromUrl,false);
+    try{var u=new URL(location.href);u.searchParams.delete('code');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}}
+  else{var saved=null;try{saved=localStorage.getItem(KEY)}catch(e){} if(saved) check(saved,true);}
 })();
 </script>
 </body></html>
