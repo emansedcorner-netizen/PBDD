@@ -2242,6 +2242,19 @@ p,li{text-wrap:pretty}
 .tlab small{display:block;font:700 10px/1.2 'Manrope',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#f6e6b4;opacity:.85}
 .tlab b{display:block;margin-top:2px;font:400 30px/1 'Great Vibes',cursive;color:#e8c46a}
 @media(max-width:600px){.tlab small{font-size:8px;letter-spacing:.1em}.tlab b{font-size:21px}}
+/* Enrollment closed */
+.paybox.is-closed .paybox-tag{z-index:4}
+.closed-clip{position:absolute;inset:0;z-index:3;overflow:hidden;border-radius:inherit;pointer-events:none}
+.paybox.is-closed .paybox-view,.paybox.is-closed .paybox-switch{filter:grayscale(.6) blur(2px);opacity:.25;pointer-events:none;user-select:none}
+.closed-band{position:absolute;z-index:3;top:46px;right:-78px;width:300px;transform:rotate(35deg);background:#243029;border-top:2px solid #e8c46a;border-bottom:2px solid #e8c46a;box-shadow:0 8px 20px rgba(0,0,0,.25);text-align:center;pointer-events:none}
+.closed-band span{display:block;padding:10px 0;font:800 14px/1 'Manrope',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#f6e6b4}
+.closed-cover{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:40px 30px;border-radius:inherit;background:radial-gradient(ellipse at center,rgba(255,253,248,.97) 45%,rgba(255,253,248,.85) 100%)}
+.closed-title{margin:0;font:500 clamp(28px,4vw,38px)/1.1 'Bodoni Moda',Georgia,serif;color:#243029}
+.closed-sub{margin:0;max-width:340px;font:500 16px/1.5 'Manrope',sans-serif;color:#354238}
+.closed-btn{margin-top:8px;padding:17px 30px;border:0;border-radius:12px;background:#243029;color:#f6e6b4;font:800 14px/1 'Manrope',sans-serif;letter-spacing:.14em;cursor:pointer;box-shadow:0 12px 26px rgba(36,48,41,.3);transition:transform .2s,background .2s}
+.closed-btn:hover{background:#354238;transform:translateY(-2px)}
+.closed-btn:focus-visible{outline:3px solid #e8c46a;outline-offset:3px}
+@media(max-width:600px){.closed-band{top:34px;right:-92px}.closed-band span{font-size:12px}.closed-cover{padding:40px 20px}}
 </style>
 <meta content="Parenting by Divine Design" property="og:title"/>
 <meta content="Your parenting home for the first 12 years." property="og:description"/>
@@ -2249,7 +2262,7 @@ p,li{text-wrap:pretty}
 <meta content="#243029" name="theme-color"/>
 </head>
 <body>
-<div aria-label="Enrollment is now open, exclusively for you" class="enroll-ticker" role="note"><a aria-hidden="true" class="enroll-track" data-track="Top banner" href="#join" tabindex="-1"><span class="enroll-set"><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i></span><span class="enroll-set"><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i><span>Enrollment is now open, exclusively for you</span><i aria-hidden="true">♥</i></span></a></div>
+
 <noscript><div style="padding:10px 16px;text-align:center;background:#fff3cd;color:#4b4638;font-family:Arial,sans-serif;font-size:14px">This page works best with JavaScript enabled.</div></noscript>
 <header class="hero">
 <div class="wrap hero-grid">
@@ -2765,14 +2778,15 @@ p,li{text-wrap:pretty}
 <div class="pricing-longevity">Built to be returned to through the first 12 years.</div>
 <p class="lead">Parent education. Child Islamic education. Custom tools built for you. Community. Ongoing support.</p>
 <div class="pricing-value-strip"><span>Join for one year. Parent from it for years.</span> You are building foundations, tools, and understanding you can keep returning to as your children and family grow.</div>
-<div aria-label="Workshop rate countdown" class="rate-cd" id="rateCd" role="timer"><div class="rate-track"><span aria-hidden="true" class="rate-set"><span>Workshop rate expires in <b class="rate-time">--</b></span><i>♥</i><span>Workshop rate expires in <b class="rate-time">--</b></span><i>♥</i><span>Workshop rate expires in <b class="rate-time">--</b></span><i>♥</i></span><span aria-hidden="true" class="rate-set"><span>Workshop rate expires in <b class="rate-time">--</b></span><i>♥</i><span>Workshop rate expires in <b class="rate-time">--</b></span><i>♥</i><span>Workshop rate expires in <b class="rate-time">--</b></span><i>♥</i></span></div></div>
-<div class="paybox" id="paybox" data-plan="monthly">
-<div class="paybox-tag">ENROLLMENT IS OPEN</div>
+<div class="paybox is-closed" id="paybox" data-plan="monthly">
+<div class="paybox-tag">ENROLLMENT IS CLOSED</div>
+<div class="closed-clip" aria-hidden="true"><div class="closed-band"><span>Now closed</span></div></div>
+<div class="closed-cover"><p class="closed-title">Enrollment is now closed.</p><p class="closed-sub">Join the waitlist to be the first to know when doors open again.</p><button class="closed-btn js-waitlist" data-track="Waitlist: Payment area" type="button">JOIN THE WAITLIST</button></div>
 <div class="paybox-view monthly" aria-hidden="false">
 <p class="paybox-label">Join Parenting by Divine Design today for</p>
 <div class="paybox-price">$297<small>/month</small></div>
 <p class="paybox-sub">The complete 12-month PBDD experience. Start today and spread your investment across the year.</p>
-<a class="paybox-cta" data-track="Checkout: Monthly $297" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">ENROLL NOW FOR $297</a>
+<a aria-disabled="true" class="paybox-cta" tabindex="-1">ENROLL NOW FOR $297</a>
 <p class="paybox-fine"><strong>12-month commitment.</strong> 12 monthly payments of $297 USD.</p>
 </div>
 <div class="paybox-view full" aria-hidden="true">
@@ -2780,7 +2794,7 @@ p,li{text-wrap:pretty}
 <div class="paybox-was"><s>$3,564</s><span>12 × $297</span></div>
 <div class="paybox-price">$2,500<small>one payment</small></div>
 <div class="paybox-save">You save $1,064</div>
-<a class="paybox-cta gold" data-track="Checkout: Pay in full $2,500" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">PAY IN FULL &amp; SAVE $1,064</a>
+<a aria-disabled="true" class="paybox-cta gold" tabindex="-1">PAY IN FULL &amp; SAVE $1,064</a>
 <p class="paybox-fine">Includes the 7-day refund guarantee</p>
 </div>
 <button class="paybox-switch" data-track="Pricing: Switched plan view" type="button" aria-controls="paybox"><span class="to-full"><i class="pb-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 4v15M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span class="pb-pill">Save $1,064 when you <span style="white-space:nowrap">pay in full →</span></span></span><span class="to-monthly">← Prefer monthly? $297/month</span></button>
@@ -2866,7 +2880,7 @@ p,li{text-wrap:pretty}
 <div class="bonus-value">Valued at $500 — <strong>yours free.</strong></div>
 </article>
 </div>
-<div class="bonus-modal-foot"><a class="btn" data-track="Checkout: From bonus gifts" href="https://academy.thegoodchild.org/pbdd/order/" rel="noopener">JOIN PBDD</a></div>
+<div class="bonus-modal-foot"><a class="btn js-waitlist" data-track="Waitlist: From bonus gifts" href="#join">JOIN THE WAITLIST</a></div>
 </div>
 </div>
 </div>
@@ -3241,7 +3255,7 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
   io.observe(stack);
 })();
 </script>
-<div aria-hidden="true" class="join-bar" id="joinBar"><span><span class="jb-name">Parenting by Divine Design · </span><span class="jb-short">PBDD </span><em>from $297/mo</em><span class="jb-long"> · 12 months of support</span></span><a data-track="Sticky bar: Join" href="#join" tabindex="-1">JOIN PBDD</a></div>
+<div aria-hidden="true" class="join-bar" id="joinBar"><span><span class="jb-name">Parenting by Divine Design · </span><span class="jb-short">PBDD · </span><em>Enrollment closed</em></span><a class="js-waitlist" data-track="Sticky bar: Join waitlist" href="#join" tabindex="-1">JOIN THE WAITLIST</a></div>
 <script>
 (function(){
   if(!('IntersectionObserver' in window)) return;
@@ -3538,6 +3552,29 @@ document.querySelectorAll('.support-tab').forEach(function(tab){
     setTimeout(tick,1000-Date.now()%1000);
   }
   tick();
+})();
+</script>
+<script>
+/* Flodesk waitlist popup (form 6acb68e907e54fbb33c3a607) */
+(function(){
+  var FORM_ID='6acb68e907e54fbb33c3a607';
+  if(!document.querySelector('script[src*="flodesk"]')){
+    (function(w,d,t,h,s,n){
+      w.FlodeskObject=n;
+      var fn=function(){(w[n].q=w[n].q||[]).push(arguments);};
+      w[n]=w[n]||fn;
+      var f=d.getElementsByTagName(t)[0];
+      var v='?v='+Math.floor(new Date().getTime()/(120*1000))*60;
+      var sm=d.createElement(t);sm.async=true;sm.type='module';sm.src=h+s+'.mjs'+v;f.parentNode.insertBefore(sm,f);
+      var sn=d.createElement(t);sn.async=true;sn.noModule=true;sn.src=h+s+'.js'+v;f.parentNode.insertBefore(sn,f);
+    })(window,document,'script','https://assets.flodesk.com','/universal','fd');
+  }
+  window.fd('form',{formId:FORM_ID});
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.js-waitlist'); if(!b) return;
+    e.preventDefault();
+    window.fd('form',{formId:FORM_ID});
+  });
 })();
 </script>
 </body></html>
